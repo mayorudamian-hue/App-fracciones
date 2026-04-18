@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matemática Profe - Fracciones</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#3498db">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="stylesheet" href="./css/estilos.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Fracciones - Juegos</h1>
+    <div class="card" id="menu">
+      <h2>1. Elegí tu curso</h2>
+      <select id="select-curso">
+        <option value="">-- Seleccionar --</option>
+        <option value="1ro">1ro</option>
+        <option value="2do">2do</option>
+        <option value="3ro">3ro</option>
+      </select>
+      <h2>2. Elegí el juego</h2>
+      <button onclick="cargarJuego('pizza_rush')" disabled>Pizza Rush - Disparador</button>
+      <button onclick="cargarJuego('tetris')" disabled>Equivalencia Tetris - Práctica</button>
+      <button onclick="cargarJuego('chef_fraccion')" disabled>Chef Fracción - Boss Final</button>
+    </div>
+    <div class="card oculto" id="juego-container">
+      <h2 id="titulo-juego"></h2>
+      <p id="desc-juego"></p>
+      <button class="secundario" onclick="volverMenu()">← Volver al menú</button>
+      <div id="contenido-juego"></div>
+    </div>
+  </div>
+  <script src="./js/game.js"></script>
+</body>
+</html>

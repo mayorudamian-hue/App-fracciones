@@ -1,0 +1,15 @@
+{
+  "juego": "pizza_rush",
+  "metadata": {
+    "descripcion": "Juego de disparador: Armar pedidos de pizza",
+    "mecanica": "Los alumnos deben combinar fracciones de pizza para cumplir pedidos antes que se acabe el tiempo"
+  },
+  "pedidos": [
+    { "id": 1, "curso_minimo": "1ro", "texto_pedido": "Dame 1/2 de muzza", "fracciones_necesarias": ["1/2"], "tiempo_seg": 20, "dificultad": 1 },
+    { "id": 2, "curso_minimo": "1ro", "texto_pedido": "Quiero 1/4 de fugazzeta", "fracciones_necesarias": ["1/4"], "tiempo_seg": 15, "dificultad": 1 },
+    { "id": 3, "curso_minimo": "2do", "texto_pedido": "Necesito 3/4 de napolitana", "fracciones_necesarias": ["1/2", "1/4"], "tiempo_seg": 25, "dificultad": 2 },
+    { "id": 4, "curso_minimo": "2do", "texto_pedido": "Traeme 1/2 + 1/4 de jamón", "fracciones_necesarias": ["1/2", "1/4"], "tiempo_seg": 20, "dificultad": 2 },
+    { "id": 5, "curso_minimo": "3ro", "texto_pedido": "Pizza entera: 1/2 muzza, 1/4 napo, 1/4 jamón", "fracciones_necesarias": ["1/2", "1/4", "1/4"], "tiempo_seg": 30, "dificultad": 3 },
+    { "id": 6, "curso_minimo": "3ro", "texto_pedido": "Pizza 1⅔: una entera + 2/3 de otra", "fracciones_necesarias": ["1", "2/3"], "tiempo_seg": 35, "dificultad": 4 }
+  ]
+}
