@@ -1,83 +1,175 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matemática Profe - Fracciones</title>
-  <meta name="description" content="Juegos educativos interactivos para aprender y practicar fracciones: Pizza Rush, Tetris de Equivalencias y Chef Fracción.">
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#3498db">
-  <link rel="apple-touch-icon" href="./assets/icon-192.png">
-  <link rel="stylesheet" href="./css/estilos.css">
-</head>
-<body>
-  <main class="container">
-    <h1>Fracciones - Juegos</h1>
-    
-    <!-- Contenedor para mensajes de éxito/error -->
-    <div id="msj-container" class="notificacion-toast" aria-live="polite"></div>
-
-    <div class="card" id="menu">
-      <section>
-        <label for="input-nombre-menu"><h2>1. Tu Nombre</h2></label>
-        <input type="text" id="input-nombre-menu" placeholder="Escribí tu nombre..." maxlength="20">
-
-        <label for="select-curso"><h2>2. Elegí tu curso</h2></label>
-        <select id="select-curso">
-          <option value="">-- Seleccionar --</option>
-          <option value="1ro">1ro</option>
-          <option value="2do">2do</option>
-          <option value="3ro">3ro</option>
-        </select>
-      </section>
-      <section>
-        <h2>3. Módulo Fracciones</h2>
-        <button onclick="cargarJuego('pizza_rush')" disabled aria-label="Jugar Pizza Rush">Pizza Rush - Disparador</button>
-        <button onclick="cargarJuego('tetris')" disabled aria-label="Jugar Tetris de Equivalencias">Equivalencia Tetris - Práctica</button>
-        <button onclick="cargarJuego('arquitecto')" disabled aria-label="Jugar Arquitecto de Cuerdas">Arquitecto - Concepto</button>
-        <button onclick="cargarJuego('porcentajes')" disabled aria-label="Jugar Experto en Porcentajes">Porcentajes - Relación</button>
-        <button onclick="cargarJuego('chef_fraccion')" disabled aria-label="Jugar Chef Fracción">Chef Fracción - Boss Final</button>
-
-        <h2 style="margin-top:20px;">4. Módulo Enteros</h2>
-        <button onclick="cargarJuego('ascensor_extremo')" disabled>Ascensor Extremo - Desplazamientos</button>
-        <button onclick="cargarJuego('clima_loco')" disabled>Clima Loco - Contexto Real</button>
-        <button onclick="cargarJuego('saldo_inteligente')" disabled>Saldo Inteligente - Finanzas</button>
-        <button onclick="cargarJuego('zona_impacto')" disabled>Zona de Impacto - Regla de Signos</button>
-      </section>
-      <button onclick="verLogros()" id="btn-logros" class="secundario" style="margin-top:10px; border: 2px solid #f1c40f; color: #d4ac0d;" disabled>🏆 Mis Logros</button>
-      <button onclick="abrirPanelDocente()" class="secundario" style="margin-top:20px; border: 2px solid var(--azul); color: var(--azul);">📋 Ver Panel de Notas</button>
-      <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
-      <div style="display:flex; gap:8px;">
-        <button onclick="exportarCSV()" class="secundario" style="margin:0; font-size:0.8rem; opacity:0.8;">📥 Exportar Notas (Excel)</button>
-        <button onclick="resetearTodo()" class="secundario" style="margin:0; font-size:0.8rem; opacity:0.8;">⚙️ Reiniciar Todo</button>
-      </div>
-    </div>
-    <div class="card oculto" id="juego-container" role="region" aria-labelledby="titulo-juego">
-      <h2 id="titulo-juego"></h2>
-      <p id="desc-juego"></p>
-      <button class="secundario" onclick="volverMenu()">← Volver al menú</button>
-      <div id="contenido-juego"></div>
-    </div>
-    <div class="card oculto" id="logros-container">
-      <h2 style="color: #d4ac0d; text-align: center;">🏅 Mis Medallas</h2>
-      <div id="contenido-logros" style="margin-top: 15px;"></div>
-      <button class="secundario" onclick="volverMenu()" style="margin-top: 20px;">← Volver al menú</button>
-    </div>
-    <div class="card oculto" id="panel-docente-container">
-      <h2 style="color: var(--azul-oscuro); display: flex; align-items: center; gap: 8px;">📊 Historial de Evaluaciones</h2>
-      <div style="margin: 15px 0 10px;">
-        <label for="filtro-curso-panel" style="font-size: 0.85rem; font-weight: 600; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrar por curso:</label>
-        <select id="filtro-curso-panel" onchange="abrirPanelDocente()" style="margin-bottom: 0; padding: 10px; font-size: 0.9rem; height: auto;">
-          <option value="todos">Todos los cursos</option>
-          <option value="1ro">1ro</option>
-          <option value="2do">2do</option>
-          <option value="3ro">3ro</option>
-        </select>
-      </div>
-      <div id="contenido-panel" style="margin-top: 15px;"></div>
-      <button class="secundario" onclick="cerrarPanelDocente()" style="margin-top: 20px;">← Volver al menú</button>
-    </div>
-  </main>
-  <script src="./js/game.js"></script>
-</body>
-</html>
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/index.html b/index.html
+index 687d36062caa9fa6d3b99bce2e0980770e9bb534..383428b47f9c5e2f20ef10d55b64cd12eb41522f 100644
+--- a/index.html
++++ b/index.html
+@@ -1,83 +1,83 @@
+-<!DOCTYPE html>
+-<html lang="es">
+-<head>
+-  <meta charset="UTF-8">
+-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-  <title>Matemática Profe - Fracciones</title>
+-  <meta name="description" content="Juegos educativos interactivos para aprender y practicar fracciones: Pizza Rush, Tetris de Equivalencias y Chef Fracción.">
+-  <link rel="manifest" href="./manifest.json">
+-  <meta name="theme-color" content="#3498db">
+-  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+-  <link rel="stylesheet" href="./css/estilos.css">
+-</head>
+-<body>
+-  <main class="container">
+-    <h1>Fracciones - Juegos</h1>
+-    
+-    <!-- Contenedor para mensajes de éxito/error -->
+-    <div id="msj-container" class="notificacion-toast" aria-live="polite"></div>
+-
+-    <div class="card" id="menu">
+-      <section>
+-        <label for="input-nombre-menu"><h2>1. Tu Nombre</h2></label>
+-        <input type="text" id="input-nombre-menu" placeholder="Escribí tu nombre..." maxlength="20">
+-
+-        <label for="select-curso"><h2>2. Elegí tu curso</h2></label>
+-        <select id="select-curso">
+-          <option value="">-- Seleccionar --</option>
+-          <option value="1ro">1ro</option>
+-          <option value="2do">2do</option>
+-          <option value="3ro">3ro</option>
+-        </select>
+-      </section>
+-      <section>
+-        <h2>3. Módulo Fracciones</h2>
+-        <button onclick="cargarJuego('pizza_rush')" disabled aria-label="Jugar Pizza Rush">Pizza Rush - Disparador</button>
+-        <button onclick="cargarJuego('tetris')" disabled aria-label="Jugar Tetris de Equivalencias">Equivalencia Tetris - Práctica</button>
+-        <button onclick="cargarJuego('arquitecto')" disabled aria-label="Jugar Arquitecto de Cuerdas">Arquitecto - Concepto</button>
+-        <button onclick="cargarJuego('porcentajes')" disabled aria-label="Jugar Experto en Porcentajes">Porcentajes - Relación</button>
+-        <button onclick="cargarJuego('chef_fraccion')" disabled aria-label="Jugar Chef Fracción">Chef Fracción - Boss Final</button>
+-
+-        <h2 style="margin-top:20px;">4. Módulo Enteros</h2>
+-        <button onclick="cargarJuego('ascensor_extremo')" disabled>Ascensor Extremo - Desplazamientos</button>
+-        <button onclick="cargarJuego('clima_loco')" disabled>Clima Loco - Contexto Real</button>
+-        <button onclick="cargarJuego('saldo_inteligente')" disabled>Saldo Inteligente - Finanzas</button>
+-        <button onclick="cargarJuego('zona_impacto')" disabled>Zona de Impacto - Regla de Signos</button>
+-      </section>
+-      <button onclick="verLogros()" id="btn-logros" class="secundario" style="margin-top:10px; border: 2px solid #f1c40f; color: #d4ac0d;" disabled>🏆 Mis Logros</button>
+-      <button onclick="abrirPanelDocente()" class="secundario" style="margin-top:20px; border: 2px solid var(--azul); color: var(--azul);">📋 Ver Panel de Notas</button>
+-      <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
+-      <div style="display:flex; gap:8px;">
+-        <button onclick="exportarCSV()" class="secundario" style="margin:0; font-size:0.8rem; opacity:0.8;">📥 Exportar Notas (Excel)</button>
+-        <button onclick="resetearTodo()" class="secundario" style="margin:0; font-size:0.8rem; opacity:0.8;">⚙️ Reiniciar Todo</button>
+-      </div>
+-    </div>
+-    <div class="card oculto" id="juego-container" role="region" aria-labelledby="titulo-juego">
+-      <h2 id="titulo-juego"></h2>
+-      <p id="desc-juego"></p>
+-      <button class="secundario" onclick="volverMenu()">← Volver al menú</button>
+-      <div id="contenido-juego"></div>
+-    </div>
+-    <div class="card oculto" id="logros-container">
+-      <h2 style="color: #d4ac0d; text-align: center;">🏅 Mis Medallas</h2>
+-      <div id="contenido-logros" style="margin-top: 15px;"></div>
+-      <button class="secundario" onclick="volverMenu()" style="margin-top: 20px;">← Volver al menú</button>
+-    </div>
+-    <div class="card oculto" id="panel-docente-container">
+-      <h2 style="color: var(--azul-oscuro); display: flex; align-items: center; gap: 8px;">📊 Historial de Evaluaciones</h2>
+-      <div style="margin: 15px 0 10px;">
+-        <label for="filtro-curso-panel" style="font-size: 0.85rem; font-weight: 600; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrar por curso:</label>
+-        <select id="filtro-curso-panel" onchange="abrirPanelDocente()" style="margin-bottom: 0; padding: 10px; font-size: 0.9rem; height: auto;">
+-          <option value="todos">Todos los cursos</option>
+-          <option value="1ro">1ro</option>
+-          <option value="2do">2do</option>
+-          <option value="3ro">3ro</option>
+-        </select>
+-      </div>
+-      <div id="contenido-panel" style="margin-top: 15px;"></div>
+-      <button class="secundario" onclick="cerrarPanelDocente()" style="margin-top: 20px;">← Volver al menú</button>
+-    </div>
+-  </main>
+-  <script src="./js/game.js"></script>
+-</body>
++<!DOCTYPE html>
++<html lang="es">
++<head>
++  <meta charset="UTF-8">
++  <meta name="viewport" content="width=device-width, initial-scale=1.0">
++  <title>MatePlay</title>
++  <meta name="description" content="Juegos educativos interactivos para aprender y practicar fracciones: Pizza Rush, Tetris de Equivalencias y Chef Fracción.">
++  <link rel="manifest" href="./manifest.json">
++  <meta name="theme-color" content="#3498db">
++  <link rel="apple-touch-icon" href="./assets/icon-192.png">
++  <link rel="stylesheet" href="./css/estilos.css">
++</head>
++<body>
++  <main class="container">
++    <h1>MatePlay</h1>
++    
++    <!-- Contenedor para mensajes de éxito/error -->
++    <div id="msj-container" class="notificacion-toast" aria-live="polite"></div>
++
++    <div class="card" id="menu">
++      <section>
++        <label for="input-nombre-menu"><h2>Tu Nombre</h2></label>
++        <input type="text" id="input-nombre-menu" placeholder="Escribí tu nombre..." maxlength="20">
++
++        <label for="select-curso"><h2>Elegí tu curso</h2></label>
++        <select id="select-curso">
++          <option value="">-- Seleccionar --</option>
++          <option value="1ro">1ro</option>
++          <option value="2do">2do</option>
++          <option value="3ro">3ro</option>
++        </select>
++      </section>
++      <section>
++        <h2>Módulo Números Enteros</h2>
++        <button onclick="cargarJuego('ascensor_extremo')" disabled>Ascensor Extremo - Desplazamientos</button>
++        <button onclick="cargarJuego('clima_loco')" disabled>Clima Loco - Contexto Real</button>
++        <button onclick="cargarJuego('saldo_inteligente')" disabled>Saldo Inteligente - Finanzas</button>
++        <button onclick="cargarJuego('zona_impacto')" disabled>Zona de Impacto - Regla de Signos</button>
++
++        <h2 style="margin-top:20px;">Módulo Números Racionales</h2>
++        <button onclick="cargarJuego('pizza_rush')" disabled aria-label="Jugar Pizza Rush">Pizza Rush - Disparador</button>
++        <button onclick="cargarJuego('tetris')" disabled aria-label="Jugar Tetris de Equivalencias">Equivalencia Tetris - Práctica</button>
++        <button onclick="cargarJuego('arquitecto')" disabled aria-label="Jugar Arquitecto de Cuerdas">Arquitecto - Concepto</button>
++        <button onclick="cargarJuego('porcentajes')" disabled aria-label="Jugar Experto en Porcentajes">Porcentajes - Relación</button>
++        <button onclick="cargarJuego('chef_fraccion')" disabled aria-label="Jugar Chef Fracción">Chef Fracción - Boss Final</button>
++      </section>
++      <button onclick="verLogros()" id="btn-logros" class="secundario" style="margin-top:10px; border: 2px solid #f1c40f; color: #d4ac0d;" disabled>🏆 Mis Logros</button>
++      <button onclick="abrirPanelDocente()" class="secundario" style="margin-top:20px; border: 2px solid var(--azul); color: var(--azul);">📋 Ver Panel de Notas</button>
++      <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
++      <div style="display:flex; gap:8px;">
++        <button onclick="exportarCSV()" class="secundario" style="margin:0; font-size:0.8rem; opacity:0.8;">📥 Exportar Notas (Excel)</button>
++        <button onclick="resetearTodo()" class="secundario" style="margin:0; font-size:0.8rem; opacity:0.8;">⚙️ Reiniciar Todo</button>
++      </div>
++    </div>
++    <div class="card oculto" id="juego-container" role="region" aria-labelledby="titulo-juego">
++      <h2 id="titulo-juego"></h2>
++      <p id="desc-juego"></p>
++      <button class="secundario" onclick="volverMenu()">← Volver al menú</button>
++      <div id="contenido-juego"></div>
++    </div>
++    <div class="card oculto" id="logros-container">
++      <h2 style="color: #d4ac0d; text-align: center;">🏅 Mis Medallas</h2>
++      <div id="contenido-logros" style="margin-top: 15px;"></div>
++      <button class="secundario" onclick="volverMenu()" style="margin-top: 20px;">← Volver al menú</button>
++    </div>
++    <div class="card oculto" id="panel-docente-container">
++      <h2 style="color: var(--azul-oscuro); display: flex; align-items: center; gap: 8px;">📊 Historial de Evaluaciones</h2>
++      <div style="margin: 15px 0 10px;">
++        <label for="filtro-curso-panel" style="font-size: 0.85rem; font-weight: 600; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrar por curso:</label>
++        <select id="filtro-curso-panel" onchange="abrirPanelDocente()" style="margin-bottom: 0; padding: 10px; font-size: 0.9rem; height: auto;">
++          <option value="todos">Todos los cursos</option>
++          <option value="1ro">1ro</option>
++          <option value="2do">2do</option>
++          <option value="3ro">3ro</option>
++        </select>
++      </div>
++      <div id="contenido-panel" style="margin-top: 15px;"></div>
++      <button class="secundario" onclick="cerrarPanelDocente()" style="margin-top: 20px;">← Volver al menú</button>
++    </div>
++  </main>
++  <script src="./js/game.js"></script>
++</body>
+ </html>
+\ No newline at end of file
+ 
+EOF
+)
