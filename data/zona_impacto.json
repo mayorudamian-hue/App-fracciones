@@ -1,0 +1,18 @@
+{
+  "juego": "zona_impacto",
+  "metadata": {
+    "descripcion": "Zona de Impacto - Regla de Signos",
+    "mecanica": "Determiná el signo y el resultado de las operaciones con números enteros."
+  },
+  "ejercicios": [
+    { "id": 1, "curso_minimo": "1ro", "tipo": "multiplicacion", "expresion": "(-3) × (+4)", "valor": -12, "signo": "-", "dificultad": 1, "explicacion": "Negativo por positivo da negativo." },
+    { "id": 2, "curso_minimo": "1ro", "tipo": "division", "expresion": "(-15) ÷ (-3)", "valor": 5, "signo": "+", "dificultad": 1, "explicacion": "Negativo dividido negativo da positivo." },
+    { "id": 3, "curso_minimo": "1ro", "tipo": "multiplicacion", "expresion": "(+6) × (-2)", "valor": -12, "signo": "-", "dificultad": 1, "explicacion": "Positivo por negativo da negativo." },
+    { "id": 4, "curso_minimo": "2do", "tipo": "potencia", "expresion": "(-2)³", "valor": -8, "signo": "-", "dificultad": 2, "explicacion": "Base negativa con exponente impar da resultado negativo." },
+    { "id": 5, "curso_minimo": "2do", "tipo": "potencia", "expresion": "(-5)²", "valor": 25, "signo": "+", "dificultad": 2, "explicacion": "Base negativa con exponente par da resultado positivo." },
+    { "id": 6, "curso_minimo": "2do", "tipo": "multiplicacion", "expresion": "(-4) × (-3)", "valor": 12, "signo": "+", "dificultad": 2, "explicacion": "Menos por menos es más." },
+    { "id": 7, "curso_minimo": "3ro", "tipo": "raiz", "expresion": "√(16)", "valor": 4, "signo": "+", "dificultad": 3, "opciones": ["4", "-4", "8", "No real"], "explicacion": "La raíz cuadrada de un positivo es positiva." },
+    { "id": 8, "curso_minimo": "3ro", "tipo": "raiz", "expresion": "√(-9)", "valor": null, "signo": "invalido", "dificultad": 3, "opciones": ["3", "-3", "0", "No real"], "explicacion": "La raíz de un número negativo no es un número real en ℝ." },
+    { "id": 9, "curso_minimo": "3ro", "tipo": "combinado", "expresion": "(-2)³ × (-3)", "valor": 24, "signo": "+", "dificultad": 3, "opciones": ["24", "-24", "-6", "18"], "explicacion": "(-8) × (-3) = 24. Menos por menos es más." }
+  ]
+}

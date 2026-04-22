@@ -1,0 +1,32 @@
+{
+  "juego": "saldo_inteligente",
+  "metadata": {
+    "descripcion": "Saldo Inteligente",
+    "mecanica": "Gestioná el saldo de tu tarjeta. ¡Cuidado con quedar en negativo!"
+  },
+  "ejercicios": [
+    { "id": 1, "modo": "A", "curso_minimo": "1ro", "saldo_inicial": 200, "movimientos": [-50, -60, 100], "respuesta": 190, "dificultad": 1 },
+    { "id": 2, "modo": "B", "curso_minimo": "2do", "saldo_final": 40, "movimientos": [-30, -20, 10], "respuesta": 80, "dificultad": 2 },
+    { "id": 3, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 50, "movimientos": [-100, 200, -80], "respuesta": 70, "dificultad": 3 },
+    { "id": 4, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 100, "movimientos": [-150, -40, 30], "respuesta": -60, "dificultad": 3 },
+    { "id": 5, "modo": "B", "curso_minimo": "3ro", "saldo_final": -20, "movimientos": [-50, 10, -40], "respuesta": 60, "dificultad": 3 },
+    { "id": 6, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 50, "movimientos": [-100, -100, 50], "respuesta": -100, "dificultad": 3 },
+    { "id": 7, "modo": "B", "curso_minimo": "3ro", "saldo_final": -100, "movimientos": [200, -400, 50], "respuesta": 50, "dificultad": 3 },
+    { "id": 8, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 0, "movimientos": [-250, 100, -80], "respuesta": -230, "dificultad": 3 },
+    { "id": 9, "modo": "B", "curso_minimo": "3ro", "saldo_final": -50, "movimientos": [150, -300, 100], "respuesta": 0, "dificultad": 3 },
+    { "id": 10, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": -20, "movimientos": [-80, -50, 30], "respuesta": -120, "dificultad": 3 },
+    { "id": 11, "modo": "B", "curso_minimo": "3ro", "saldo_final": -200, "movimientos": [-100, -100, -50], "respuesta": 50, "dificultad": 3 },
+    { "id": 12, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 300, "movimientos": [-500, 50, -20], "respuesta": -170, "dificultad": 3 },
+    { "id": 13, "modo": "B", "curso_minimo": "3ro", "saldo_final": -10, "movimientos": [100, -200, 50], "respuesta": 40, "dificultad": 3 },
+    { "id": 14, "modo": "A", "curso_minimo": "1ro", "saldo_inicial": 500, "movimientos": [-150, 300, -100], "respuesta": 550, "dificultad": 1 },
+    { "id": 15, "modo": "A", "curso_minimo": "1ro", "saldo_inicial": 1000, "movimientos": [-450, -250, 700], "respuesta": 1000, "dificultad": 1 },
+    { "id": 16, "modo": "B", "curso_minimo": "2do", "saldo_final": 1200, "movimientos": [-800, 500, -300], "respuesta": 1800, "dificultad": 2 },
+    { "id": 17, "modo": "B", "curso_minimo": "2do", "saldo_final": -500, "movimientos": [1000, -2500, 500], "respuesta": 500, "dificultad": 2 },
+    { "id": 18, "modo": "A", "curso_minimo": "2do", "saldo_inicial": 2500, "movimientos": [-3000, 1500, -800], "respuesta": 200, "dificultad": 2 },
+    { "id": 19, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 10000, "movimientos": [-15000, 8500, -3500], "respuesta": 0, "dificultad": 3 },
+    { "id": 20, "modo": "B", "curso_minimo": "3ro", "saldo_final": -2500, "movimientos": [5000, -12000, 3000], "respuesta": 1500, "dificultad": 3 },
+    { "id": 21, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 50000, "movimientos": [-75000, 35000, -10000], "respuesta": 0, "dificultad": 3 },
+    { "id": 22, "modo": "B", "curso_minimo": "3ro", "saldo_final": 0, "movimientos": [25000, -45000, 15000], "respuesta": 5000, "dificultad": 3 },
+    { "id": 23, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": -15000, "movimientos": [45000, -30000, 12000], "respuesta": 12000, "dificultad": 3 }
+  ]
+}

@@ -5,11 +5,35 @@
     "mecanica": "Los alumnos deben mezclar jarras de ingredientes usando fracciones para lograr la cantidad exacta"
   },
   "recetas": [
-    { "id": 1, "curso_minimo": "1ro", "objetivo_texto": "Hacé 3/4 de harina", "cantidad_objetivo": "3/4", "jarras_disponibles": ["1/4", "1/4", "1/4"], "pista_opcional": "Usá 3 veces la de 1/4" },
-    { "id": 2, "curso_minimo": "1ro", "objetivo_texto": "Mezclá 1/2 de azúcar", "cantidad_objetivo": "1/2", "jarras_disponibles": ["1/2"], "pista_opcional": "Directo" },
-    { "id": 3, "curso_minimo": "2do", "objetivo_texto": "Conseguí 1 litro: 1/2 + 1/4 + 1/4", "cantidad_objetivo": "1", "jarras_disponibles": ["1/2", "1/4", "1/4"], "pista_opcional": "1/2 + 1/4 + 1/4 = 1 entero" },
-    { "id": 4, "curso_minimo": "2do", "objetivo_texto": "Prepará 2/3 de leche", "cantidad_objetivo": "2/3", "jarras_disponibles": ["1/3", "1/3"], "pista_opcional": "Doble de 1/3" },
-    { "id": 5, "curso_minimo": "3ro", "objetivo_texto": "Hacé 1⅔ de masa: 1 + 2/3", "cantidad_objetivo": "5/3", "jarras_disponibles": ["1", "1/3", "1/3"], "pista_opcional": "Una jarra entera + dos de 1/3" },
-    { "id": 6, "curso_minimo": "3ro", "objetivo_texto": "Mezcla final: 7/8 de chocolate", "cantidad_objetivo": "7/8", "jarras_disponibles": ["1/2", "1/4", "1/8"], "pista_opcional": "1/2 = 4/8, 1/4 = 2/8. Sumá 4/8 + 2/8 + 1/8" }
+    { "id": 1, "curso_minimo": "1ro", "objetivo_texto": "Hacé 3/4 de harina", "cantidad_objetivo": "3/4", "jarras_disponibles": ["1/4", "1/3", "1/2", "1/4", "1/6", "1/4", "1/8", "2/3"], "pista_opcional": "Tres cuartos son 3 partes de 1/4" },
+    { "id": 2, "curso_minimo": "1ro", "objetivo_texto": "Mezclá 1/2 de azúcar", "cantidad_objetivo": "1/2", "jarras_disponibles": ["1/4", "1/8", "1/2", "1/3", "1/6", "1/4", "2/4", "1/3"], "pista_opcional": "Directo o sumando" },
+    { "id": 3, "curso_minimo": "2do", "objetivo_texto": "Conseguí 1 litro sumando", "cantidad_objetivo": "1", "jarras_disponibles": ["1/2", "1/3", "1/4", "1/6", "1/4", "1/8", "1/3", "1/6"], "pista_opcional": "1/2 + 1/4 + 1/4 = 1 entero" },
+    { "id": 4, "curso_minimo": "2do", "objetivo_texto": "Prepará 2/3 de leche", "cantidad_objetivo": "2/3", "jarras_disponibles": ["1/3", "1/4", "1/6", "1/3", "1/2", "1/8", "2/3", "1/3"], "pista_opcional": "Doble de 1/3" },
+    { "id": 5, "curso_minimo": "3ro", "objetivo_texto": "Hacé 1⅔ de masa", "cantidad_objetivo": "5/3", "jarras_disponibles": ["1", "1/2", "1/3", "1/4", "1/3", "1/6", "1/12", "1/2"], "pista_opcional": "Una jarra entera + dos de 1/3" },
+    { "id": 6, "curso_minimo": "3ro", "objetivo_texto": "Mezcla final: 7/8 de chocolate", "cantidad_objetivo": "7/8", "jarras_disponibles": ["1/2", "1/3", "1/4", "1/6", "1/8", "3/8", "1/4", "1/8"], "pista_opcional": "1/2 (que son 4/8) + 3/8" },
+    { "id": 7, "curso_minimo": "1ro", "objetivo_texto": "Prepara 1/2 de queso", "cantidad_objetivo": "1/2", "jarras_disponibles": ["1/4", "1/4", "1/8", "1/2", "1/3", "1/6", "1/4", "1/2"], "pista_opcional": "Usá la jarra de 1/2" },
+    { "id": 8, "curso_minimo": "2do", "objetivo_texto": "Prepara 2/3 de azúcar", "cantidad_objetivo": "2/3", "jarras_disponibles": ["1/3", "1/2", "1/3", "1/4", "1/3", "1/6", "2/3", "1/3"], "pista_opcional": "Usá 2 veces la de 1/3" },
+    { "id": 9, "curso_minimo": "2do", "objetivo_texto": "Prepara 3/8 de sal", "cantidad_objetivo": "3/8", "jarras_disponibles": ["1/8", "1/4", "1/8", "1/2", "1/8", "1/3", "1/6", "1/8"], "pista_opcional": "Usá 3 veces la de 1/8" },
+    { "id": 10, "curso_minimo": "3ro", "objetivo_texto": "Prepara 5/8 de harina", "cantidad_objetivo": "5/8", "jarras_disponibles": ["1/8", "1/2", "1/4", "1/8", "1/3", "1/6", "1/2", "1/4"], "pista_opcional": "Recordá que 1/2 son 4/8" },
+    { "id": 11, "curso_minimo": "1ro", "objetivo_texto": "Hacé 1 entero de agua", "cantidad_objetivo": "1", "jarras_disponibles": ["1/2", "1/4", "1/2", "1/3", "1/6", "1/4", "1/8", "1"], "pista_opcional": "Dos mitades hacen un entero" },
+    { "id": 12, "curso_minimo": "2do", "objetivo_texto": "Prepará 1/2 de jugo usando cuartos", "cantidad_objetivo": "1/2", "jarras_disponibles": ["1/4", "1/3", "1/4", "1/8", "1/6", "1/2", "1/4", "1/8"], "pista_opcional": "1/4 + 1/4 = 2/4 = 1/2" },
+    { "id": 13, "curso_minimo": "2do", "objetivo_texto": "Mezclá 3/2 de aceite", "cantidad_objetivo": "3/2", "jarras_disponibles": ["1", "1/4", "1/2", "1/3", "1/6", "1/2", "1", "1/4"], "pista_opcional": "1 entero y una mitad" },
+    { "id": 14, "curso_minimo": "3ro", "objetivo_texto": "Lográ 5/6 de esencia", "cantidad_objetivo": "5/6", "jarras_disponibles": ["1/2", "1/4", "1/3", "1/8", "1/6", "1/3", "1/2", "1/6"], "pista_opcional": "1/2 + 1/3 = 5/6" },
+    { "id": 15, "curso_minimo": "1ro", "objetivo_texto": "Hacé 2/2 de crema", "cantidad_objetivo": "1", "jarras_disponibles": ["1/2", "1/3", "1/2", "1/4", "1/6", "1/8", "1/2", "1"], "pista_opcional": "Sumá las dos mitades" },
+    { "id": 16, "curso_minimo": "2do", "objetivo_texto": "Prepará 3/4 de puré", "cantidad_objetivo": "3/4", "jarras_disponibles": ["1/2", "1/6", "1/4", "1/3", "1/4", "1/8", "1/2", "1/4"], "pista_opcional": "1/2 es igual a 2/4" },
+    { "id": 17, "curso_minimo": "3ro", "objetivo_texto": "Conseguí 1 1/8 de miel", "cantidad_objetivo": "9/8", "jarras_disponibles": ["1", "1/2", "1/8", "1/4", "1/3", "1/6", "1/8", "1"], "pista_opcional": "Directo: el entero y el octavo" },
+    { "id": 18, "curso_minimo": "2do", "objetivo_texto": "Hacé 1/3 de jarabe", "cantidad_objetivo": "1/3", "jarras_disponibles": ["1/6", "1/4", "1/6", "1/8", "1/3", "1/12", "1/2", "1/6"], "pista_opcional": "1/6 + 1/6 = 2/6 = 1/3" },
+    { "id": 19, "curso_minimo": "3ro", "objetivo_texto": "Mezclá 1 1/2 de soda", "cantidad_objetivo": "3/2", "jarras_disponibles": ["1/2", "1", "1/2", "1/4", "1/2", "1/3", "1/6", "1/2"], "pista_opcional": "Tres veces 1/2" },
+    { "id": 20, "curso_minimo": "3ro", "objetivo_texto": "Final: 1 3/4 de caldo", "cantidad_objetivo": "7/4", "jarras_disponibles": ["1", "1/3", "1/2", "1/6", "1/4", "1/8", "1/2", "1/4"], "pista_opcional": "1 + 1/2 + 1/4" },
+    { "id": 21, "curso_minimo": "1ro", "objetivo_texto": "Lográ 2/2 de leche", "cantidad_objetivo": "1", "jarras_disponibles": ["1/2", "1/4", "1/2", "1/3", "1/6", "1/4", "1/8", "1"], "pista_opcional": "Sumá las dos mitades para el entero" },
+    { "id": 22, "curso_minimo": "1ro", "objetivo_texto": "Prepará 1/3 de harina", "cantidad_objetivo": "1/3", "jarras_disponibles": ["1/3", "1/2", "1/6", "1/4", "1/8", "1/4", "1/2", "1"], "pista_opcional": "Buscá la jarra que dice 1/3" },
+    { "id": 23, "curso_minimo": "1ro", "objetivo_texto": "Mezclá 2/4 de agua", "cantidad_objetivo": "1/2", "jarras_disponibles": ["1/4", "1/4", "1/2", "1/3", "1/6", "1/8", "1/4", "1"], "pista_opcional": "Dos cuartos son iguales a medio litro" },
+    { "id": 24, "curso_minimo": "1ro", "objetivo_texto": "Hacé 1 litro: 1/2 + 1/2", "cantidad_objetivo": "1", "jarras_disponibles": ["1/2", "1/4", "1/2", "1/3", "1/6", "1/4", "1/8", "1"], "pista_opcional": "Usá las dos jarras de 1/2" },
+    { "id": 25, "curso_minimo": "1ro", "objetivo_texto": "Prepará 1/4 de aceite", "cantidad_objetivo": "1/4", "jarras_disponibles": ["1/4", "1/8", "1/2", "1/3", "1/6", "1/4", "1/2", "1"], "pista_opcional": "Buscá la jarra de 1/4" },
+    { "id": 26, "curso_minimo": "2do", "objetivo_texto": "Hacé 1 ¼ de masa", "cantidad_objetivo": "5/4", "jarras_disponibles": ["1", "1/4", "1/2", "1/8", "1/2", "1/4", "1/3", "1"], "pista_opcional": "Un entero y un cuarto" },
+    { "id": 27, "curso_minimo": "2do", "objetivo_texto": "Prepará 3/2 de caldo", "cantidad_objetivo": "3/2", "jarras_disponibles": ["1", "1/2", "1/4", "1/2", "1/6", "1/8", "1/2", "1"], "pista_opcional": "Un litro entero y medio litro más" },
+    { "id": 28, "curso_minimo": "3ro", "objetivo_texto": "Lográ 1 ⅓ de jugo", "cantidad_objetivo": "4/3", "jarras_disponibles": ["1", "1/3", "1/6", "1/6", "1/2", "1/4", "1/3", "1"], "pista_opcional": "Un entero más un tercio (o dos sextos)" },
+    { "id": 30, "curso_minimo": "3ro", "objetivo_texto": "Final Boss: 1 5/6 de esencia", "cantidad_objetivo": "11/6", "jarras_disponibles": ["1", "1/2", "1/3", "1/6", "2/3", "1/6", "1/2", "1"], "pista_opcional": "1 + 1/2 + 1/3" },
+    { "id": 29, "curso_minimo": "3ro", "objetivo_texto": "Mezclá 2 ¼ de harina", "cantidad_objetivo": "9/4", "jarras_disponibles": ["1", "1", "1/4", "1/2", "1/4", "1/8", "1/2", "1"], "pista_opcional": "Dos litros enteros y un cuarto" }
   ]
-}
+} 

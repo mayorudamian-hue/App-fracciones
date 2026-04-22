@@ -1,0 +1,33 @@
+{
+  "juego": "ascensor_extremo",
+  "metadata": {
+    "descripcion": "Ascensor Extremo",
+    "mecanica": "Calculá en qué piso termina el ascensor según los movimientos."
+  },
+  "ejercicios": [
+    { "id": 1, "curso_minimo": "1ro", "inicio": 0, "movimientos": [3, -2], "respuesta": 1, "dificultad": 1 },
+    { "id": 2, "curso_minimo": "1ro", "inicio": 0, "movimientos": [5, -7], "respuesta": -2, "dificultad": 1 },
+    { "id": 15, "curso_minimo": "1ro", "inicio": 0, "movimientos": [4, -2], "respuesta": 2, "dificultad": 1 },
+    { "id": 16, "curso_minimo": "1ro", "inicio": 0, "movimientos": [-2, 5], "respuesta": 3, "dificultad": 1 },
+    { "id": 17, "curso_minimo": "1ro", "inicio": 0, "movimientos": [10, -5], "respuesta": 5, "dificultad": 1 },
+    { "id": 18, "curso_minimo": "1ro", "inicio": 0, "movimientos": [-1, -3], "respuesta": -4, "dificultad": 1 },
+    { "id": 19, "curso_minimo": "1ro", "inicio": 0, "movimientos": [6, -10], "respuesta": -4, "dificultad": 1 },
+    { "id": 3, "curso_minimo": "2do", "inicio": -2, "movimientos": [5, -3, 4], "respuesta": 4, "dificultad": 2 },
+    { "id": 20, "curso_minimo": "2do", "inicio": 3, "movimientos": [-5, 2], "respuesta": 0, "dificultad": 2 },
+    { "id": 21, "curso_minimo": "2do", "inicio": -4, "movimientos": [6, -2], "respuesta": 0, "dificultad": 2 },
+    { "id": 22, "curso_minimo": "2do", "inicio": 1, "movimientos": [-4, -2], "respuesta": -5, "dificultad": 2 },
+    { "id": 23, "curso_minimo": "2do", "inicio": -5, "movimientos": [10, -3], "respuesta": 2, "dificultad": 2 },
+    { "id": 24, "curso_minimo": "2do", "inicio": 0, "movimientos": [-8, 4, 2], "respuesta": -2, "dificultad": 2 },
+    { "id": 4, "curso_minimo": "3ro", "inicio": 3, "movimientos": [-5, 8, -10, 2, -1], "respuesta": -2, "dificultad": 3 },
+    { "id": 5, "curso_minimo": "3ro", "inicio": 5, "movimientos": [-25, 12], "respuesta": -8, "dificultad": 3 },
+    { "id": 6, "curso_minimo": "3ro", "inicio": -10, "movimientos": [-15, 30, -5], "respuesta": 0, "dificultad": 3 },
+    { "id": 7, "curso_minimo": "3ro", "inicio": 0, "movimientos": [-80, 50, 40], "respuesta": 10, "dificultad": 3 },
+    { "id": 8, "curso_minimo": "3ro", "inicio": -2, "movimientos": [-18, 50, -40], "respuesta": -10, "dificultad": 3 },
+    { "id": 9, "curso_minimo": "3ro", "inicio": 15, "movimientos": [-40, 10, -5], "respuesta": -20, "dificultad": 3 },
+    { "id": 10, "curso_minimo": "3ro", "inicio": -5, "movimientos": [25, -35, 10], "respuesta": -5, "dificultad": 3 },
+    { "id": 11, "curso_minimo": "3ro", "inicio": 8, "movimientos": [-28, 12, -2], "respuesta": -10, "dificultad": 3 },
+    { "id": 12, "curso_minimo": "3ro", "inicio": -50, "movimientos": [100, -60], "respuesta": -10, "dificultad": 3 },
+    { "id": 13, "curso_minimo": "3ro", "inicio": 0, "movimientos": [-30, -10, 25, 5], "respuesta": -10, "dificultad": 3 },
+    { "id": 14, "curso_minimo": "3ro", "inicio": 12, "movimientos": [-52, 10, 30], "respuesta": 0, "dificultad": 3 }
+  ]
+}

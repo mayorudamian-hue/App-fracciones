@@ -1,0 +1,32 @@
+{
+  "juego": "clima_loco",
+  "metadata": {
+    "descripcion": "Clima Loco",
+    "mecanica": "Calculá la temperatura final después de los cambios del día."
+  },
+  "ejercicios": [
+    { "id": 1, "curso_minimo": "1ro", "temp_inicial": 10, "cambios": [-3], "respuesta": 7, "dificultad": 1 },
+    { "id": 2, "curso_minimo": "2do", "temp_inicial": 5, "cambios": [3, -7, 4], "respuesta": 5, "dificultad": 2 },
+    { "id": 3, "curso_minimo": "3ro", "temp_inicial": -2, "cambios": [-5, 8, -3], "respuesta": -2, "dificultad": 3 },
+    { "id": 4, "curso_minimo": "1ro", "temp_inicial": 2, "cambios": [-5], "respuesta": -3, "dificultad": 1 },
+    { "id": 5, "curso_minimo": "2do", "temp_inicial": -1, "cambios": [-4, 6], "respuesta": 1, "dificultad": 2 },
+    { "id": 6, "curso_minimo": "2do", "temp_inicial": -5, "cambios": [8, -4], "respuesta": -1, "dificultad": 2 },
+    { "id": 7, "curso_minimo": "2do", "temp_inicial": 3, "cambios": [-7, -2], "respuesta": -6, "dificultad": 2 },
+    { "id": 8, "curso_minimo": "3ro", "temp_inicial": -10, "cambios": [15, -8, 2], "respuesta": -1, "dificultad": 3 },
+    { "id": 9, "curso_minimo": "3ro", "temp_inicial": -3, "cambios": [-4, -2, 10], "respuesta": 1, "dificultad": 3 },
+    { "id": 10, "curso_minimo": "3ro", "temp_inicial": 0, "cambios": [-5, -5, -5], "respuesta": -15, "dificultad": 3 },
+    { "id": 11, "curso_minimo": "3ro", "temp_inicial": -8, "cambios": [12, -20, 5], "respuesta": -11, "dificultad": 3 },
+    { "id": 12, "curso_minimo": "3ro", "temp_inicial": 5, "cambios": [-6, -4, -2, 8], "respuesta": 1, "dificultad": 3 },
+    { "id": 13, "curso_minimo": "3ro", "temp_inicial": -1, "cambios": [-1, -1, -1, -1, -1], "respuesta": -5, "dificultad": 3 },
+    { "id": 14, "curso_minimo": "3ro", "temp_inicial": -20, "cambios": [40, -10], "respuesta": 10, "dificultad": 3 },
+    { "id": 15, "curso_minimo": "3ro", "temp_inicial": 35, "cambios": [-50, 5], "respuesta": -10, "dificultad": 3 },
+    { "id": 16, "curso_minimo": "3ro", "temp_inicial": 0, "cambios": [40, -60, 10], "respuesta": -10, "dificultad": 3 },
+    { "id": 17, "curso_minimo": "3ro", "temp_inicial": -15, "cambios": [-5, 50, -20], "respuesta": 10, "dificultad": 3 },
+    { "id": 18, "curso_minimo": "3ro", "temp_inicial": 40, "cambios": [-60, 15], "respuesta": -5, "dificultad": 3 },
+    { "id": 19, "curso_minimo": "3ro", "temp_inicial": -10, "cambios": [30, -40, 10], "respuesta": -10, "dificultad": 3 },
+    { "id": 20, "curso_minimo": "3ro", "temp_inicial": 20, "cambios": [-40, 50, -30], "respuesta": 0, "dificultad": 3 },
+    { "id": 21, "curso_minimo": "3ro", "temp_inicial": -20, "cambios": [60, -10, -5], "respuesta": 25, "dificultad": 3 },
+    { "id": 22, "curso_minimo": "3ro", "temp_inicial": 10, "cambios": [-30, 40, -20], "respuesta": 0, "dificultad": 3 },
+    { "id": 23, "curso_minimo": "3ro", "temp_inicial": -5, "cambios": [45, -50, 10], "respuesta": 0, "dificultad": 3 }
+  ]
+}
