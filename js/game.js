@@ -103,6 +103,52 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
 }
 
+// ── Lógica de Instalación (PWA) ───────────────────────────────
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Evitar que el navegador muestre su propio prompt predeterminado
+  e.preventDefault();
+  deferredPrompt = e;
+  // Mostrar nuestro banner personalizado después de 3 segundos de entrar
+  setTimeout(mostrarBannerInstalacion, 3000);
+});
+
+function mostrarBannerInstalacion() {
+  if (!deferredPrompt || document.getElementById('install-banner')) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'install-banner';
+  banner.style.cssText = `
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: white; padding: 15px 20px; border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 10000;
+    display: flex; align-items: center; gap: 15px; width: 90%; max-width: 420px;
+    border: 3px solid var(--azul); animation: mpFadeIn 0.5s ease-out;
+    font-family: sans-serif;
+  `;
+  banner.innerHTML = `
+    <div style="font-size: 28px;">🎮</div>
+    <div style="flex:1;">
+      <div style="font-weight: 900; color: var(--azul-oscuro); font-size: 1rem;">¡Instalá MatePlay!</div>
+      <div style="font-size: 0.8rem; color: #7f8c8d; font-weight: 600;">Jugá sin internet y desde tu escritorio.</div>
+    </div>
+    <button id="btn-pwa-install" style="margin:0; padding:10px 18px; font-size:0.85rem; font-weight:800; background:var(--azul); color:white; border:none; border-radius:12px; cursor:pointer; box-shadow: 0 4px 0 var(--azul-oscuro);">INSTALAR</button>
+    <button onclick="this.parentElement.remove()" style="background:none; border:none; color:#bdc3c7; font-size:1.5rem; cursor:pointer; padding:0 5px; font-weight:bold;">&times;</button>
+  `;
+  document.body.appendChild(banner);
+
+  document.getElementById('btn-pwa-install').addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        trackMP('pwa_install_accepted');
+        banner.remove();
+      }
+      deferredPrompt = null;
+    }
+  });
+}
+
 function validarMenu() {
   nombreAlumno = document.getElementById('input-nombre-menu').value.trim();
   const listo = cursoSeleccionado && nombreAlumno.length >= 2;
@@ -1252,8 +1298,12 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         '<div id="movimientos-display" style="text-align:center; margin: 15px 0;"></div>' + // Dynamic movements here
         '<div id="instruccion-paso" style="text-align:center; font-weight:bold; color:var(--azul-oscuro); margin-bottom:10px;"></div>' + // Dynamic instruction here
         '<div style="text-align:center;">' +
-          '<input type="number" id="input-ascensor" placeholder="¿A qué piso va?" style="width:120px; text-align:center; font-size:1.2rem;">' + // Usar TIEMPO_POR_EJERCICIO
-          '<button onclick="window.comprobarPiso()" style="margin-top:10px;">¡Mover!</button>' +
+          '<div style="display:flex; justify-content:center; gap:5px; margin-bottom:10px;">' +
+            '<button onclick="window.cambiarSigno(\'input-ascensor\', \'-\')" style="padding:10px; width:45px; background:#e74c3c; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">-</button>' +
+            '<input type="number" id="input-ascensor" placeholder="Piso" style="width:100px; text-align:center; font-size:1.5rem; margin:0;">' +
+            '<button onclick="window.cambiarSigno(\'input-ascensor\', \'+\')" style="padding:10px; width:45px; background:#2ecc71; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">+</button>' +
+          '</div>' +
+          '<button onclick="window.comprobarPiso()" style="width:100%; max-width:200px;">¡MOVER!</button>' +
         '</div>';
       
       function updateAscensorStateUI() { // New function to update dynamic parts
@@ -1389,8 +1439,12 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
             '<div class="zona-pedido">Temperatura inicial: ' + ej.temp_inicial + '°C</div>' +
             '<div class="objetivo-chef">' + ej.cambios.map(c => (c > 0 ? '🔺 +' : '❄️ ') + c + '°C').join(' ') + '</div>' +
             '<div style="text-align:center; margin-top:20px;">' +
-              '<input type="number" id="input-clima" placeholder="¿Temp final?" style="width:120px;">' +
-              '<button onclick="window.comprobarClima()">Confirmar</button>' +
+              '<div style="display:flex; justify-content:center; gap:5px; margin-bottom:10px;">' +
+                '<button onclick="window.cambiarSigno(\'input-clima\', \'-\')" style="padding:10px; width:45px; background:#3498db; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">-</button>' +
+                '<input type="number" id="input-clima" placeholder="Temp" style="width:100px; text-align:center; font-size:1.5rem; margin:0;">' +
+                '<button onclick="window.cambiarSigno(\'input-clima\', \'+\')" style="padding:10px; width:45px; background:#f1c40f; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">+</button>' +
+              '</div>' +
+              '<button onclick="window.comprobarClima()" style="width:100%; max-width:200px;">Confirmar</button>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -1499,8 +1553,12 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         '<div class="zona-pedido">' + (ej.modo === 'A' ? '¿Cuál es el saldo final?' : '¿Cuál era el saldo inicial?') + '</div>' +
         '<p style="text-align:center; font-size: 1.1rem; margin: 15px 0;">' + txt + '</p>' +
         '<div style="text-align:center; margin-bottom: 20px;">' +
-          '<input type="number" id="input-saldo" placeholder="Respuesta..." style="width:140px; font-size:1.2rem; padding:8px;">' +
-          '<button onclick="window.comprobarSaldo()" style="padding:10px 20px;">Verificar</button>' +
+          '<div style="display:flex; justify-content:center; gap:5px; margin-bottom:10px;">' +
+            '<button onclick="window.cambiarSigno(\'input-saldo\', \'-\')" style="padding:10px; width:45px; background:#e67e22; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">-</button>' +
+            '<input type="number" id="input-saldo" placeholder="Saldo" style="width:100px; text-align:center; font-size:1.5rem; margin:0;">' +
+            '<button onclick="window.cambiarSigno(\'input-saldo\', \'+\')" style="padding:10px; width:45px; background:#27ae60; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">+</button>' +
+          '</div>' +
+          '<button onclick="window.comprobarSaldo()" style="width:100%; max-width:200px;">Verificar</button>' +
         '</div>' +
         '<div style="text-align:center;">' +
           '<button class="secundario" style="background:#f1c40f; color:#2c3e50; border:none;" onclick="const c=document.getElementById(\'calc-app\'); c.style.display=(c.style.display===\'block\'?\'none\':\'block\')">🧮 Calculadora de apoyo</button>' +
@@ -1755,3 +1813,15 @@ function mostrarMensaje(texto, tipo) {
     container.classList.remove('visible');
   }, 2500);
 }
+
+window.cambiarSigno = function(id, signo) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let val = el.value;
+  if (signo === '-') {
+    if (!val.startsWith('-')) el.value = '-' + val;
+  } else {
+    if (val.startsWith('-')) el.value = val.substring(1);
+  }
+  el.focus();
+};

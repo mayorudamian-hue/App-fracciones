@@ -1,7 +1,7 @@
 {
-  "name": "Matemática Profe - Fracciones",
-  "short_name": "Mate Fracciones",
-  "description": "Juegos para aprender fracciones en 1ro, 2do y 3ro",
+  "name": "MatePlay",
+  "short_name": "MatePlay",
+  "description": "Juegos para aprender Matemática",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f0f4f8",
