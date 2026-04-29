@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mateplay-v1.0.0';
+const CACHE_NAME = 'mateplay-v1.0.2';
 const FILES_TO_CACHE = [
   './', './index.html', './js/game.js', './css/estilos.css',
   './data/pizza_rush.json', './data/tetris.json', './data/chef_fraccion.json', './data/arquitecto.json', './data/porcentajes.json',
