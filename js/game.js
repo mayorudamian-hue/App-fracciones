@@ -75,6 +75,16 @@ const mp_init = () => {
       btn.textContent = nombresBotones[match[1]];
     }
   });
+
+  // Cargar nombre guardado del alumno si existe
+  const nombreGuardado = localStorage.getItem('mateplay_nombre');
+  if (nombreGuardado) {
+    const inputNombre = document.getElementById('input-nombre-menu');
+    if (inputNombre) {
+      inputNombre.value = nombreGuardado;
+      validarMenu(); // Actualiza la variable global y el estado de los botones
+    }
+  }
 };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mp_init);
 else mp_init();
@@ -151,6 +161,7 @@ function mostrarBannerInstalacion() {
 
 function validarMenu() {
   nombreAlumno = document.getElementById('input-nombre-menu').value.trim();
+  localStorage.setItem('mateplay_nombre', nombreAlumno); // Guardar nombre automáticamente
   const listo = cursoSeleccionado && nombreAlumno.length >= 2;
   document.querySelectorAll('#menu button[onclick^="cargarJuego"]').forEach(btn => btn.disabled = !listo);
   if (document.getElementById('btn-logros')) document.getElementById('btn-logros').disabled = !listo;
@@ -215,6 +226,7 @@ async function cargarJuego(tipoJuego) {
     // Simular un tiempo mínimo de carga para que se vea la animación
     await new Promise(r => setTimeout(r, 1000));
 
+    history.pushState({ view: 'juego' }, '');
     trackMP('game_start', { 'tipo_juego': tipoJuego });
 
     mostrarJuego(data, ejerciciosFiltrados, cursoSeleccionado);
@@ -263,6 +275,7 @@ window.abrirPanelDocente = function() {
   const contenido = document.getElementById('contenido-panel');
   const filtro = document.getElementById('filtro-curso-panel') ? document.getElementById('filtro-curso-panel').value : 'todos';
 
+  history.pushState({ view: 'docente' }, '');
   let resultados = [];
   Object.keys(localStorage).forEach(key => {
     const match = key.match(/^ranking_(.+)_([^_]+)$/);
@@ -320,8 +333,7 @@ window.abrirPanelDocente = function() {
 };
 
 window.cerrarPanelDocente = function() {
-  document.getElementById('panel-docente-container').classList.add('oculto');
-  document.getElementById('menu').classList.remove('oculto');
+  if (history.state) history.back(); else volverMenu();
 };
 
 window.eliminarRegistro = function(key, idx) {
@@ -341,6 +353,7 @@ window.verLogros = function() {
   const container = document.getElementById('logros-container');
   const contenido = document.getElementById('contenido-logros');
   document.getElementById('menu').classList.add('oculto');
+  history.pushState({ view: 'logros' }, '');
   container.classList.remove('oculto');
 
   const key = `logros_${nombreAlumno}_${cursoSeleccionado}`;
@@ -401,13 +414,42 @@ window.resetearTodo = function() {
 };
 
 function volverMenu() {
+  if (history.state) {
+    history.back();
+  } else {
+    // Fallback por si se llama manualmente sin historial
+    document.getElementById('menu').classList.remove('oculto');
+    document.getElementById('juego-container').classList.add('oculto');
+    document.getElementById('logros-container').classList.add('oculto');
+    document.getElementById('panel-docente-container').classList.add('oculto');
+    document.getElementById('contenido-juego').innerHTML = '';
+    comboActual = 0;
+    clearInterval(window.timerID);
+  }
+}
+
+window.addEventListener('popstate', () => {
+  // Esta función se activa cuando el usuario toca el botón "atrás" del celular
+  const juegoContainer = document.getElementById('juego-container');
+  const juegoActivo = !juegoContainer.classList.contains('oculto');
+  const finalizado = document.getElementById('tabla-ranking') !== null;
+
+  if (juegoActivo && !finalizado) {
+    if (!confirm('¿Deseas salir del juego? Perderás el progreso de esta misión.')) {
+      // Si el usuario cancela, volvemos a empujar el estado para quedarnos en el juego
+      history.pushState({ view: 'juego' }, '');
+      return;
+    }
+  }
+
   document.getElementById('menu').classList.remove('oculto');
   document.getElementById('juego-container').classList.add('oculto');
   document.getElementById('logros-container').classList.add('oculto');
+  document.getElementById('panel-docente-container').classList.add('oculto');
   document.getElementById('contenido-juego').innerHTML = '';
   comboActual = 0;
   clearInterval(window.timerID);
-}
+});
 
 // ── Matemática de fracciones ───────────────────────────────────
 const GLIFOS_FRACCION = { 
@@ -1824,4 +1866,14 @@ window.cambiarSigno = function(id, signo) {
     if (val.startsWith('-')) el.value = val.substring(1);
   }
   el.focus();
+};
+
+window.cambiarUsuario = function() {
+  localStorage.removeItem('mateplay_nombre');
+  const inputNombre = document.getElementById('input-nombre-menu');
+  if (inputNombre) {
+    inputNombre.value = '';
+    validarMenu();
+    mostrarMensaje('Nombre borrado. ¡Ingresá uno nuevo!', 'exito');
+  }
 };
