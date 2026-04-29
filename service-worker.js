@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fracciones-v1.0.0';
+const CACHE_NAME = 'mateplay-v1.0.0';
 const FILES_TO_CACHE = [
   './', './index.html', './js/game.js', './css/estilos.css',
   './data/pizza_rush.json', './data/tetris.json', './data/chef_fraccion.json', './data/arquitecto.json', './data/porcentajes.json',
@@ -12,7 +12,8 @@ const FILES_TO_CACHE = [
   './assets/sounds/fanfarria.mp3',
   './assets/sounds/elevator.mp3',
   './assets/sounds/ding.mp3',
-  './assets/sounds/caja.mp3'
+  './assets/sounds/caja.mp3',
+  './assets/sounds/encaje.mp3'
 ];
 self.addEventListener('install', (evt) => {
   evt.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE)));

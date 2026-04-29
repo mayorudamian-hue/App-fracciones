@@ -3,16 +3,81 @@ const RUTAS_JSON = {
   pizza_rush: './data/pizza_rush.json', 
   tetris: './data/tetris.json', 
   chef_fraccion: './data/chef_fraccion.json', 
-  arquitecto: './data/arquitecto.json', 
+  arquitecto: './data/arquitecto.json',
   porcentajes: './data/porcentajes.json',
   ascensor_extremo: './data/ascensor_extremo.json',
   clima_loco: './data/clima_loco.json',
   saldo_inteligente: './data/saldo_inteligente.json',
   zona_impacto: './data/zona_impacto.json'
 };
-const TIEMPO_DEFECTO = 30;
+const TIEMPO_DEFECTO = 60;
+const TIEMPO_POR_EJERCICIO = 60; // 1 minuto por ejercicio
 let cursoSeleccionado = '', nombreAlumno = '', comboActual = 0;
 let elementoArrastrado = null, offsetX = 0, offsetY = 0, zonaDestino = null;
+
+// ── Google Analytics Helper ───────────────────────────────────
+function trackMP(eventName, params = {}) {
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, {
+      'app_name': 'MatePlay',
+      'alumno': nombreAlumno,
+      'curso': cursoSeleccionado,
+      ...params
+    });
+  }
+}
+
+// ── Estilo Visual MatePlay (Estilo "Play") ───────────────────
+const MatePlayTheme = `
+<style>
+  :root {
+    --azul: #ff9800; /* Naranja Play */
+    --azul-oscuro: #e65100;
+    --verde: #ffc107; /* Amarillo Play */
+    --verde-oscuro: #ffa000;
+    --fondo-app: #fffdeb;
+  }
+  body { background-color: var(--fondo-app) !important; }
+  .progreso-barra { background: linear-gradient(90deg, var(--verde), var(--azul)) !important; }
+  .notificacion-toast.exito { background-color: #ffc107 !important; color: #5d4a00 !important; border: 2px solid #ff9800 !important; }
+  .mp-slogan { margin-top: -10px; font-size: 1.1rem; color: var(--azul-oscuro); font-weight: bold; text-align: center; margin-bottom: 20px; animation: mpFadeIn 1.5s ease-in-out forwards; }
+  @keyframes mpFadeIn { from { opacity: 0; } to { opacity: 1; } }
+</style>`;
+document.head.insertAdjacentHTML('beforeend', MatePlayTheme);
+document.title = "MatePlay";
+const mp_init = () => {
+  const h1 = document.querySelector('h1');
+  if (h1 && !document.querySelector('.mp-slogan')) {
+    h1.textContent = "MatePlay";
+    const slogan = document.createElement('p');
+    slogan.className = 'mp-slogan';
+    slogan.textContent = "¡Aprendé jugando!";
+    h1.insertAdjacentElement('afterend', slogan);
+  }
+
+  // Actualizar los nombres de los botones en el menú principal para que sean más atractivos
+  const nombresBotones = {
+    pizza_rush: '🍕 Pizza Express',
+    equivalencia_tetris: '🧩 Tetris Galáctico',
+    arquitecto: '📏 Arquitecto Supremo',
+    porcentajes: '📊 Radar de Porcentajes',
+    chef_fraccion: '👨‍🍳 Super Chef',
+    ascensor_extremo: '🛗 Rascacielos Extremo',
+    clima_loco: '🌡️ Héroe del Clima',
+    saldo_inteligente: '💳 Magnate de la Isla',
+    zona_impacto: '💥 Zona de Impacto'
+  };
+
+  document.querySelectorAll('#menu button[onclick^="cargarJuego"]').forEach(btn => {
+    const attr = btn.getAttribute('onclick');
+    const match = attr.match(/'([^']+)'/) || attr.match(/"([^"]+)"/);
+    if (match && nombresBotones[match[1]]) {
+      btn.textContent = nombresBotones[match[1]];
+    }
+  });
+};
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mp_init);
+else mp_init();
 
 // ── Sonidos ───────────────────────────────────────────────────
 const SONIDOS = {
@@ -24,7 +89,8 @@ const SONIDOS = {
   fanfarria: new Audio('./assets/sounds/fanfarria.mp3'),
   elevator: new Audio('./assets/sounds/elevator.mp3'),
   ding: new Audio('./assets/sounds/ding.mp3'),
-  caja: new Audio('./assets/sounds/caja.mp3')
+  caja: new Audio('./assets/sounds/caja.mp3'),
+  encaje: new Audio('./assets/sounds/encaje.mp3')
 };
 
 function reproducirSonido(tipo) {
@@ -54,27 +120,64 @@ document.getElementById('input-nombre-menu').addEventListener('input', validarMe
 // ── Cargar juego ───────────────────────────────────────────────
 async function cargarJuego(tipoJuego) {
   if (!cursoSeleccionado) return;
-  const response = await fetch(RUTAS_JSON[tipoJuego]);
-  const data = await response.json();
 
-  const pool = tipoJuego === 'pizza_rush' ? data.pedidos : 
-               tipoJuego === 'tetris' ? data.fichas : 
-               tipoJuego === 'porcentajes' ? data.ejercicios :
-               tipoJuego === 'arquitecto' ? data.ejercicios :
-               tipoJuego === 'ascensor_extremo' ? data.ejercicios :
-               tipoJuego === 'clima_loco' ? data.ejercicios :
-               tipoJuego === 'saldo_inteligente' ? data.ejercicios :
-               tipoJuego === 'zona_impacto' ? data.ejercicios :
-               data.recetas;
+  // Crear y mostrar pantalla de carga con logo animado
+  const loader = document.createElement('div');
+  loader.id = 'mateplay-loader';
+  loader.style.cssText = `
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #fffdeb; z-index: 10000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: sans-serif;
+  `;
+  loader.innerHTML = `
+    <style>
+      @keyframes rotate-logo { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .loader-logo { 
+        width: 100px; height: 100px; background: linear-gradient(135deg, #f1c40f, #f39c12); 
+        border-radius: 22px; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3);
+        animation: rotate-logo 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        margin-bottom: 20px;
+      }
+      .loader-logo span { color: white; font-size: 3rem; font-weight: 900; pointer-events: none; }
+    </style>
+    <div class="loader-logo"><span>M</span></div>
+    <div style="font-weight: 800; color: #2c3e50; font-size: 1.2rem;">Cargando MatePlay...</div>
+  `;
+  document.body.appendChild(loader);
 
-  // Filtramos los ejercicios que pertenecen exactamente al curso elegido.
-  // Luego los mezclamos al azar y tomamos los primeros 10 para la evaluación.
-  const ejerciciosFiltrados = pool
-    .filter(e => e.curso_minimo === cursoSeleccionado)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 10);
+  try {
+    const response = await fetch(RUTAS_JSON[tipoJuego]);
+    const data = await response.json();
 
-  mostrarJuego(data, ejerciciosFiltrados, cursoSeleccionado);
+    const pool = tipoJuego === 'pizza_rush' ? data.pedidos : 
+                 tipoJuego === 'tetris' ? data.fichas : 
+                 tipoJuego === 'porcentajes' ? data.ejercicios :
+                 tipoJuego === 'arquitecto' ? data.ejercicios :
+                 tipoJuego === 'ascensor_extremo' ? data.ejercicios :
+                 tipoJuego === 'clima_loco' ? data.ejercicios :
+                 tipoJuego === 'saldo_inteligente' ? data.ejercicios :
+                 tipoJuego === 'zona_impacto' ? data.ejercicios :
+                 data.recetas;
+
+    const ejerciciosFiltrados = pool
+      .filter(e => e.curso_minimo === cursoSeleccionado)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 10);
+
+    // Simular un tiempo mínimo de carga para que se vea la animación
+    await new Promise(r => setTimeout(r, 1000));
+
+    trackMP('game_start', { 'tipo_juego': tipoJuego });
+
+    mostrarJuego(data, ejerciciosFiltrados, cursoSeleccionado);
+  } catch (err) {
+    mostrarMensaje('Error al cargar datos', 'error');
+  } finally {
+    // Quitar el loader al terminar (éxito o error)
+    if (loader) loader.remove();
+  }
 }
 
 window.exportarCSV = function() {
@@ -103,7 +206,7 @@ window.exportarCSV = function() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'notas_fracciones_' + new Date().toLocaleDateString('es-AR').replace(/\//g,'-') + '.csv';
+  link.download = 'notas_MatePlay_' + new Date().toLocaleDateString('es-AR').replace(/\//g,'-') + '.csv';
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 100);
 };
@@ -197,19 +300,19 @@ window.verLogros = function() {
   const key = `logros_${nombreAlumno}_${cursoSeleccionado}`;
   const completados = JSON.parse(localStorage.getItem(key)) || [];
   const juegos = [
-    { id: 'pizza_rush', n: 'Pizza Rush', i: '🍕' },
-    { id: 'equivalencia_tetris', n: 'Tetris Fracciones', i: '🧩' },
-    { id: 'arquitecto', n: 'Arquitecto', i: '📏' },
-    { id: 'porcentajes', n: 'Porcentajes', i: '📊' },
-    { id: 'chef_fraccion', n: 'Chef Fracción', i: '👨‍🍳' },
-    { id: 'ascensor_extremo', n: 'Maestro de Pisos', i: '🛗' },
-    { id: 'clima_loco', n: 'Climatólogo', i: '🌡️' },
-    { id: 'saldo_inteligente', n: 'Experto en Finanzas', i: '💳' },
-    { id: 'zona_impacto', n: 'Experto en Signos', i: '💥' }
+    { id: 'pizza_rush', n: 'Pizza Express: ¡Súper Reparto!', i: '🍕' },
+    { id: 'equivalencia_tetris', n: 'Tetris Galáctico: Alianza de Fracciones', i: '🧩' },
+    { id: 'arquitecto', n: 'Arquitecto Supremo: ¡Crea tu Mundo!', i: '📏' },
+    { id: 'porcentajes', n: 'Radar de Porcentajes: El Círculo Mágico', i: '📊' },
+    { id: 'chef_fraccion', n: 'Super Chef: Sabores Fraccionados', i: '👨‍🍳' },
+    { id: 'ascensor_extremo', n: 'Rascacielos Extremo: ¡Ascensor al Infinito!', i: '🛗' },
+    { id: 'clima_loco', n: 'Héroe del Clima: Desafío Térmico', i: '🌡️' },
+    { id: 'saldo_inteligente', n: 'Magnate de la Isla: ¡Cuentas Millonarias!', i: '💳' },
+    { id: 'zona_impacto', n: 'Zona de Impacto: El Poder de los Signos', i: '💥' }
   ];
 
   const esMaestro = completados.length === juegos.length;
-  let html = esMaestro ? `<div class="maestro-banner">🏆 ¡MAESTRO DE FRACCIONES: ${cursoSeleccionado}! 🏆</div>` : '';
+  let html = esMaestro ? `<div class="maestro-banner">🏆 ¡MAESTRO MATEPLAY: ${cursoSeleccionado}! 🏆</div>` : '';
 
   html += juegos.map(j => {
     const ok = completados.includes(j.id);
@@ -232,7 +335,7 @@ function registrarCompletitud(juegoId, curso, nombre) {
   if (!completados.includes(juegoId)) {
     completados.push(juegoId);
     localStorage.setItem(key, JSON.stringify(completados));
-    if (completados.length === 9) mostrarMensaje(`¡NUEVO LOGRO: Maestro de ${curso}! 🏆`, 'exito');
+    if (completados.length === 9) mostrarMensaje(`¡NUEVO LOGRO: Maestro MatePlay de ${curso}! 🏆`, 'exito');
   }
 }
 
@@ -351,6 +454,8 @@ function mostrarPantallaFinal(contenedor, juego, curso, puntaje, aciertos, total
   guardarPuntaje(juego, curso, nombreAlumno, puntaje, nota);
   registrarCompletitud(juego, curso, nombreAlumno);
 
+  trackMP('game_complete', { 'id_juego': juego, 'puntaje': puntaje, 'nota': nota, 'aciertos': aciertos });
+
   // Efecto de billetes si termina Saldo Inteligente con nota aprobada
   if (juego === 'saldo_inteligente' && parseFloat(nota) >= 6) {
     lanzarBilletes();
@@ -395,10 +500,16 @@ function mostrarPantallaFinal(contenedor, juego, curso, puntaje, aciertos, total
 }
 
 // ── Cronometro con barra ───────────────────────────────────────
+let cronometroRestante = 0;
+let cronometroTotal = 0;
+let tiempoExtraUsado = 0;
+const LIMITE_TIEMPO_EXTRA = 2;
+
 function crearHTMLCronometro(segundos) {
-  return '<div class="cronometro-wrap">' +
+  return '<div class="cronometro-wrap" style="display:flex; align-items:center; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:10px;">' +
     '<div class="timer" id="timer-display">⏱️ ' + segundos + 's</div>' +
-    '<div class="barra-tiempo-fondo"><div class="barra-tiempo" id="barra-timer" style="width:100%"></div></div>' +
+    '<button id="btn-extra-tiempo" onclick="window.agregarTiempo()" class="secundario" style="margin:0; padding:2px 8px; font-size:0.75rem; background:#f39c12; color:white; border:none; height:auto; line-height:1; border-radius:4px; cursor:pointer;">+15s ⏱️ (' + LIMITE_TIEMPO_EXTRA + ')</button>' +
+    '<div class="barra-tiempo-fondo" style="flex: 1 1 100%;"><div class="barra-tiempo" id="barra-timer" style="width:100%"></div></div>' +
   '</div>';
 }
 function actualizarCronometro(restante, total) {
@@ -406,19 +517,49 @@ function actualizarCronometro(restante, total) {
   const barra = document.getElementById('barra-timer');
   if (el) el.textContent = '⏱️ ' + restante + 's';
   if (barra) {
-    barra.style.width = ((restante / total) * 100) + '%';
-    barra.style.background = restante <= 10 ? '#e74c3c' : restante <= 20 ? '#f39c12' : '#2ecc71';
+    const pct = Math.max(0, Math.min(100, (restante / total) * 100));
+    barra.style.width = pct + '%';
+    barra.style.background = restante <= 10 ? '#e74c3c' : restante <= 30 ? '#ff9800' : '#ffc107';
   }
 }
 function iniciarCronometro(segundos, onFin) {
-  let restante = segundos;
+  cronometroRestante = segundos;
+  cronometroTotal = segundos;
+  tiempoExtraUsado = 0;
   clearInterval(window.timerID);
   window.timerID = setInterval(function() {
-    restante--;
-    actualizarCronometro(restante, segundos);
-    if (restante <= 0) { clearInterval(window.timerID); onFin(); }
+    cronometroRestante--;
+    actualizarCronometro(cronometroRestante, cronometroTotal);
+    if (cronometroRestante <= 0) { 
+      clearInterval(window.timerID); 
+      onFin(); 
+    }
   }, 1000);
 }
+
+window.agregarTiempo = function() {
+  if (tiempoExtraUsado >= LIMITE_TIEMPO_EXTRA) {
+    mostrarMensaje('Máximo 2 veces por ejercicio 🛑', 'error');
+    return;
+  }
+
+  cronometroRestante += 15;
+  tiempoExtraUsado++;
+  actualizarCronometro(cronometroRestante, cronometroTotal);
+
+  trackMP('use_extra_time', { 'usos': tiempoExtraUsado });
+  
+  const btn = document.getElementById('btn-extra-tiempo');
+  if (btn) {
+    const usosRestantes = LIMITE_TIEMPO_EXTRA - tiempoExtraUsado;
+    btn.textContent = '+15s ⏱️ (' + usosRestantes + ')';
+    if (usosRestantes === 0) {
+      btn.style.opacity = '0.5';
+      btn.style.background = '#95a5a6';
+    }
+  }
+  mostrarMensaje('¡+15 segundos! Usos: ' + tiempoExtraUsado + '/' + LIMITE_TIEMPO_EXTRA + ' ⏳', 'exito');
+};
 
 // ── Arrastre (tactil y mouse) ──────────────────────────────────
 function hacerArrastrable(elemento, tipo) {
@@ -481,10 +622,28 @@ function soltar(e) {
 
 // ── Mostrar juego ──────────────────────────────────────────────
 function mostrarJuego(dataCompleta, ejercicios, curso) {
+  const epico = {
+    pizza_rush: { n: 'Pizza Express: ¡Súper Reparto!', m: '¡La ciudad tiene hambre! Conviértete en el repartidor legendario dominando las porciones perfectas antes de que se enfríe el pedido.' },
+    equivalencia_tetris: { n: 'Tetris Galáctico: Alianza de Fracciones', m: '¡Fragmentos de energía caen del cosmos! Estabiliza la galaxia uniendo fracciones equivalentes en esta batalla espacial de ingenio.' },
+    arquitecto: { n: 'Arquitecto Supremo: ¡Crea tu Mundo!', m: '¡Diseña la ciudad del futuro! Usa tu sabiduría para completar estructuras maestras basadas en la unidad sagrada y proporciones divinas.' },
+    porcentajes: { n: 'Radar de Porcentajes: El Círculo Mágico', m: '¡Sincroniza el Círculo Mágico! Transforma la energía de los porcentajes en conocimiento puro para iluminar el radar arcano.' },
+    chef_fraccion: { n: 'Super Chef: Sabores Fraccionados', m: '¡Alerta en la cocina real! Fusiona ingredientes prohibidos con precisión absoluta para crear el banquete de la victoria definitiva.' },
+    ascensor_extremo: { n: 'Rascacielos Extremo: ¡Ascensor al Infinito!', m: '¡Desafía a la gravedad! Pilota el ascensor infinito a través de tormentas y megas-picos en busca de la mítica planta final.' },
+    clima_loco: { n: 'Héroe del Clima: Desafío Térmico', m: '¡El equilibrio térmico del mundo depende de ti! Enfrenta cambios extremos de temperatura y sobrevive a las tormentas de hielo y fuego.' },
+    saldo_inteligente: { n: 'Magnate de la Isla: ¡Cuentas Millonarias!', m: '¡De náufrago a trillonario! Gestiona los tesoros de la isla y construye tu imperio financiero con cálculos de precisión milimétrica.' },
+    zona_impacto: { n: 'Zona de Impacto: El Poder de los Signos', m: '¡Fuego en el hoyo! Lanza proyectiles matemáticos devastadores para derribar las fortalezas de la ignorancia en un choque explosivo.' }
+  };
+
+  const idJuego = dataCompleta.juego;
+  const override = epico[idJuego];
+
   document.getElementById('menu').classList.add('oculto');
   document.getElementById('juego-container').classList.remove('oculto');
-  document.getElementById('titulo-juego').textContent = dataCompleta.metadata.descripcion + ' - ' + curso;
-  document.getElementById('desc-juego').textContent = dataCompleta.metadata.mecanica;
+
+  const tituloFinal = (override ? override.n : dataCompleta.metadata.descripcion.replace(/fracciones/gi, 'MatePlay')) + ' - ' + curso;
+  document.getElementById('titulo-juego').textContent = tituloFinal;
+  document.getElementById('desc-juego').textContent = override ? override.m : dataCompleta.metadata.mecanica;
+
   const contenedor = document.getElementById('contenido-juego');
   let erroresPorTema = {};
 
@@ -539,7 +698,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       for (let i = 0; i < cantCajas; i++) cajasHTML += '<div class="caja-pizza"></div>';
 
       const tiempoPedido = ej.tiempo_seg || TIEMPO_DEFECTO;
-      contenedor.innerHTML = getProgresoHTML() +
+      contenedor.innerHTML = getProgresoHTML() + // Usar TIEMPO_POR_EJERCICIO
         '<div class="header-juego">' + crearHTMLCronometro(tiempoPedido) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
         '<div style="text-align:right;color:#7f8c8d;font-size:0.85rem;margin-bottom:6px;">Pedido ' + (pedidoActual+1) + '/' + ejercicios.length + '</div>' +
         '<div class="zona-pedido">' + ej.texto_pedido + '</div>' +
@@ -547,7 +706,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         '<button onclick="window.limpiarCajas()" class="secundario btn-limpiar">🗑️ Limpiar Cajas</button>' +
         '<div class="jarras-container">' + porciones.map(function(p) { 
           return '<div class="porcion" data-valor="' + p + '"><span class="txt-porcion">🍕<br>' + p + '</span></div>'; 
-        }).join('') + '</div>';
+        }).join('') + '</div>'; // Usar TIEMPO_POR_EJERCICIO
       contenedor.querySelectorAll('.porcion').forEach(function(p) { hacerArrastrable(p, 'porcion'); });
       iniciarCronometro(tiempoPedido, function() { terminarPedido(false); });
     }
@@ -582,8 +741,14 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       if (correcto) { 
         aciertos++; 
         comboActual++;
-        puntaje += 10 * (ejercicios[pedidoActual].dificultad || 1); 
-        mostrarMensaje('Pedido correcto! 🍕', 'exito');
+        let bonusBase = 10 * (ejercicios[pedidoActual].dificultad || 1);
+        if (tiempoExtraUsado === 0) {
+          puntaje += (bonusBase + 5);
+          mostrarMensaje('¡Pedido perfecto! +5 Bonus 🍕', 'exito');
+        } else {
+          puntaje += bonusBase;
+          mostrarMensaje('Pedido correcto! 🍕', 'exito');
+        }
         document.querySelectorAll('.caja-pizza').forEach(caja => {
           const r = caja.getBoundingClientRect();
           crearParticulas(r.left + r.width/2, r.top + r.height/2, '#f1c40f');
@@ -616,18 +781,20 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       });
       const fichas = correctas.concat(incorrectas.slice(0, Math.max(3, 5 - correctas.length))).sort(function() { return Math.random() - 0.5; });
       contenedor.innerHTML = getProgresoHTML() +
-        '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_DEFECTO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
+        '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_POR_EJERCICIO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
         '<div style="text-align:right;color:#7f8c8d;font-size:0.85rem;margin-bottom:6px;">Ficha ' + (fichaActual+1) + '/' + ejercicios.length + '</div>' +
         '<div class="ficha-tetris ficha-base">' + ej.fraccion_visible + '</div>' +
         '<p style="text-align:center;margin:16px 0;color:#7f8c8d;">Toca solo las equivalentes</p>' +
-        '<div class="tablero-tetris">' + fichas.map(function(f) { return '<div class="ficha-tetris" data-valor="' + f + '">' + f + '</div>'; }).join('') + '</div>';
+        '<div class="tablero-tetris" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 100%; margin: 10px auto; padding: 10px; box-sizing: border-box;">' + fichas.map(function(f) { return '<div class="ficha-tetris" data-valor="' + f + '">' + f + '</div>'; }).join('') + '</div>';
 
       contenedor.querySelectorAll('.ficha-tetris[data-valor]').forEach(function(ficha) {
         ficha.onclick = function() {
           const val = ficha.dataset.valor;
           if (sonEquivalentes(val, ej.fraccion_visible)) {
             ficha.classList.add('correcta'); puntaje += 10;
-            reproducirSonido('exito');
+            reproducirSonido('encaje');
+            const rect = ficha.getBoundingClientRect();
+            crearParticulas(rect.left + rect.width/2, rect.top + rect.height/2, '#ffc107');
           } else {
             comboActual = 0;
             const tema = ej.familia ? ej.familia.charAt(0).toUpperCase() + ej.familia.slice(1) : "Equivalencias";
@@ -643,12 +810,16 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
             clearInterval(window.timerID); 
             aciertos++; 
             comboActual++;
+            if (tiempoExtraUsado === 0) {
+              puntaje += 5;
+              mostrarMensaje('¡Todo equivalente! +5 Bonus 🧩', 'exito');
+            }
             const nivelCompleto = actProgreso(true);
             avanzarFicha(nivelCompleto); 
           }
-        };
+        }; // Usar TIEMPO_POR_EJERCICIO
       });
-      iniciarCronometro(TIEMPO_DEFECTO, function() {
+      iniciarCronometro(TIEMPO_POR_EJERCICIO, function() {
         comboActual = 0;
         actProgreso(false);
         const tema = ej.familia ? ej.familia.charAt(0).toUpperCase() + ej.familia.slice(1) : "Equivalencias";
@@ -691,20 +862,51 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       const esCaliente = t.includes('caldo') || t.includes('sopa');
       const vaporHTML = `<div class="vapor-container ${esCaliente ? '' : 'oculto'}"><div class="vapor-particula"></div><div class="vapor-particula"></div><div class="vapor-particula"></div></div>`;
 
+      // Nuevo CSS para el efecto de desbordamiento
+      const overflowEstilo = `
+        <style>
+          .bowl.desbordado {
+            border-color: var(--bolivia-red);
+            box-shadow: 0 0 15px var(--bolivia-red);
+            animation: shake-bowl 0.5s ease-in-out;
+          }
+          .bowl.desbordado::after {
+            content: '💧'; /* Emoji para simular el derrame */
+            position: absolute;
+            top: -10px; /* Posición inicial por encima del bowl */
+            right: 5px;
+            font-size: 1.5rem;
+            animation: spill-drop 0.8s forwards;
+          }
+          @keyframes shake-bowl {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+          }
+          @keyframes spill-drop {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(20px) rotate(30deg); opacity: 0; }
+          }
+        </style>`;
+
       let bowlsHTML = '';
       for (let i = 0; i < cantBowls; i++) bowlsHTML += `<div style="position:relative;">${vaporHTML}<div class="bowl" data-total="0">0</div></div>`;
-
-      contenedor.innerHTML = getProgresoHTML() +
-        '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_DEFECTO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
+      // Usar TIEMPO_POR_EJERCICIO
+      contenedor.innerHTML = getProgresoHTML() + overflowEstilo +
+        '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_POR_EJERCICIO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
         '<div style="text-align:right;color:#7f8c8d;font-size:0.85rem;margin-bottom:6px;">Receta ' + (recetaActual+1) + '/' + ejercicios.length + '</div>' +
         '<div class="objetivo-chef" data-objetivo="' + ej.cantidad_objetivo + '">' + ej.objetivo_texto + '</div>' +
         '<div class="contenedor-bowls">' + bowlsHTML + '</div>' +
         '<div id="total-chef-display" style="text-align:center; font-weight:bold; font-size:1.2rem; margin-bottom:10px; color:var(--azul-oscuro);">Total: 0</div>' +
         '<button onclick="window.limpiarBowl()" class="secundario btn-limpiar">🗑️ Limpiar Bowl</button>' +
-        '<div class="jarras-container">' + ej.jarras_disponibles.map(function(j) { return '<div class="jarra" data-valor="' + j + '">' + j + '</div>'; }).join('') + '</div>' +
+        '<div class="jarras-container">' + ej.jarras_disponibles.map(function(j) { return '<div class="jarra" data-valor="' + j + '">' + j + '</div>'; }).join('') + '</div>' + // Usar TIEMPO_POR_EJERCICIO
         '<p style="text-align:center;color:#7f8c8d;margin-top:8px;">💡 ' + ej.pista_opcional + '</p>';
       contenedor.querySelectorAll('.jarra').forEach(function(j) { hacerArrastrable(j, 'jarra'); });
-      iniciarCronometro(TIEMPO_DEFECTO, function() {
+      
+      // Asegurarse de que no haya bowls con la clase 'desbordado' al iniciar una nueva receta
+      document.querySelectorAll('.bowl').forEach(b => b.classList.remove('desbordado'));
+
+      iniciarCronometro(TIEMPO_POR_EJERCICIO, function() {
         const ejFin = ejercicios[recetaActual];
         comboActual = 0;
         actProgreso(false);
@@ -728,6 +930,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         bowl.classList.remove('lleno');
         bowl.classList.remove('peligro');
       });
+      document.querySelectorAll('.bowl').forEach(b => b.classList.remove('desbordado')); // Eliminar clase de desbordamiento
       document.querySelectorAll('.jarra').forEach(j => j.classList.remove('usada'));
     };
 
@@ -775,8 +978,14 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       if (totalEnBowl === objetivo) {
         clearInterval(window.timerID);
         comboActual++;
-        aciertos++; puntaje += 15;
-        mostrarMensaje('Receta perfecta! 👨‍🍳', 'exito');
+        aciertos++;
+        if (tiempoExtraUsado === 0) {
+          puntaje += 20; // 15 base + 5 bonus
+          mostrarMensaje('¡Receta perfecta! +5 Bonus 👨‍🍳', 'exito');
+        } else {
+          puntaje += 15;
+          mostrarMensaje('Receta perfecta! 👨‍🍳', 'exito');
+        }
         const r = bowlElements[0].getBoundingClientRect();
         crearParticulas(r.left + r.width / 2, r.top + r.height / 2, '#f1c40f');
         const nivelCompleto = actProgreso(true);
@@ -792,12 +1001,12 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         actProgreso(false);
         clearInterval(window.timerID);
 
-        // Si se pasa por más de 1/2, se quema
+        // Si se pasa por más de 1/2, se quema, de lo contrario solo se desborda
         if (comparar(totalEnBowl, sumarFracciones(objetivo, "1/2")) > 0) {
           document.querySelectorAll('.vapor-container').forEach(v => { v.classList.remove('oculto'); v.classList.add('quemado'); });
           mostrarMensaje('¡Se quemó! Te pasaste demasiado. Era ' + objetivo, 'error');
         } else {
-          mostrarMensaje('Te pasaste. Era ' + objetivo, 'error');
+          mostrarMensaje('¡Se desbordó! Te pasaste. Era ' + objetivo, 'error'); // Nuevo mensaje para desbordamiento
         }
 
         setTimeout(renderizarReceta, 1500);
@@ -818,7 +1027,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       // Generar segmentos para la muestra (numerador)
       let segmentsHTML = '';
       for(let i=0; i<fRef.num; i++) segmentsHTML += '<div class="cuerda-segmento aparecer" style="background:#d35400; border-color:rgba(255,255,255,0.2)"></div>';
-
+      // Usar TIEMPO_POR_EJERCICIO
       contenedor.innerHTML = getProgresoHTML() +
         '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_DEFECTO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
         '<div class="zona-pedido">' + ej.texto + '</div>' +
@@ -826,7 +1035,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         '<small style="color:#e67e22; font-weight:bold;">MUESTRA: ' + ej.parte_fraccion + '</small></div>' +
         '<div class="opciones-arquitecto">' + 
           ej.opciones.map((op, i) => `<div class="cuerda-opcion" data-idx="${i}" style="width:${baseWidth * op.proporcion}px"></div>`).join('') + 
-        '</div>' + '<p style="text-align:center; margin-top:15px; color:#7f8c8d;">¿Cuál es el entero (1)?</p>';
+        '</div>' + '<p style="text-align:center; margin-top:15px; color:#7f8c8d;">¿Cuál es el entero (1)?</p>'; // Usar TIEMPO_POR_EJERCICIO
 
       contenedor.querySelectorAll('.cuerda-opcion').forEach(el => {
         el.onclick = function() {
@@ -834,7 +1043,13 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           if (idx === ej.correcta_idx) {
             this.classList.add('correcta');
             comboActual++;
-            aciertos++; puntaje += 10; reproducirSonido('exito');
+            aciertos++;
+            if (tiempoExtraUsado === 0) {
+              puntaje += 15; // 10 base + 5 bonus
+              mostrarMensaje('¡Construcción perfecta! +5 Bonus 📏', 'exito');
+            } else {
+              puntaje += 10; reproducirSonido('exito');
+            }
             
             // Animación de ensamblaje en la respuesta correcta (denominador)
             const f = parsearFraccion(ej.parte_fraccion);
@@ -868,7 +1083,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           }, 1500);
         };
       });
-      iniciarCronometro(TIEMPO_DEFECTO, () => { comboActual = 0; actProgreso(false); ejActual++; if(ejActual < ejercicios.length) renderizarEjercicio(); else mostrarPantallaFinal(contenedor, 'arquitecto', curso, puntaje, aciertos, ejActual, erroresPorTema); });
+      iniciarCronometro(TIEMPO_POR_EJERCICIO, () => { comboActual = 0; actProgreso(false); ejActual++; if(ejActual < ejercicios.length) renderizarEjercicio(); else mostrarPantallaFinal(contenedor, 'arquitecto', curso, puntaje, aciertos, ejActual, erroresPorTema); });
     }
     renderizarEjercicio();
 
@@ -878,15 +1093,15 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
 
     function renderizarEjercicio() {
       const ej = ejercicios[ejActual];
-      contenedor.innerHTML = getProgresoHTML() +
-        '<div class="header-juego">' + crearHTMLCronometro(15) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
+      contenedor.innerHTML = getProgresoHTML() + // Usar TIEMPO_POR_EJERCICIO
+        '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_POR_EJERCICIO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
         '<div style="text-align:right;color:#7f8c8d;font-size:0.85rem;margin-bottom:6px;">Desafío ' + (ejActual+1) + '/10</div>' +
         '<div class="percent-label-big">' + ej.porcentaje + '%</div>' +
         '<div class="percent-visual-circle" id="pie-chart"></div>' +
         '<p style="text-align:center; color:#7f8c8d; font-weight:bold;">¿Qué fracción representa este porcentaje?</p>' +
         '<div class="btn-grid-porcentaje">' + 
           ej.opciones.map(op => `<button class="ficha-tetris" data-val="${op}">${op}</button>`).join('') + 
-        '</div>';
+        '</div>'; // Usar TIEMPO_POR_EJERCICIO
 
       // Añadir marcas de graduación
       const chartEl = document.getElementById('pie-chart');
@@ -925,8 +1140,14 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         btn.onclick = function() {
           const esCorrecto = this.dataset.val === ej.correcta;
           if (esCorrecto) {
-            this.classList.add('correcta'); aciertos++; puntaje += 15; comboActual++; reproducirSonido('exito');
-            const r = this.getBoundingClientRect(); crearParticulas(r.left + r.width/2, r.top + r.height/2, '#2ecc71');
+            this.classList.add('correcta'); aciertos++; comboActual++;
+            if (tiempoExtraUsado === 0) {
+              puntaje += 20; // 15 base + 5 bonus
+              mostrarMensaje('¡Porcentaje exacto! +5 Bonus 📊', 'exito');
+            } else {
+              puntaje += 15; reproducirSonido('exito');
+            }
+            const r = this.getBoundingClientRect(); crearParticulas(r.left + r.width/2, r.top + r.height/2, '#ffc107');
           } else {
             this.classList.add('incorrecta'); comboActual = 0; reproducirSonido('error');
             erroresPorTema["Conversión Porcentaje"] = (erroresPorTema["Conversión Porcentaje"] || 0) + 1;
@@ -940,7 +1161,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           }, 1500);
         };
       });
-      iniciarCronometro(15, () => { comboActual = 0; actProgreso(false); ejActual++; if(ejActual < ejercicios.length) renderizarEjercicio(); else mostrarPantallaFinal(contenedor, 'porcentajes', curso, puntaje, aciertos, ejActual, erroresPorTema); });
+      iniciarCronometro(TIEMPO_POR_EJERCICIO, () => { comboActual = 0; actProgreso(false); ejActual++; if(ejActual < ejercicios.length) renderizarEjercicio(); else mostrarPantallaFinal(contenedor, 'porcentajes', curso, puntaje, aciertos, ejActual, erroresPorTema); });
     }
     renderizarEjercicio();
 
@@ -949,13 +1170,21 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
     let ejActual = 0, puntaje = 0, aciertos = 0;
     let movActual = 0, pisoActual = 0, ultimoPisoPos = 0;
 
-    function renderizarEjercicio() {
+    function renderizarEjercicio() { // This function will now only render the static parts and initial state
       const ej = ejercicios[ejActual];
       movActual = 0;
-      pisoActual = ej.inicio;
+      pisoActual = ej.inicio; // Reset pisoActual for new exercise
       ultimoPisoPos = ej.inicio;
       
       const esNoche = ejActual >= 5; // Cambia a noche a partir del 6to ejercicio
+
+      // Generar indicadores de luces para los pisos (del -12 al 12)
+      let lucesHTML = '';
+      for(let i = -12; i <= 12; i++) {
+        const pct = 50 + (i * 4);
+        lucesHTML += `<div class="luz-piso" id="luz-piso-${i}" style="bottom:${pct}%"></div>`;
+      }
+
       const ascensorEstilo = `
         <style>
           .mov-item { display: inline-block; padding: 4px 8px; margin: 0 4px; border-radius: 4px; background: #eee; font-family: monospace; }
@@ -972,6 +1201,9 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           }
           .edificio-visual.noche { background-color: #2c3e50; border-color: #1a252f; background-image: linear-gradient(#34495e 1px, transparent 1px); }
           .edificio-visual.noche .piso-cero { background: #fff; opacity: 0.2; }
+          .luz-piso { width: 4px; height: 4px; background: #95a5a6; border-radius: 50%; position: absolute; left: 4px; transition: background 0.3s, box-shadow 0.3s; z-index: 5; }
+          .luz-piso.activa { background: #2ecc71; box-shadow: 0 0 5px #2ecc71; width: 6px; height: 6px; left: 3px; }
+          .edificio-visual.noche .luz-piso:not(.activa) { background: #34495e; }
           .ventanas-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: grid; grid-template-columns: repeat(2, 20px); justify-content: center; gap: 20px 15px; padding-top: 15px; box-sizing: border-box; pointer-events: none; }
           .ventana { background: #95a5a6; height: 15px; border-radius: 1px; transition: background 2s ease, box-shadow 2s ease; }
           .edificio-visual.noche .ventana { background: #f1c40f; box-shadow: 0 0 10px rgba(241, 196, 15, 0.8); }
@@ -1003,50 +1235,46 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           }
         </style>`;
 
-      function actualizarUI() {
-        const mHTML = ej.movimientos.map((m, i) => {
+      contenedor.innerHTML = getProgresoHTML() + ascensorEstilo +
+        '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_POR_EJERCICIO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
+        '<div id="ascensor-info" class="zona-pedido"></div>' + // Dynamic info here
+        '<div class="edificio-visual ' + (esNoche ? 'noche' : '') + '">' +
+          lucesHTML + 
+          '<div class="ventanas-grid">' +
+            '<div class="ventana"></div><div class="ventana"></div>' +
+            '<div class="ventana"></div><div class="ventana"></div>' +
+            '<div class="ventana"></div><div class="ventana"></div>' +
+            '<div class="ventana"></div><div class="ventana"></div>' +
+          '</div>' +
+          '<div class="piso-cero"></div>' +
+          '<div id="ascensor-visual" class="ascensor-caja"></div>' + // Content updated dynamically
+        '</div>' +
+        '<div id="movimientos-display" style="text-align:center; margin: 15px 0;"></div>' + // Dynamic movements here
+        '<div id="instruccion-paso" style="text-align:center; font-weight:bold; color:var(--azul-oscuro); margin-bottom:10px;"></div>' + // Dynamic instruction here
+        '<div style="text-align:center;">' +
+          '<input type="number" id="input-ascensor" placeholder="¿A qué piso va?" style="width:120px; text-align:center; font-size:1.2rem;">' + // Usar TIEMPO_POR_EJERCICIO
+          '<button onclick="window.comprobarPiso()" style="margin-top:10px;">¡Mover!</button>' +
+        '</div>';
+      
+      function updateAscensorStateUI() { // New function to update dynamic parts
+        document.getElementById('ascensor-info').innerHTML = 'Ejercicio ' + (ejActual+1) + '/10: El ascensor está en el piso <strong>' + pisoActual + '</strong>';
+        document.getElementById('movimientos-display').innerHTML = ej.movimientos.map((m, i) => {
           const cls = i < movActual ? 'pasado' : (i === movActual ? 'actual' : '');
           return `<span class="mov-item ${cls}">${m > 0 ? '+' : ''}${m}</span>`;
         }).join('');
-
-        contenedor.innerHTML = getProgresoHTML() + ascensorEstilo +
-          '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_DEFECTO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
-          '<div class="zona-pedido">Ejercicio ' + (ejActual+1) + '/10: El ascensor está en el piso <strong>' + pisoActual + '</strong></div>' +
-          '<div class="edificio-visual ' + (esNoche ? 'noche' : '') + '">' +
-            '<div class="ventanas-grid">' +
-              '<div class="ventana"></div><div class="ventana"></div>' +
-              '<div class="ventana"></div><div class="ventana"></div>' +
-              '<div class="ventana"></div><div class="ventana"></div>' +
-              '<div class="ventana"></div><div class="ventana"></div>' +
-            '</div>' +
-            '<div class="piso-cero"></div>' +
-            '<div id="ascensor-visual" class="ascensor-caja">' + pisoActual + '</div>' +
-          '</div>' +
-          '<div style="text-align:center; margin: 15px 0;">' + mHTML + '</div>' +
-          '<div id="instruccion-paso" style="text-align:center; font-weight:bold; color:var(--azul-oscuro); margin-bottom:10px;">' + 
-            (ej.movimientos[movActual] > 0 ? '🔼 SUBIR ' : '🔽 BAJAR ') + Math.abs(ej.movimientos[movActual]) + ' pisos' +
-          '</div>' +
-          '<div style="text-align:center;">' +
-            '<input type="number" id="input-ascensor" placeholder="¿A qué piso va?" style="width:120px; text-align:center; font-size:1.2rem;">' +
-            '<button onclick="window.comprobarPiso()" style="margin-top:10px;">¡Mover!</button>' +
-          '</div>';
-        
-        document.getElementById('input-ascensor').focus();
-        moverAscensorVisual(pisoActual, false);
-        iniciarCronometro(TIEMPO_DEFECTO, () => {
-           comboActual = 0; mostrarMensaje('¡Tiempo agotado!', 'error');
-           ejActual++; 
-           if(ejActual < ejercicios.length) renderizarEjercicio();
-           else mostrarPantallaFinal(contenedor, 'ascensor_extremo', curso, puntaje, aciertos, ejActual, erroresPorTema);
-        });
+        document.getElementById('instruccion-paso').innerHTML = 
+            (ej.movimientos[movActual] > 0 ? '🔼 SUBIR ' : '🔽 BAJAR ') + Math.abs(ej.movimientos[movActual]) + ' pisos';
       }
 
-      actualizarUI();
-      
       const moverAscensorVisual = (piso, sonarDing = false) => {
         const el = document.getElementById('ascensor-visual');
         const edificio = document.querySelector('.edificio-visual');
         if (!el || !edificio) return;
+
+        // Actualizar luces indicadoras
+        document.querySelectorAll('.luz-piso').forEach(l => l.classList.remove('activa'));
+        const luzActual = document.getElementById('luz-piso-' + piso);
+        if (luzActual) luzActual.classList.add('activa');
 
         // Vibración si el desplazamiento es brusco (más de 10 pisos)
         if (Math.abs(piso - ultimoPisoPos) > 10) {
@@ -1075,6 +1303,18 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         el.textContent = piso;
       };
 
+      // Initial update of dynamic parts
+      updateAscensorStateUI();
+      
+      document.getElementById('input-ascensor').focus();
+      moverAscensorVisual(pisoActual, false); // Initial elevator position
+      iniciarCronometro(TIEMPO_POR_EJERCICIO, () => {
+         comboActual = 0; mostrarMensaje('¡Tiempo agotado!', 'error');
+         ejActual++; 
+         if(ejActual < ejercicios.length) renderizarEjercicio();
+         else mostrarPantallaFinal(contenedor, 'ascensor_extremo', curso, puntaje, aciertos, ejActual, erroresPorTema);
+      });
+
       window.comprobarPiso = function() {
         const resp = parseInt(document.getElementById('input-ascensor').value);
         const correcta = pisoActual + ej.movimientos[movActual];
@@ -1087,13 +1327,19 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           puntaje += 5;
 
           if (movActual < ej.movimientos.length) {
-            setTimeout(actualizarUI, 1000);
+            mostrarMensaje('¡Piso correcto! 🏢', 'exito');
+            setTimeout(updateAscensorStateUI, 1000); // Update the text elements after the animation
           } else {
             // Ejercicio terminado completamente
             aciertos++;
             comboActual++;
-            puntaje += 5; // Bonus por terminar secuencia
-            mostrarMensaje('¡Secuencia completada! 🏁', 'exito');
+            if (tiempoExtraUsado === 0) {
+              puntaje += 10; // 5 base + 5 bonus
+              mostrarMensaje('¡Secuencia perfecta! +5 Bonus 🏁', 'exito');
+            } else {
+              puntaje += 5; // Bonus por terminar secuencia
+              mostrarMensaje('¡Secuencia completada! 🏁', 'exito');
+            }
             const nivelCompleto = actProgreso(true);
             clearInterval(window.timerID);
             setTimeout(() => {
@@ -1161,7 +1407,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           bwrap.innerHTML = Array.from({length: 5}).map(() => 
             `<div class="bubble-particle" style="left:${Math.random()*60+20}%; width:${Math.random()*8+4}px; height:${Math.random()*8+4}px; animation-delay:${Math.random()*1.5}s"></div>`
           ).join('');
-        } else { bwrap.innerHTML = ''; }
+        } else { bwrap.innerHTML = ''; } // Usar TIEMPO_POR_EJERCICIO
       };
 
       actualizarTermometro(ej.temp_inicial);
@@ -1172,13 +1418,17 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         const esCorrecto = resp === correcta;
 
         if (esCorrecto) { 
-          aciertos++; puntaje += 10; reproducirSonido('exito');
+          aciertos++;
+          let bonusExtra = (tiempoExtraUsado === 0 ? 5 : 0);
+          puntaje += (10 + bonusExtra);
+          let msg = bonusExtra > 0 ? '¡Temperatura perfecta! +5 Bonus 🌡️' : '¡Temperatura exacta! 🌡️';
+
           // Lógica de racha bajo cero
           if (correcta < 0) {
             consecutivosBajoCero++;
             consecutivosCalor = 0;
             if (consecutivosBajoCero === 5) {
-              mostrarMensaje('¡Superviviente del Ártico! ❄️🏔️', 'exito');
+              msg = '¡Superviviente del Ártico! ❄️🏔️';
               // Disparar efecto visual de congelado
               const frost = document.createElement('div');
               frost.className = 'frost-overlay';
@@ -1189,7 +1439,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
             consecutivosCalor++;
             consecutivosBajoCero = 0;
             if (consecutivosCalor === 5) {
-              mostrarMensaje('¡Maestro del Desierto! 🔥🌵', 'exito');
+              msg = '¡Maestro del Desierto! 🔥🌵';
               // Disparar efecto visual de calor
               const heat = document.createElement('div');
               heat.className = 'heat-overlay';
@@ -1200,6 +1450,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
             consecutivosBajoCero = 0; // Se rompe la racha si la temp es >= 0
             consecutivosCalor = 0;
           }
+          mostrarMensaje(msg, 'exito');
         } else { 
           reproducirSonido('error'); 
           erroresPorTema["Contexto Clima"] = (erroresPorTema["Contexto Clima"] || 0) + 1; 
@@ -1214,7 +1465,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           else mostrarPantallaFinal(contenedor, 'clima_loco', curso, puntaje, aciertos, ejActual, erroresPorTema);
         }, 1500);
       };
-    }
+    } // Usar TIEMPO_POR_EJERCICIO
     renderizarEjercicio();
 
   // ── SALDO INTELIGENTE ───────────────────────────────────────
@@ -1263,7 +1514,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           '</div>' +
         '</div>';
 
-      window.calcClick = (k) => {
+      window.calcClick = (k) => { // Usar TIEMPO_POR_EJERCICIO
         const res = document.getElementById('calc-res');
         if (k === 'C') res.textContent = '';
         else if (k === '←') res.textContent = res.textContent.slice(0, -1);
@@ -1277,7 +1528,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           if (!val) return;
           res.textContent = Function('"use strict";return (' + val + ')')();
         } catch(e) { res.textContent = 'Error'; }
-      };
+      }; // Usar TIEMPO_POR_EJERCICIO
 
       window.comprobarSaldo = function() {
         const resp = parseInt(document.getElementById('input-saldo').value);
@@ -1286,7 +1537,11 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           ej.saldo_final - ej.movimientos.reduce((a, b) => a + b, 0);
 
         const esCorrecto = resp === correcta;
-        if (esCorrecto) { aciertos++; puntaje += 15; reproducirSonido('exito'); }
+        if (esCorrecto) { 
+          aciertos++;
+          if (tiempoExtraUsado === 0) { puntaje += 20; mostrarMensaje('¡Cuenta perfecta! +5 Bonus 💰', 'exito'); }
+          else { puntaje += 15; mostrarMensaje('¡Cuenta perfecta! 💰', 'exito'); }
+        }
         else { reproducirSonido('error'); erroresPorTema["Ecuaciones de Saldo"] = (erroresPorTema["Ecuaciones de Saldo"] || 0) + 1; }
         const nivelCompleto = actProgreso(esCorrecto);
         setTimeout(() => {
@@ -1295,7 +1550,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           else mostrarPantallaFinal(contenedor, 'saldo_inteligente', curso, puntaje, aciertos, ejActual, erroresPorTema);
         }, 1500);
       };
-    }
+    } // Usar TIEMPO_POR_EJERCICIO
     renderizarEjercicio();
 
   // ── ZONA DE IMPACTO ─────────────────────────────────────────
@@ -1343,14 +1598,14 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           </div>`;
       }
 
-      contenedor.innerHTML = getProgresoHTML() + estilosImpacto +
+      contenedor.innerHTML = getProgresoHTML() + estilosImpacto + // Usar TIEMPO_POR_EJERCICIO
         '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_DEFECTO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
         interfaceHTML;
 
       // Funciones de validación
       window.checkSigno = function(s) {
         if (s === ej.signo) {
-          reproducirSonido('exito');
+          if (!esNivel1) reproducirSonido('exito');
           if (esNivel1) {
             procesarAcierto();
           } else {
@@ -1382,12 +1637,17 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       };
 
       function procesarAcierto() {
-        aciertos++; puntaje += 15; comboActual++;
+        aciertos++; comboActual++;
+        if (tiempoExtraUsado === 0) {
+          puntaje += 20;
+          mostrarMensaje('¡Impacto certero! +5 Bonus', 'exito');
+        } else {
+          puntaje += 15;
+          mostrarMensaje('¡Impacto certero!', 'exito');
+        }
         const el = document.querySelector('.expresion-impacto');
         const rect = el.getBoundingClientRect();
-        crearParticulas(rect.left + rect.width/2, rect.top + rect.height/2, '#2ecc71');
-        mostrarMensaje('¡Impacto certero!', 'exito');
-        reproducirSonido('exito');
+        crearParticulas(rect.left + rect.width/2, rect.top + rect.height/2, '#ffc107');
         const nivelCompleto = actProgreso(true);
         setTimeout(() => {
           ejActual++;
@@ -1409,7 +1669,7 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
         }, 2500);
       }
 
-      iniciarCronometro(TIEMPO_DEFECTO, () => {
+      iniciarCronometro(TIEMPO_POR_EJERCICIO, () => {
         procesarError("¡Se acabó el tiempo!");
       });
     }
