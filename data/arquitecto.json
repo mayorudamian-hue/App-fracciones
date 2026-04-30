@@ -5,37 +5,1244 @@
     "mecanica": "Observá el fragmento de cuerda y elegí cuál de las opciones de abajo representa la unidad entera (1)."
   },
   "ejercicios": [
-    { "id": 1, "curso_minimo": "1ro", "texto": "Esta soga es la mitad (1/2) del total.", "parte_fraccion": "1/2", "opciones": [{ "proporcion": 0.5 }, { "proporcion": 1.0 }, { "proporcion": 1.5 }], "correcta_idx": 1 },
-    { "id": 2, "curso_minimo": "1ro", "texto": "Tenés un cuarto (1/4) de la soga.", "parte_fraccion": "1/4", "opciones": [{ "proporcion": 0.25 }, { "proporcion": 0.75 }, { "proporcion": 1.0 }], "correcta_idx": 2 },
-    { "id": 3, "curso_minimo": "1ro", "texto": "Esto representa un tercio (1/3).", "parte_fraccion": "1/3", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 0.33 }, { "proporcion": 0.66 }], "correcta_idx": 0 },
-    { "id": 4, "curso_minimo": "1ro", "texto": "Mirá esta mitad (1/2). ¿Cuál es la soga completa?", "parte_fraccion": "1/2", "opciones": [{ "proporcion": 1.5 }, { "proporcion": 1.0 }, { "proporcion": 0.5 }], "correcta_idx": 1 },
-    { "id": 5, "curso_minimo": "1ro", "texto": "Si esto es 1/4, buscá el entero.", "parte_fraccion": "1/4", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 0.5 }, { "proporcion": 0.25 }], "correcta_idx": 0 },
-    { "id": 6, "curso_minimo": "1ro", "texto": "Un tercio (1/3) de camino. ¿Cuánto falta para el total?", "parte_fraccion": "1/3", "opciones": [{ "proporcion": 0.33 }, { "proporcion": 0.66 }, { "proporcion": 1.0 }], "correcta_idx": 2 },
-    { "id": 7, "curso_minimo": "1ro", "texto": "Esto es solo 1/2. Encontrá el 1.", "parte_fraccion": "1/2", "opciones": [{ "proporcion": 0.25 }, { "proporcion": 1.0 }, { "proporcion": 0.5 }], "correcta_idx": 1 },
-    { "id": 8, "curso_minimo": "1ro", "texto": "Si tenés 1/4, ¿cuál de estas es la unidad?", "parte_fraccion": "1/4", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 0.75 }, { "proporcion": 1.25 }], "correcta_idx": 0 },
-    { "id": 9, "curso_minimo": "1ro", "texto": "Muestra de 1/3. Reconstruí el entero.", "parte_fraccion": "1/3", "opciones": [{ "proporcion": 0.66 }, { "proporcion": 1.0 }, { "proporcion": 0.33 }], "correcta_idx": 1 },
-    { "id": 10, "curso_minimo": "1ro", "texto": "Esto es una quinta parte (1/5).", "parte_fraccion": "1/5", "opciones": [{ "proporcion": 0.2 }, { "proporcion": 0.6 }, { "proporcion": 1.0 }], "correcta_idx": 2 },
-
-    { "id": 11, "curso_minimo": "2do", "texto": "Esta cuerda son dos tercios (2/3).", "parte_fraccion": "2/3", "opciones": [{ "proporcion": 0.66 }, { "proporcion": 1.0 }, { "proporcion": 1.33 }], "correcta_idx": 1 },
-    { "id": 12, "curso_minimo": "2do", "texto": "Si esto representa 3/4, ¿cuál es el entero?", "parte_fraccion": "3/4", "opciones": [{ "proporcion": 0.75 }, { "proporcion": 1.25 }, { "proporcion": 1.0 }], "correcta_idx": 2 },
-    { "id": 13, "curso_minimo": "2do", "texto": "Esto son dos cuartos (2/4).", "parte_fraccion": "2/4", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 0.5 }, { "proporcion": 1.5 }], "correcta_idx": 0 },
-    { "id": 14, "curso_minimo": "2do", "texto": "Tenés dos quintos (2/5) de la cuerda.", "parte_fraccion": "2/5", "opciones": [{ "proporcion": 0.4 }, { "proporcion": 1.0 }, { "proporcion": 0.8 }], "correcta_idx": 1 },
-    { "id": 15, "curso_minimo": "2do", "texto": "Si esto es 3/5, ¿cuál es la unidad completa?", "parte_fraccion": "3/5", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 0.6 }, { "proporcion": 0.8 }], "correcta_idx": 0 },
-    { "id": 16, "curso_minimo": "2do", "texto": "Representación de 2/3. Buscá el entero.", "parte_fraccion": "2/3", "opciones": [{ "proporcion": 1.33 }, { "proporcion": 0.66 }, { "proporcion": 1.0 }], "correcta_idx": 2 },
-    { "id": 17, "curso_minimo": "2do", "texto": "Esto son tres cuartos (3/4) de la medida.", "parte_fraccion": "3/4", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 0.5 }, { "proporcion": 0.75 }], "correcta_idx": 0 },
-    { "id": 18, "curso_minimo": "2do", "texto": "Mirá estos cuatro sextos (4/6).", "parte_fraccion": "4/6", "opciones": [{ "proporcion": 0.66 }, { "proporcion": 0.33 }, { "proporcion": 1.0 }], "correcta_idx": 2 },
-    { "id": 19, "curso_minimo": "2do", "texto": "Dos cuartos (2/4) de soga. Buscá el 1.", "parte_fraccion": "2/4", "opciones": [{ "proporcion": 0.5 }, { "proporcion": 1.0 }, { "proporcion": 0.75 }], "correcta_idx": 1 },
-    { "id": 20, "curso_minimo": "2do", "texto": "Tres tercios (3/3). ¿Cuál es el entero?", "parte_fraccion": "3/3", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 0.66 }, { "proporcion": 1.33 }], "correcta_idx": 0 },
-
-    { "id": 21, "curso_minimo": "3ro", "texto": "¡Cuidado! Esto es tres medios (3/2).", "parte_fraccion": "3/2", "opciones": [{ "proporcion": 1.5 }, { "proporcion": 1.0 }, { "proporcion": 0.5 }], "correcta_idx": 1 },
-    { "id": 22, "curso_minimo": "3ro", "texto": "Esto representa cinco cuartos (5/4).", "parte_fraccion": "5/4", "opciones": [{ "proporcion": 1.25 }, { "proporcion": 0.75 }, { "proporcion": 1.0 }], "correcta_idx": 2 },
-    { "id": 23, "curso_minimo": "3ro", "texto": "Tenés cuatro tercios (4/3). ¿Cuál es la unidad?", "parte_fraccion": "4/3", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 1.33 }, { "proporcion": 1.66 }], "correcta_idx": 0 },
-    { "id": 24, "curso_minimo": "3ro", "texto": "Seis cuartos (6/4) de soga. Buscá el 1.", "parte_fraccion": "6/4", "opciones": [{ "proporcion": 1.5 }, { "proporcion": 1.0 }, { "proporcion": 0.5 }], "correcta_idx": 1 },
-    { "id": 25, "curso_minimo": "3ro", "texto": "Esto son cinco medios (5/2).", "parte_fraccion": "5/2", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 2.5 }, { "proporcion": 2.0 }], "correcta_idx": 0 },
-    { "id": 26, "curso_minimo": "3ro", "texto": "Una soga y media (1 1/2). Buscá el entero.", "parte_fraccion": "1 1/2", "opciones": [{ "proporcion": 1.5 }, { "proporcion": 1.0 }, { "proporcion": 2.0 }], "correcta_idx": 1 },
-    { "id": 27, "curso_minimo": "3ro", "texto": "Esto es un entero y un cuarto (1 1/4).", "parte_fraccion": "1 1/4", "opciones": [{ "proporcion": 1.25 }, { "proporcion": 1.0 }, { "proporcion": 0.75 }], "correcta_idx": 1 },
-    { "id": 28, "curso_minimo": "3ro", "texto": "Esto son dos enteros (2). ¿Cuál es el 1?", "parte_fraccion": "2", "opciones": [{ "proporcion": 2.0 }, { "proporcion": 1.0 }, { "proporcion": 0.5 }], "correcta_idx": 1 },
-    { "id": 29, "curso_minimo": "3ro", "texto": "Siete cuartos (7/4). Buscá la unidad.", "parte_fraccion": "7/4", "opciones": [{ "proporcion": 1.0 }, { "proporcion": 1.75 }, { "proporcion": 2.0 }], "correcta_idx": 0 },
-    { "id": 30, "curso_minimo": "3ro", "texto": "Cuatro medios (4/2). Encontrá el entero.", "parte_fraccion": "4/2", "opciones": [{ "proporcion": 2.0 }, { "proporcion": 1.5 }, { "proporcion": 1.0 }], "correcta_idx": 2 }
+    {
+      "id": 1,
+      "curso_minimo": "1ro",
+      "texto": "Esta soga es la mitad (1/2) del total.",
+      "parte_fraccion": "1/2",
+      "opciones": [
+        {
+          "proporcion": 0.5
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 1.5
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 2,
+      "curso_minimo": "1ro",
+      "texto": "Tenés un cuarto (1/4) de la soga.",
+      "parte_fraccion": "1/4",
+      "opciones": [
+        {
+          "proporcion": 0.25
+        },
+        {
+          "proporcion": 0.75
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 3,
+      "curso_minimo": "1ro",
+      "texto": "Esto representa un tercio (1/3).",
+      "parte_fraccion": "1/3",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.33
+        },
+        {
+          "proporcion": 0.66
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 4,
+      "curso_minimo": "1ro",
+      "texto": "Mirá esta mitad (1/2). ¿Cuál es la soga completa?",
+      "parte_fraccion": "1/2",
+      "opciones": [
+        {
+          "proporcion": 1.5
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 5,
+      "curso_minimo": "1ro",
+      "texto": "Si esto es 1/4, buscá el entero.",
+      "parte_fraccion": "1/4",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        },
+        {
+          "proporcion": 0.25
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 6,
+      "curso_minimo": "1ro",
+      "texto": "Un tercio (1/3) de camino. ¿Cuánto falta para el total?",
+      "parte_fraccion": "1/3",
+      "opciones": [
+        {
+          "proporcion": 0.33
+        },
+        {
+          "proporcion": 0.66
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 7,
+      "curso_minimo": "1ro",
+      "texto": "Esto es solo 1/2. Encontrá el 1.",
+      "parte_fraccion": "1/2",
+      "opciones": [
+        {
+          "proporcion": 0.25
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 8,
+      "curso_minimo": "1ro",
+      "texto": "Si tenés 1/4, ¿cuál de estas es la unidad?",
+      "parte_fraccion": "1/4",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.75
+        },
+        {
+          "proporcion": 1.25
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 9,
+      "curso_minimo": "1ro",
+      "texto": "Muestra de 1/3. Reconstruí el entero.",
+      "parte_fraccion": "1/3",
+      "opciones": [
+        {
+          "proporcion": 0.66
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.33
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 10,
+      "curso_minimo": "1ro",
+      "texto": "Esto es una quinta parte (1/5).",
+      "parte_fraccion": "1/5",
+      "opciones": [
+        {
+          "proporcion": 0.2
+        },
+        {
+          "proporcion": 0.6
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 11,
+      "curso_minimo": "2do",
+      "texto": "Esta cuerda son dos tercios (2/3).",
+      "parte_fraccion": "2/3",
+      "opciones": [
+        {
+          "proporcion": 0.66
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 1.33
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 12,
+      "curso_minimo": "2do",
+      "texto": "Si esto representa 3/4, ¿cuál es el entero?",
+      "parte_fraccion": "3/4",
+      "opciones": [
+        {
+          "proporcion": 0.75
+        },
+        {
+          "proporcion": 1.25
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 13,
+      "curso_minimo": "2do",
+      "texto": "Esto son dos cuartos (2/4).",
+      "parte_fraccion": "2/4",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        },
+        {
+          "proporcion": 1.5
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 14,
+      "curso_minimo": "2do",
+      "texto": "Tenés dos quintos (2/5) de la cuerda.",
+      "parte_fraccion": "2/5",
+      "opciones": [
+        {
+          "proporcion": 0.4
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.8
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 15,
+      "curso_minimo": "2do",
+      "texto": "Si esto es 3/5, ¿cuál es la unidad completa?",
+      "parte_fraccion": "3/5",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.6
+        },
+        {
+          "proporcion": 0.8
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 16,
+      "curso_minimo": "2do",
+      "texto": "Representación de 2/3. Buscá el entero.",
+      "parte_fraccion": "2/3",
+      "opciones": [
+        {
+          "proporcion": 1.33
+        },
+        {
+          "proporcion": 0.66
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 17,
+      "curso_minimo": "2do",
+      "texto": "Esto son tres cuartos (3/4) de la medida.",
+      "parte_fraccion": "3/4",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        },
+        {
+          "proporcion": 0.75
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 18,
+      "curso_minimo": "2do",
+      "texto": "Mirá estos cuatro sextos (4/6).",
+      "parte_fraccion": "4/6",
+      "opciones": [
+        {
+          "proporcion": 0.66
+        },
+        {
+          "proporcion": 0.33
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 19,
+      "curso_minimo": "2do",
+      "texto": "Dos cuartos (2/4) de soga. Buscá el 1.",
+      "parte_fraccion": "2/4",
+      "opciones": [
+        {
+          "proporcion": 0.5
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.75
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 20,
+      "curso_minimo": "2do",
+      "texto": "Tres tercios (3/3). ¿Cuál es el entero?",
+      "parte_fraccion": "3/3",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.66
+        },
+        {
+          "proporcion": 1.33
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 21,
+      "curso_minimo": "3ro",
+      "texto": "¡Cuidado! Esto es tres medios (3/2).",
+      "parte_fraccion": "3/2",
+      "opciones": [
+        {
+          "proporcion": 1.5
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 22,
+      "curso_minimo": "3ro",
+      "texto": "Esto representa cinco cuartos (5/4).",
+      "parte_fraccion": "5/4",
+      "opciones": [
+        {
+          "proporcion": 1.25
+        },
+        {
+          "proporcion": 0.75
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 23,
+      "curso_minimo": "3ro",
+      "texto": "Tenés cuatro tercios (4/3). ¿Cuál es la unidad?",
+      "parte_fraccion": "4/3",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 1.33
+        },
+        {
+          "proporcion": 1.66
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 24,
+      "curso_minimo": "3ro",
+      "texto": "Seis cuartos (6/4) de soga. Buscá el 1.",
+      "parte_fraccion": "6/4",
+      "opciones": [
+        {
+          "proporcion": 1.5
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 25,
+      "curso_minimo": "3ro",
+      "texto": "Esto son cinco medios (5/2).",
+      "parte_fraccion": "5/2",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 2.5
+        },
+        {
+          "proporcion": 2.0
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 26,
+      "curso_minimo": "3ro",
+      "texto": "Una soga y media (1 1/2). Buscá el entero.",
+      "parte_fraccion": "1 1/2",
+      "opciones": [
+        {
+          "proporcion": 1.5
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 2.0
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 27,
+      "curso_minimo": "3ro",
+      "texto": "Esto es un entero y un cuarto (1 1/4).",
+      "parte_fraccion": "1 1/4",
+      "opciones": [
+        {
+          "proporcion": 1.25
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.75
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 28,
+      "curso_minimo": "3ro",
+      "texto": "Esto son dos enteros (2). ¿Cuál es el 1?",
+      "parte_fraccion": "2",
+      "opciones": [
+        {
+          "proporcion": 2.0
+        },
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 0.5
+        }
+      ],
+      "correcta_idx": 1
+    },
+    {
+      "id": 29,
+      "curso_minimo": "3ro",
+      "texto": "Siete cuartos (7/4). Buscá la unidad.",
+      "parte_fraccion": "7/4",
+      "opciones": [
+        {
+          "proporcion": 1.0
+        },
+        {
+          "proporcion": 1.75
+        },
+        {
+          "proporcion": 2.0
+        }
+      ],
+      "correcta_idx": 0
+    },
+    {
+      "id": 30,
+      "curso_minimo": "3ro",
+      "texto": "Cuatro medios (4/2). Encontrá el entero.",
+      "parte_fraccion": "4/2",
+      "opciones": [
+        {
+          "proporcion": 2.0
+        },
+        {
+          "proporcion": 1.5
+        },
+        {
+          "proporcion": 1.0
+        }
+      ],
+      "correcta_idx": 2
+    },
+    {
+      "id": 31,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 2
+    },
+    {
+      "id": 32,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 1
+    },
+    {
+      "id": 33,
+      "curso_minimo": "2do",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 2
+    },
+    {
+      "id": 34,
+      "curso_minimo": "2do",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 35,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 3
+    },
+    {
+      "id": 36,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 3
+    },
+    {
+      "id": 37,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 2
+    },
+    {
+      "id": 38,
+      "curso_minimo": "2do",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 2
+    },
+    {
+      "id": 39,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 1
+    },
+    {
+      "id": 40,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 3
+    },
+    {
+      "id": 41,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 3
+    },
+    {
+      "id": 42,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 2
+    },
+    {
+      "id": 43,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 1
+    },
+    {
+      "id": 44,
+      "curso_minimo": "3ro",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 45,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 1
+    },
+    {
+      "id": 46,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 3
+    },
+    {
+      "id": 47,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 1
+    },
+    {
+      "id": 48,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 49,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 2
+    },
+    {
+      "id": 50,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 3
+    },
+    {
+      "id": 51,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 1
+    },
+    {
+      "id": 52,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 3
+    },
+    {
+      "id": 53,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 2
+    },
+    {
+      "id": 54,
+      "curso_minimo": "2do",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 55,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 3
+    },
+    {
+      "id": 56,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 2
+    },
+    {
+      "id": 57,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 2
+    },
+    {
+      "id": 58,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 59,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 3
+    },
+    {
+      "id": 60,
+      "curso_minimo": "2do",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 2
+    },
+    {
+      "id": 61,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 62,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 1
+    },
+    {
+      "id": 63,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 1
+    },
+    {
+      "id": 64,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 65,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 2
+    },
+    {
+      "id": 66,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 67,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 68,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 69,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 1
+    },
+    {
+      "id": 70,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 3
+    },
+    {
+      "id": 71,
+      "curso_minimo": "2do",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 72,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 2
+    },
+    {
+      "id": 73,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 1
+    },
+    {
+      "id": 74,
+      "curso_minimo": "2do",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 2
+    },
+    {
+      "id": 75,
+      "curso_minimo": "3ro",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 76,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 2
+    },
+    {
+      "id": 77,
+      "curso_minimo": "2do",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 2
+    },
+    {
+      "id": 78,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 3
+    },
+    {
+      "id": 79,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/2"
+      ],
+      "texto": "Dos medios hacen un entero",
+      "dificultad": 2
+    },
+    {
+      "id": 80,
+      "curso_minimo": "2do",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 2
+    },
+    {
+      "id": 81,
+      "curso_minimo": "2do",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 2
+    },
+    {
+      "id": 82,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Medio y dos cuartos hacen un entero",
+      "dificultad": 1
+    },
+    {
+      "id": 83,
+      "curso_minimo": "3ro",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 84,
+      "curso_minimo": "3ro",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 85,
+      "curso_minimo": "1ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 1
+    },
+    {
+      "id": 86,
+      "curso_minimo": "3ro",
+      "cuerda_base": "3/4",
+      "opciones": [
+        "1/2",
+        "1/4"
+      ],
+      "texto": "Medio y un cuarto son tres cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 87,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 3
+    },
+    {
+      "id": 88,
+      "curso_minimo": "2do",
+      "cuerda_base": "1/2",
+      "opciones": [
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Dos cuartos hacen medio bloque",
+      "dificultad": 2
+    },
+    {
+      "id": 89,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto": "Cuatro cuartos forman la unidad",
+      "dificultad": 3
+    },
+    {
+      "id": 90,
+      "curso_minimo": "3ro",
+      "cuerda_base": "1",
+      "opciones": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto": "Tres tercios son un bloque completo",
+      "dificultad": 3
+    }
   ]
 }

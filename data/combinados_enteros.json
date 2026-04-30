@@ -1,0 +1,20 @@
+{
+  "juego": "calculos_combinados",
+  "metadata": {
+    "descripcion": "Cálculos Combinados - Desafío Carpeta",
+    "mecanica": "Resolvé el cálculo combinado en tu carpeta, prestando atención a potencias y raíces. Anotá el resultado final."
+  },
+  "ejercicios": [
+    { "id": 1, "curso_minimo": "1ro", "expresion": "(-5 + 3) * (-2)", "respuesta": "4", "dificultad": 1 },
+    { "id": 2, "curso_minimo": "1ro", "expresion": "-10 / 2 + (-3) * (-4)", "respuesta": "7", "dificultad": 1 },
+    { "id": 3, "curso_minimo": "1ro", "expresion": "(15 - 20) * 3 - (-8)", "respuesta": "-7", "dificultad": 1 },
+    { "id": 4, "curso_minimo": "2do", "expresion": "(-3)² - 4 * (-2)", "respuesta": "17", "dificultad": 2 },
+    { "id": 5, "curso_minimo": "2do", "expresion": "√16 + (-2)³", "respuesta": "-4", "dificultad": 2 },
+    { "id": 6, "curso_minimo": "2do", "expresion": "(-5)² - ∛(-8) * 3", "respuesta": "31", "dificultad": 2 },
+    { "id": 7, "curso_minimo": "2do", "expresion": "( -4 + 2 )³ / (-2)", "respuesta": "4", "dificultad": 2 },
+    { "id": 8, "curso_minimo": "3ro", "expresion": "(-2)⁴ + ∛(-27) - (-5)²", "respuesta": "-12", "dificultad": 3 },
+    { "id": 9, "curso_minimo": "3ro", "expresion": "√144 / (-3) + (-1)⁵ * 10", "respuesta": "-14", "dificultad": 3 },
+    { "id": 10, "curso_minimo": "3ro", "expresion": "(-4)³ / √64 + (-3) * (-2)²", "respuesta": "-20", "dificultad": 3 },
+    { "id": 11, "curso_minimo": "3ro", "expresion": "(∛-64 + 2)² - √81", "respuesta": "-5", "dificultad": 3 }
+  ]
+}

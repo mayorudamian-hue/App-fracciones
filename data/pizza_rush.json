@@ -5,35 +5,1017 @@
     "mecanica": "Los alumnos deben combinar fracciones de pizza para cumplir pedidos antes que se acabe el tiempo"
   },
   "pedidos": [
-    { "id": 1, "curso_minimo": "1ro", "texto_pedido": "Dame 1/2 de muzza", "fracciones_necesarias": ["1/2"], "tiempo_seg": 20, "dificultad": 1 },
-    { "id": 2, "curso_minimo": "1ro", "texto_pedido": "Quiero 1/4 de fugazzeta", "fracciones_necesarias": ["1/4"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 3, "curso_minimo": "2do", "texto_pedido": "Necesito 3/4 de napolitana", "fracciones_necesarias": ["1/2", "1/4"], "tiempo_seg": 25, "dificultad": 2 },
-    { "id": 4, "curso_minimo": "2do", "texto_pedido": "Traeme 1/2 + 1/4 de jamón", "fracciones_necesarias": ["1/2", "1/4"], "tiempo_seg": 20, "dificultad": 2 },
-    { "id": 5, "curso_minimo": "3ro", "texto_pedido": "Pizza entera: 1/2 muzza, 1/4 napo, 1/4 jamón", "fracciones_necesarias": ["1/2", "1/4", "1/4"], "tiempo_seg": 30, "dificultad": 3 },
-    { "id": 6, "curso_minimo": "3ro", "texto_pedido": "Pizza 1⅔: una entera + 2/3 de otra", "fracciones_necesarias": ["1", "2/3"], "tiempo_seg": 35, "dificultad": 4 },
-    { "id": 7, "curso_minimo": "3ro", "texto_pedido": "Especial de la casa: 1 1/2 pizzas", "fracciones_necesarias": ["1", "1/2"], "tiempo_seg": 30, "dificultad": 3 },
-    { "id": 8, "curso_minimo": "3ro", "texto_pedido": "Marcha un pedido de 5/4 (un entero y un cuarto)", "fracciones_necesarias": ["1", "1/4"], "tiempo_seg": 35, "dificultad": 4 },
-    { "id": 9, "curso_minimo": "3ro", "texto_pedido": "Combinación Gourmet: 1/2 + 2/3", "fracciones_necesarias": ["1/2", "2/3"], "tiempo_seg": 40, "dificultad": 5 },
-    { "id": 10, "curso_minimo": "3ro", "texto_pedido": "Súper pedido familiar: 2 1/4 de pizza", "fracciones_necesarias": ["1", "1", "1/4"], "tiempo_seg": 45, "dificultad": 5 },
-    { "id": 11, "curso_minimo": "3ro", "texto_pedido": "Pedido rápido: 4/3 de pizza (1 + 1/3)", "fracciones_necesarias": ["1", "1/3"], "tiempo_seg": 30, "dificultad": 4 },
-    { "id": 12, "curso_minimo": "1ro", "texto_pedido": "¡Dame un tercio de pizza!", "fracciones_necesarias": ["1/3"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 13, "curso_minimo": "1ro", "texto_pedido": "Una entera para el cliente de la mesa 4", "fracciones_necesarias": ["1"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 14, "curso_minimo": "1ro", "texto_pedido": "Quiero media de fugazzeta", "fracciones_necesarias": ["1/2"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 15, "curso_minimo": "1ro", "texto_pedido": "Dame solo un cuarto, no tengo mucha hambre", "fracciones_necesarias": ["1/4"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 16, "curso_minimo": "1ro", "texto_pedido": "Un tercio de pizza de jamón", "fracciones_necesarias": ["1/3"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 17, "curso_minimo": "1ro", "texto_pedido": "Marcha media pizza de calabresa", "fracciones_necesarias": ["1/2"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 18, "curso_minimo": "1ro", "texto_pedido": "Un cuarto de pizza para el nene", "fracciones_necesarias": ["1/4"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 19, "curso_minimo": "1ro", "texto_pedido": "¡La pizza completa, por favor!", "fracciones_necesarias": ["1"], "tiempo_seg": 15, "dificultad": 1 },
-    { "id": 20, "curso_minimo": "2do", "texto_pedido": "Dos mitades hacen una entera: dame 1/2 + 1/2", "fracciones_necesarias": ["1/2", "1/2"], "tiempo_seg": 20, "dificultad": 2 },
-    { "id": 21, "curso_minimo": "2do", "texto_pedido": "Un entero y una mitad para compartir", "fracciones_necesarias": ["1", "1/2"], "tiempo_seg": 20, "dificultad": 2 },
-    { "id": 22, "curso_minimo": "2do", "texto_pedido": "Tres cuartos de pizza (3 partes de 1/4)", "fracciones_necesarias": ["1/4", "1/4", "1/4"], "tiempo_seg": 20, "dificultad": 2 },
-    { "id": 23, "curso_minimo": "2do", "texto_pedido": "Una pizza mixta: media y dos cuartos", "fracciones_necesarias": ["1/2", "1/4", "1/4"], "tiempo_seg": 25, "dificultad": 2 },
-    { "id": 24, "curso_minimo": "2do", "texto_pedido": "Dos piezas de un tercio", "fracciones_necesarias": ["1/3", "1/3"], "tiempo_seg": 20, "dificultad": 2 },
-    { "id": 25, "curso_minimo": "2do", "texto_pedido": "Una entera usando solo tercios", "fracciones_necesarias": ["1/3", "1/3", "1/3"], "tiempo_seg": 25, "dificultad": 2 },
-    { "id": 26, "curso_minimo": "2do", "texto_pedido": "Pedido clásico: 1/2 + 1/4", "fracciones_necesarias": ["1/2", "1/4"], "tiempo_seg": 20, "dificultad": 2 },
-    { "id": 27, "curso_minimo": "2do", "texto_pedido": "Dame 1 pizza y 1/3 de otra", "fracciones_necesarias": ["1", "1/3"], "tiempo_seg": 25, "dificultad": 2 },
-    { "id": 28, "curso_minimo": "3ro", "texto_pedido": "Combo familiar: 2 pizzas y media", "fracciones_necesarias": ["1", "1", "1/2"], "tiempo_seg": 40, "dificultad": 4 },
-    { "id": 29, "curso_minimo": "3ro", "texto_pedido": "Mezcla loca: media + un tercio + un sexto", "fracciones_necesarias": ["1/2", "1/3", "1/6"], "tiempo_seg": 45, "dificultad": 5 },
-    { "id": 30, "curso_minimo": "3ro", "texto_pedido": "Súper pedido: tres cuartos y una mitad", "fracciones_necesarias": ["3/4", "1/2"], "tiempo_seg": 40, "dificultad": 5 }
+    {
+      "id": 1,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Dame 1/2 de muzza",
+      "fracciones_necesarias": [
+        "1/2"
+      ],
+      "tiempo_seg": 20,
+      "dificultad": 1
+    },
+    {
+      "id": 2,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Quiero 1/4 de fugazzeta",
+      "fracciones_necesarias": [
+        "1/4"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 3,
+      "curso_minimo": "2do",
+      "texto_pedido": "Necesito 3/4 de napolitana",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4"
+      ],
+      "tiempo_seg": 25,
+      "dificultad": 2
+    },
+    {
+      "id": 4,
+      "curso_minimo": "2do",
+      "texto_pedido": "Traeme 1/2 + 1/4 de jamón",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4"
+      ],
+      "tiempo_seg": 20,
+      "dificultad": 2
+    },
+    {
+      "id": 5,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Pizza entera: 1/2 muzza, 1/4 napo, 1/4 jamón",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "tiempo_seg": 30,
+      "dificultad": 3
+    },
+    {
+      "id": 6,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Pizza 1⅔: una entera + 2/3 de otra",
+      "fracciones_necesarias": [
+        "1",
+        "2/3"
+      ],
+      "tiempo_seg": 35,
+      "dificultad": 4
+    },
+    {
+      "id": 7,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Especial de la casa: 1 1/2 pizzas",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "tiempo_seg": 30,
+      "dificultad": 3
+    },
+    {
+      "id": 8,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Marcha un pedido de 5/4 (un entero y un cuarto)",
+      "fracciones_necesarias": [
+        "1",
+        "1/4"
+      ],
+      "tiempo_seg": 35,
+      "dificultad": 4
+    },
+    {
+      "id": 9,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Combinación Gourmet: 1/2 + 2/3",
+      "fracciones_necesarias": [
+        "1/2",
+        "2/3"
+      ],
+      "tiempo_seg": 40,
+      "dificultad": 5
+    },
+    {
+      "id": 10,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Súper pedido familiar: 2 1/4 de pizza",
+      "fracciones_necesarias": [
+        "1",
+        "1",
+        "1/4"
+      ],
+      "tiempo_seg": 45,
+      "dificultad": 5
+    },
+    {
+      "id": 11,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Pedido rápido: 4/3 de pizza (1 + 1/3)",
+      "fracciones_necesarias": [
+        "1",
+        "1/3"
+      ],
+      "tiempo_seg": 30,
+      "dificultad": 4
+    },
+    {
+      "id": 12,
+      "curso_minimo": "1ro",
+      "texto_pedido": "¡Dame un tercio de pizza!",
+      "fracciones_necesarias": [
+        "1/3"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 13,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Una entera para el cliente de la mesa 4",
+      "fracciones_necesarias": [
+        "1"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 14,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Quiero media de fugazzeta",
+      "fracciones_necesarias": [
+        "1/2"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 15,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Dame solo un cuarto, no tengo mucha hambre",
+      "fracciones_necesarias": [
+        "1/4"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 16,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Un tercio de pizza de jamón",
+      "fracciones_necesarias": [
+        "1/3"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 17,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Marcha media pizza de calabresa",
+      "fracciones_necesarias": [
+        "1/2"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 18,
+      "curso_minimo": "1ro",
+      "texto_pedido": "Un cuarto de pizza para el nene",
+      "fracciones_necesarias": [
+        "1/4"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 19,
+      "curso_minimo": "1ro",
+      "texto_pedido": "¡La pizza completa, por favor!",
+      "fracciones_necesarias": [
+        "1"
+      ],
+      "tiempo_seg": 15,
+      "dificultad": 1
+    },
+    {
+      "id": 20,
+      "curso_minimo": "2do",
+      "texto_pedido": "Dos mitades hacen una entera: dame 1/2 + 1/2",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/2"
+      ],
+      "tiempo_seg": 20,
+      "dificultad": 2
+    },
+    {
+      "id": 21,
+      "curso_minimo": "2do",
+      "texto_pedido": "Un entero y una mitad para compartir",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "tiempo_seg": 20,
+      "dificultad": 2
+    },
+    {
+      "id": 22,
+      "curso_minimo": "2do",
+      "texto_pedido": "Tres cuartos de pizza (3 partes de 1/4)",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "tiempo_seg": 20,
+      "dificultad": 2
+    },
+    {
+      "id": 23,
+      "curso_minimo": "2do",
+      "texto_pedido": "Una pizza mixta: media y dos cuartos",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "tiempo_seg": 25,
+      "dificultad": 2
+    },
+    {
+      "id": 24,
+      "curso_minimo": "2do",
+      "texto_pedido": "Dos piezas de un tercio",
+      "fracciones_necesarias": [
+        "1/3",
+        "1/3"
+      ],
+      "tiempo_seg": 20,
+      "dificultad": 2
+    },
+    {
+      "id": 25,
+      "curso_minimo": "2do",
+      "texto_pedido": "Una entera usando solo tercios",
+      "fracciones_necesarias": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "tiempo_seg": 25,
+      "dificultad": 2
+    },
+    {
+      "id": 26,
+      "curso_minimo": "2do",
+      "texto_pedido": "Pedido clásico: 1/2 + 1/4",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4"
+      ],
+      "tiempo_seg": 20,
+      "dificultad": 2
+    },
+    {
+      "id": 27,
+      "curso_minimo": "2do",
+      "texto_pedido": "Dame 1 pizza y 1/3 de otra",
+      "fracciones_necesarias": [
+        "1",
+        "1/3"
+      ],
+      "tiempo_seg": 25,
+      "dificultad": 2
+    },
+    {
+      "id": 28,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Combo familiar: 2 pizzas y media",
+      "fracciones_necesarias": [
+        "1",
+        "1",
+        "1/2"
+      ],
+      "tiempo_seg": 40,
+      "dificultad": 4
+    },
+    {
+      "id": 29,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Mezcla loca: media + un tercio + un sexto",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/3",
+        "1/6"
+      ],
+      "tiempo_seg": 45,
+      "dificultad": 5
+    },
+    {
+      "id": 30,
+      "curso_minimo": "3ro",
+      "texto_pedido": "Súper pedido: tres cuartos y una mitad",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/2"
+      ],
+      "tiempo_seg": 40,
+      "dificultad": 5
+    },
+    {
+      "id": 31,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 32,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/8",
+        "1/8",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en porciones mixtas (medios, cuartos y octavos)",
+      "dificultad": 1
+    },
+    {
+      "id": 33,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza cortada en medios",
+      "dificultad": 2
+    },
+    {
+      "id": 34,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 1
+    },
+    {
+      "id": 35,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza cortada en medios",
+      "dificultad": 1
+    },
+    {
+      "id": 36,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 1
+    },
+    {
+      "id": 37,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 38,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 39,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 3
+    },
+    {
+      "id": 40,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 41,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/8",
+        "1/8",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en porciones mixtas (medios, cuartos y octavos)",
+      "dificultad": 3
+    },
+    {
+      "id": 42,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 2
+    },
+    {
+      "id": 43,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 44,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza: mitad y 2 cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 45,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "2/3",
+        "1/3"
+      ],
+      "texto_pedido": "1 Pizza en tercios",
+      "dificultad": 2
+    },
+    {
+      "id": 46,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 47,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 48,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto_pedido": "1 Pizza en tercios",
+      "dificultad": 1
+    },
+    {
+      "id": 49,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 3
+    },
+    {
+      "id": 50,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 3
+    },
+    {
+      "id": 51,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 1
+    },
+    {
+      "id": 52,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 3
+    },
+    {
+      "id": 53,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/8",
+        "1/8",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en porciones mixtas (medios, cuartos y octavos)",
+      "dificultad": 1
+    },
+    {
+      "id": 54,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/8",
+        "1/8",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en porciones mixtas (medios, cuartos y octavos)",
+      "dificultad": 1
+    },
+    {
+      "id": 55,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 56,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 1
+    },
+    {
+      "id": 57,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "2/3",
+        "1/3"
+      ],
+      "texto_pedido": "1 Pizza en tercios",
+      "dificultad": 2
+    },
+    {
+      "id": 58,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 2
+    },
+    {
+      "id": 59,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza: mitad y 2 cuartos",
+      "dificultad": 1
+    },
+    {
+      "id": 60,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 1
+    },
+    {
+      "id": 61,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 1
+    },
+    {
+      "id": 62,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto_pedido": "1 Pizza en tercios",
+      "dificultad": 1
+    },
+    {
+      "id": 63,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 64,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza y media en cuartos",
+      "dificultad": 1
+    },
+    {
+      "id": 65,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/3",
+        "1/3",
+        "1/3"
+      ],
+      "texto_pedido": "1 Pizza en tercios",
+      "dificultad": 3
+    },
+    {
+      "id": 66,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/8",
+        "1/8",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en porciones mixtas (medios, cuartos y octavos)",
+      "dificultad": 2
+    },
+    {
+      "id": 67,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza: mitad y 2 cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 68,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza y media en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 69,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "2/3",
+        "1/3"
+      ],
+      "texto_pedido": "1 Pizza en tercios",
+      "dificultad": 2
+    },
+    {
+      "id": 70,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 2
+    },
+    {
+      "id": 71,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 72,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "2/3",
+        "1/3"
+      ],
+      "texto_pedido": "1 Pizza en tercios",
+      "dificultad": 2
+    },
+    {
+      "id": 73,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "3/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 74,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 75,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 2
+    },
+    {
+      "id": 76,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza y media en cuartos",
+      "dificultad": 1
+    },
+    {
+      "id": 77,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 78,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza cortada en medios",
+      "dificultad": 1
+    },
+    {
+      "id": 79,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 80,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 81,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 82,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza cortada en medios",
+      "dificultad": 2
+    },
+    {
+      "id": 83,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza: mitad y 2 cuartos",
+      "dificultad": 1
+    },
+    {
+      "id": 84,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/8",
+        "1/8",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en porciones mixtas (medios, cuartos y octavos)",
+      "dificultad": 2
+    },
+    {
+      "id": 85,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/2",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza: mitad y 2 cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 86,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 2
+    },
+    {
+      "id": 87,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1",
+        "1/2"
+      ],
+      "texto_pedido": "1 Pizza y media",
+      "dificultad": 3
+    },
+    {
+      "id": 88,
+      "curso_minimo": "2do",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 2
+    },
+    {
+      "id": 89,
+      "curso_minimo": "3ro",
+      "fracciones_necesarias": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "texto_pedido": "1 Pizza en cuartos",
+      "dificultad": 3
+    },
+    {
+      "id": 90,
+      "curso_minimo": "1ro",
+      "fracciones_necesarias": [
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8",
+        "1/8"
+      ],
+      "texto_pedido": "1 Pizza en octavos",
+      "dificultad": 1
+    }
   ]
 }

@@ -9,19 +9,11 @@
   gtag('js', new Date());
 
   gtag('config', 'G-6G5JJXXBVZ');
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(() => console.log('✅ App disponible offline'))
-        .catch(err => console.error('SW error:', err));
-    });
-  }
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MatemáticaPlay</title>
-  <meta name="description" content="Juegos educativos interactivos para aprender Matemática">
+  <title>Matemática Profe - Fracciones</title>
+  <meta name="description" content="Juegos educativos interactivos para aprender y practicar fracciones: Pizza Rush, Tetris de Equivalencias y Chef Fracción.">
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#3498db">
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
@@ -55,12 +47,14 @@
         <button onclick="cargarJuego('arquitecto')" disabled aria-label="Jugar Arquitecto de Cuerdas">Arquitecto - Concepto</button>
         <button onclick="cargarJuego('porcentajes')" disabled aria-label="Jugar Experto en Porcentajes">Porcentajes - Relación</button>
         <button onclick="cargarJuego('chef_fraccion')" disabled aria-label="Jugar Chef Fracción">Chef Fracción - Boss Final</button>
+        <button onclick="cargarJuego('combinados_fracciones')" disabled aria-label="Jugar Cálculos Combinados Fracciones">🔬 Cálculos Combinados - Potencias y Raíces</button>
 
         <h2 style="margin-top:20px;">4. Módulo Enteros</h2>
         <button onclick="cargarJuego('ascensor_extremo')" disabled>Ascensor Extremo - Desplazamientos</button>
         <button onclick="cargarJuego('clima_loco')" disabled>Clima Loco - Contexto Real</button>
         <button onclick="cargarJuego('saldo_inteligente')" disabled>Saldo Inteligente - Finanzas</button>
         <button onclick="cargarJuego('zona_impacto')" disabled>Zona de Impacto - Regla de Signos</button>
+        <button onclick="cargarJuego('combinados_enteros')" disabled aria-label="Jugar Cálculos Combinados Enteros">⚡ Cálculos Combinados - Potencias y Raíces</button>
       </section>
       <button onclick="verLogros()" id="btn-logros" class="secundario" style="margin-top:10px; border: 2px solid #f1c40f; color: #d4ac0d;" disabled>🏆 Mis Logros</button>
       <button onclick="abrirPanelDocente()" class="secundario" style="margin-top:20px; border: 2px solid var(--azul); color: var(--azul);">📋 Ver Panel de Notas</button>

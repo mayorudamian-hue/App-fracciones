@@ -5,28 +5,640 @@
     "mecanica": "Calculá la temperatura final después de los cambios del día."
   },
   "ejercicios": [
-    { "id": 1, "curso_minimo": "1ro", "temp_inicial": 10, "cambios": [-3], "respuesta": 7, "dificultad": 1 },
-    { "id": 2, "curso_minimo": "2do", "temp_inicial": 5, "cambios": [3, -7, 4], "respuesta": 5, "dificultad": 2 },
-    { "id": 3, "curso_minimo": "3ro", "temp_inicial": -2, "cambios": [-5, 8, -3], "respuesta": -2, "dificultad": 3 },
-    { "id": 4, "curso_minimo": "1ro", "temp_inicial": 2, "cambios": [-5], "respuesta": -3, "dificultad": 1 },
-    { "id": 5, "curso_minimo": "2do", "temp_inicial": -1, "cambios": [-4, 6], "respuesta": 1, "dificultad": 2 },
-    { "id": 6, "curso_minimo": "2do", "temp_inicial": -5, "cambios": [8, -4], "respuesta": -1, "dificultad": 2 },
-    { "id": 7, "curso_minimo": "2do", "temp_inicial": 3, "cambios": [-7, -2], "respuesta": -6, "dificultad": 2 },
-    { "id": 8, "curso_minimo": "3ro", "temp_inicial": -10, "cambios": [15, -8, 2], "respuesta": -1, "dificultad": 3 },
-    { "id": 9, "curso_minimo": "3ro", "temp_inicial": -3, "cambios": [-4, -2, 10], "respuesta": 1, "dificultad": 3 },
-    { "id": 10, "curso_minimo": "3ro", "temp_inicial": 0, "cambios": [-5, -5, -5], "respuesta": -15, "dificultad": 3 },
-    { "id": 11, "curso_minimo": "3ro", "temp_inicial": -8, "cambios": [12, -20, 5], "respuesta": -11, "dificultad": 3 },
-    { "id": 12, "curso_minimo": "3ro", "temp_inicial": 5, "cambios": [-6, -4, -2, 8], "respuesta": 1, "dificultad": 3 },
-    { "id": 13, "curso_minimo": "3ro", "temp_inicial": -1, "cambios": [-1, -1, -1, -1, -1], "respuesta": -5, "dificultad": 3 },
-    { "id": 14, "curso_minimo": "3ro", "temp_inicial": -20, "cambios": [40, -10], "respuesta": 10, "dificultad": 3 },
-    { "id": 15, "curso_minimo": "3ro", "temp_inicial": 35, "cambios": [-50, 5], "respuesta": -10, "dificultad": 3 },
-    { "id": 16, "curso_minimo": "3ro", "temp_inicial": 0, "cambios": [40, -60, 10], "respuesta": -10, "dificultad": 3 },
-    { "id": 17, "curso_minimo": "3ro", "temp_inicial": -15, "cambios": [-5, 50, -20], "respuesta": 10, "dificultad": 3 },
-    { "id": 18, "curso_minimo": "3ro", "temp_inicial": 40, "cambios": [-60, 15], "respuesta": -5, "dificultad": 3 },
-    { "id": 19, "curso_minimo": "3ro", "temp_inicial": -10, "cambios": [30, -40, 10], "respuesta": -10, "dificultad": 3 },
-    { "id": 20, "curso_minimo": "3ro", "temp_inicial": 20, "cambios": [-40, 50, -30], "respuesta": 0, "dificultad": 3 },
-    { "id": 21, "curso_minimo": "3ro", "temp_inicial": -20, "cambios": [60, -10, -5], "respuesta": 25, "dificultad": 3 },
-    { "id": 22, "curso_minimo": "3ro", "temp_inicial": 10, "cambios": [-30, 40, -20], "respuesta": 0, "dificultad": 3 },
-    { "id": 23, "curso_minimo": "3ro", "temp_inicial": -5, "cambios": [45, -50, 10], "respuesta": 0, "dificultad": 3 }
+    {
+      "id": 1,
+      "curso_minimo": "1ro",
+      "temp_inicial": 10,
+      "cambios": [
+        -3
+      ],
+      "respuesta": 7,
+      "dificultad": 1
+    },
+    {
+      "id": 2,
+      "curso_minimo": "2do",
+      "temp_inicial": 5,
+      "cambios": [
+        3,
+        -7,
+        4
+      ],
+      "respuesta": 5,
+      "dificultad": 2
+    },
+    {
+      "id": 3,
+      "curso_minimo": "3ro",
+      "temp_inicial": -2,
+      "cambios": [
+        -5,
+        8,
+        -3
+      ],
+      "respuesta": -2,
+      "dificultad": 3
+    },
+    {
+      "id": 4,
+      "curso_minimo": "1ro",
+      "temp_inicial": 2,
+      "cambios": [
+        -5
+      ],
+      "respuesta": -3,
+      "dificultad": 1
+    },
+    {
+      "id": 5,
+      "curso_minimo": "2do",
+      "temp_inicial": -1,
+      "cambios": [
+        -4,
+        6
+      ],
+      "respuesta": 1,
+      "dificultad": 2
+    },
+    {
+      "id": 6,
+      "curso_minimo": "2do",
+      "temp_inicial": -5,
+      "cambios": [
+        8,
+        -4
+      ],
+      "respuesta": -1,
+      "dificultad": 2
+    },
+    {
+      "id": 7,
+      "curso_minimo": "2do",
+      "temp_inicial": 3,
+      "cambios": [
+        -7,
+        -2
+      ],
+      "respuesta": -6,
+      "dificultad": 2
+    },
+    {
+      "id": 8,
+      "curso_minimo": "3ro",
+      "temp_inicial": -10,
+      "cambios": [
+        15,
+        -8,
+        2
+      ],
+      "respuesta": -1,
+      "dificultad": 3
+    },
+    {
+      "id": 9,
+      "curso_minimo": "3ro",
+      "temp_inicial": -3,
+      "cambios": [
+        -4,
+        -2,
+        10
+      ],
+      "respuesta": 1,
+      "dificultad": 3
+    },
+    {
+      "id": 10,
+      "curso_minimo": "3ro",
+      "temp_inicial": 0,
+      "cambios": [
+        -5,
+        -5,
+        -5
+      ],
+      "respuesta": -15,
+      "dificultad": 3
+    },
+    {
+      "id": 11,
+      "curso_minimo": "3ro",
+      "temp_inicial": -8,
+      "cambios": [
+        12,
+        -20,
+        5
+      ],
+      "respuesta": -11,
+      "dificultad": 3
+    },
+    {
+      "id": 12,
+      "curso_minimo": "3ro",
+      "temp_inicial": 5,
+      "cambios": [
+        -6,
+        -4,
+        -2,
+        8
+      ],
+      "respuesta": 1,
+      "dificultad": 3
+    },
+    {
+      "id": 13,
+      "curso_minimo": "3ro",
+      "temp_inicial": -1,
+      "cambios": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "respuesta": -5,
+      "dificultad": 3
+    },
+    {
+      "id": 14,
+      "curso_minimo": "3ro",
+      "temp_inicial": -20,
+      "cambios": [
+        40,
+        -10
+      ],
+      "respuesta": 10,
+      "dificultad": 3
+    },
+    {
+      "id": 15,
+      "curso_minimo": "3ro",
+      "temp_inicial": 35,
+      "cambios": [
+        -50,
+        5
+      ],
+      "respuesta": -10,
+      "dificultad": 3
+    },
+    {
+      "id": 16,
+      "curso_minimo": "3ro",
+      "temp_inicial": 0,
+      "cambios": [
+        40,
+        -60,
+        10
+      ],
+      "respuesta": -10,
+      "dificultad": 3
+    },
+    {
+      "id": 17,
+      "curso_minimo": "3ro",
+      "temp_inicial": -15,
+      "cambios": [
+        -5,
+        50,
+        -20
+      ],
+      "respuesta": 10,
+      "dificultad": 3
+    },
+    {
+      "id": 18,
+      "curso_minimo": "3ro",
+      "temp_inicial": 40,
+      "cambios": [
+        -60,
+        15
+      ],
+      "respuesta": -5,
+      "dificultad": 3
+    },
+    {
+      "id": 19,
+      "curso_minimo": "3ro",
+      "temp_inicial": -10,
+      "cambios": [
+        30,
+        -40,
+        10
+      ],
+      "respuesta": -10,
+      "dificultad": 3
+    },
+    {
+      "id": 20,
+      "curso_minimo": "3ro",
+      "temp_inicial": 20,
+      "cambios": [
+        -40,
+        50,
+        -30
+      ],
+      "respuesta": 0,
+      "dificultad": 3
+    },
+    {
+      "id": 21,
+      "curso_minimo": "3ro",
+      "temp_inicial": -20,
+      "cambios": [
+        60,
+        -10,
+        -5
+      ],
+      "respuesta": 25,
+      "dificultad": 3
+    },
+    {
+      "id": 22,
+      "curso_minimo": "3ro",
+      "temp_inicial": 10,
+      "cambios": [
+        -30,
+        40,
+        -20
+      ],
+      "respuesta": 0,
+      "dificultad": 3
+    },
+    {
+      "id": 23,
+      "curso_minimo": "3ro",
+      "temp_inicial": -5,
+      "cambios": [
+        45,
+        -50,
+        10
+      ],
+      "respuesta": 0,
+      "dificultad": 3
+    },
+    {
+      "id": 24,
+      "curso_minimo": "1ro",
+      "temp_inicial": -9,
+      "cambios": [
+        3,
+        -6,
+        2
+      ],
+      "respuesta": -10,
+      "dificultad": 1
+    },
+    {
+      "id": 25,
+      "curso_minimo": "3ro",
+      "temp_inicial": 4,
+      "cambios": [
+        -9,
+        6,
+        -14,
+        15
+      ],
+      "respuesta": 2,
+      "dificultad": 3
+    },
+    {
+      "id": 26,
+      "curso_minimo": "3ro",
+      "temp_inicial": 8,
+      "cambios": [
+        -12,
+        -9,
+        6,
+        -10
+      ],
+      "respuesta": -17,
+      "dificultad": 3
+    },
+    {
+      "id": 27,
+      "curso_minimo": "1ro",
+      "temp_inicial": -6,
+      "cambios": [
+        13,
+        -13
+      ],
+      "respuesta": -6,
+      "dificultad": 1
+    },
+    {
+      "id": 28,
+      "curso_minimo": "1ro",
+      "temp_inicial": 27,
+      "cambios": [
+        -8,
+        -9
+      ],
+      "respuesta": 10,
+      "dificultad": 1
+    },
+    {
+      "id": 29,
+      "curso_minimo": "3ro",
+      "temp_inicial": 26,
+      "cambios": [
+        -7,
+        -5,
+        -7
+      ],
+      "respuesta": 7,
+      "dificultad": 3
+    },
+    {
+      "id": 30,
+      "curso_minimo": "3ro",
+      "temp_inicial": -18,
+      "cambios": [
+        -7,
+        -13
+      ],
+      "respuesta": -38,
+      "dificultad": 3
+    },
+    {
+      "id": 31,
+      "curso_minimo": "3ro",
+      "temp_inicial": 24,
+      "cambios": [
+        -13,
+        -15
+      ],
+      "respuesta": -4,
+      "dificultad": 3
+    },
+    {
+      "id": 32,
+      "curso_minimo": "3ro",
+      "temp_inicial": 28,
+      "cambios": [
+        7,
+        14
+      ],
+      "respuesta": 49,
+      "dificultad": 3
+    },
+    {
+      "id": 33,
+      "curso_minimo": "3ro",
+      "temp_inicial": -20,
+      "cambios": [
+        12,
+        -15,
+        -5,
+        9,
+        -14
+      ],
+      "respuesta": -33,
+      "dificultad": 3
+    },
+    {
+      "id": 34,
+      "curso_minimo": "2do",
+      "temp_inicial": -19,
+      "cambios": [
+        -4,
+        -7,
+        -3,
+        -14,
+        12
+      ],
+      "respuesta": -35,
+      "dificultad": 2
+    },
+    {
+      "id": 35,
+      "curso_minimo": "2do",
+      "temp_inicial": -20,
+      "cambios": [
+        15,
+        8,
+        -5,
+        -14
+      ],
+      "respuesta": -16,
+      "dificultad": 2
+    },
+    {
+      "id": 36,
+      "curso_minimo": "3ro",
+      "temp_inicial": 10,
+      "cambios": [
+        15,
+        12,
+        13,
+        -13,
+        -2
+      ],
+      "respuesta": 35,
+      "dificultad": 3
+    },
+    {
+      "id": 37,
+      "curso_minimo": "3ro",
+      "temp_inicial": -17,
+      "cambios": [
+        7,
+        11
+      ],
+      "respuesta": 1,
+      "dificultad": 3
+    },
+    {
+      "id": 38,
+      "curso_minimo": "2do",
+      "temp_inicial": 8,
+      "cambios": [
+        6,
+        14,
+        -8,
+        -6,
+        -15
+      ],
+      "respuesta": -1,
+      "dificultad": 2
+    },
+    {
+      "id": 39,
+      "curso_minimo": "1ro",
+      "temp_inicial": 3,
+      "cambios": [
+        2,
+        -3
+      ],
+      "respuesta": 2,
+      "dificultad": 1
+    },
+    {
+      "id": 40,
+      "curso_minimo": "2do",
+      "temp_inicial": -13,
+      "cambios": [
+        13,
+        -6,
+        -3,
+        6,
+        -15
+      ],
+      "respuesta": -18,
+      "dificultad": 2
+    },
+    {
+      "id": 41,
+      "curso_minimo": "2do",
+      "temp_inicial": 8,
+      "cambios": [
+        -14,
+        -3,
+        4,
+        -14
+      ],
+      "respuesta": -19,
+      "dificultad": 2
+    },
+    {
+      "id": 42,
+      "curso_minimo": "3ro",
+      "temp_inicial": 11,
+      "cambios": [
+        10,
+        -2,
+        5
+      ],
+      "respuesta": 24,
+      "dificultad": 3
+    },
+    {
+      "id": 43,
+      "curso_minimo": "3ro",
+      "temp_inicial": 21,
+      "cambios": [
+        -4,
+        14,
+        7
+      ],
+      "respuesta": 38,
+      "dificultad": 3
+    },
+    {
+      "id": 44,
+      "curso_minimo": "3ro",
+      "temp_inicial": 4,
+      "cambios": [
+        -14,
+        14,
+        -5,
+        6,
+        2
+      ],
+      "respuesta": 7,
+      "dificultad": 3
+    },
+    {
+      "id": 45,
+      "curso_minimo": "3ro",
+      "temp_inicial": 9,
+      "cambios": [
+        13,
+        3
+      ],
+      "respuesta": 25,
+      "dificultad": 3
+    },
+    {
+      "id": 46,
+      "curso_minimo": "3ro",
+      "temp_inicial": 13,
+      "cambios": [
+        11,
+        14,
+        7,
+        13
+      ],
+      "respuesta": 58,
+      "dificultad": 3
+    },
+    {
+      "id": 47,
+      "curso_minimo": "3ro",
+      "temp_inicial": -20,
+      "cambios": [
+        13,
+        8,
+        9,
+        -14,
+        -11
+      ],
+      "respuesta": -15,
+      "dificultad": 3
+    },
+    {
+      "id": 48,
+      "curso_minimo": "3ro",
+      "temp_inicial": 10,
+      "cambios": [
+        -10,
+        -15
+      ],
+      "respuesta": -15,
+      "dificultad": 3
+    },
+    {
+      "id": 49,
+      "curso_minimo": "1ro",
+      "temp_inicial": 7,
+      "cambios": [
+        -8,
+        -2
+      ],
+      "respuesta": -3,
+      "dificultad": 1
+    },
+    {
+      "id": 50,
+      "curso_minimo": "3ro",
+      "temp_inicial": 15,
+      "cambios": [
+        -9,
+        3
+      ],
+      "respuesta": 9,
+      "dificultad": 3
+    },
+    {
+      "id": 51,
+      "curso_minimo": "1ro",
+      "temp_inicial": 9,
+      "cambios": [
+        -14,
+        6
+      ],
+      "respuesta": 1,
+      "dificultad": 1
+    },
+    {
+      "id": 52,
+      "curso_minimo": "1ro",
+      "temp_inicial": -12,
+      "cambios": [
+        14,
+        -13
+      ],
+      "respuesta": -11,
+      "dificultad": 1
+    },
+    {
+      "id": 53,
+      "curso_minimo": "1ro",
+      "temp_inicial": -3,
+      "cambios": [
+        8,
+        -13,
+        -14
+      ],
+      "respuesta": -22,
+      "dificultad": 1
+    }
   ]
 }

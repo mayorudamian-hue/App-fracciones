@@ -8,7 +8,9 @@ const RUTAS_JSON = {
   ascensor_extremo: './data/ascensor_extremo.json',
   clima_loco: './data/clima_loco.json',
   saldo_inteligente: './data/saldo_inteligente.json',
-  zona_impacto: './data/zona_impacto.json'
+  zona_impacto: './data/zona_impacto.json',
+  combinados_fracciones: './data/combinados_fracciones.json',
+  combinados_enteros: './data/combinados_enteros.json'
 };
 const TIEMPO_DEFECTO = 60;
 const TIEMPO_POR_EJERCICIO = 60; // 1 minuto por ejercicio
@@ -28,22 +30,6 @@ function trackMP(eventName, params = {}) {
 }
 
 // ── Estilo Visual MatePlay (Estilo "Play") ───────────────────
-const MatePlayTheme = `
-<style>
-  :root {
-    --azul: #ff9800; /* Naranja Play */
-    --azul-oscuro: #e65100;
-    --verde: #ffc107; /* Amarillo Play */
-    --verde-oscuro: #ffa000;
-    --fondo-app: #fffdeb;
-  }
-  body { background-color: var(--fondo-app) !important; }
-  .progreso-barra { background: linear-gradient(90deg, var(--verde), var(--azul)) !important; }
-  .notificacion-toast.exito { background-color: #ffc107 !important; color: #5d4a00 !important; border: 2px solid #ff9800 !important; }
-  .mp-slogan { margin-top: -10px; font-size: 1.1rem; color: var(--azul-oscuro); font-weight: bold; text-align: center; margin-bottom: 20px; animation: mpFadeIn 1.5s ease-in-out forwards; }
-  @keyframes mpFadeIn { from { opacity: 0; } to { opacity: 1; } }
-</style>`;
-document.head.insertAdjacentHTML('beforeend', MatePlayTheme);
 document.title = "MatePlay";
 const mp_init = () => {
   const h1 = document.querySelector('h1');
@@ -65,7 +51,9 @@ const mp_init = () => {
     ascensor_extremo: '🛗 Rascacielos Extremo',
     clima_loco: '🌡️ Héroe del Clima',
     saldo_inteligente: '💳 Magnate de la Isla',
-    zona_impacto: '💥 Zona de Impacto'
+    zona_impacto: '💥 Zona de Impacto',
+    combinados_fracciones: '🔬 Cálculos Combinados',
+    combinados_enteros: '⚡ Cálculos Combinados'
   };
 
   document.querySelectorAll('#menu button[onclick^="cargarJuego"]').forEach(btn => {
@@ -535,8 +523,14 @@ function htmlRanking(juego, curso) {
 
 // ── Pantalla final ─────────────────────────────────────────────
 function mostrarPantallaFinal(contenedor, juego, curso, puntaje, aciertos, total, erroresPorTema = {}) {
-  const porcentaje = total > 0 ? Math.round((aciertos / total) * 100) : 0;
-  const nota = (aciertos / total * 10).toFixed(1);
+  const totalErrores = Object.values(erroresPorTema).reduce((a, b) => a + b, 0);
+  let notaBruta = (aciertos / total) * 10;
+  // Penalizar 1 punto de la nota final por cada error cometido durante los intentos
+  let notaFinal = Math.max(1, notaBruta - totalErrores);
+  if (notaFinal > 10) notaFinal = 10;
+  
+  const nota = notaFinal.toFixed(1);
+  const porcentaje = total > 0 ? Math.round((notaFinal / 10) * 100) : 0;
   const notaAnim = nota === "10.0" ? 'nota-perfecta' : '';
 
   guardarPuntaje(juego, curso, nombreAlumno, puntaje, nota);
@@ -547,6 +541,8 @@ function mostrarPantallaFinal(contenedor, juego, curso, puntaje, aciertos, total
   // Efecto de billetes si termina Saldo Inteligente con nota aprobada
   if (juego === 'saldo_inteligente' && parseFloat(nota) >= 6) {
     lanzarBilletes();
+  } else if (parseFloat(nota) >= 8) {
+    lanzarConfeti();
   }
 
   const estrella = porcentaje >= 80 ? '🌟' : porcentaje >= 50 ? '⭐' : '💪';
@@ -719,7 +715,9 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
     ascensor_extremo: { n: 'Rascacielos Extremo: ¡Ascensor al Infinito!', m: '¡Desafía a la gravedad! Pilota el ascensor infinito a través de tormentas y megas-picos en busca de la mítica planta final.' },
     clima_loco: { n: 'Héroe del Clima: Desafío Térmico', m: '¡El equilibrio térmico del mundo depende de ti! Enfrenta cambios extremos de temperatura y sobrevive a las tormentas de hielo y fuego.' },
     saldo_inteligente: { n: 'Magnate de la Isla: ¡Cuentas Millonarias!', m: '¡De náufrago a trillonario! Gestiona los tesoros de la isla y construye tu imperio financiero con cálculos de precisión milimétrica.' },
-    zona_impacto: { n: 'Zona de Impacto: El Poder de los Signos', m: '¡Fuego en el hoyo! Lanza proyectiles matemáticos devastadores para derribar las fortalezas de la ignorancia en un choque explosivo.' }
+    zona_impacto: { n: 'Zona de Impacto: El Poder de los Signos', m: '¡Fuego en el hoyo! Lanza proyectiles matemáticos devastadores para derribar las fortalezas de la ignorancia en un choque explosivo.' },
+    combinados_fracciones: { n: '🔬 Cálculos Combinados: Fracciones', m: '¡El verdadero desafío comienza aquí! Resolvé en tu carpeta con calma y precisión: potencias, raíces y fracciones combinadas. Solo los más valientes completan la hoja.' },
+    combinados_enteros: { n: '⚡ Cálculos Combinados: Enteros', m: '¡Números enteros, potencias y raíces se fusionan en el desafío definitivo! Sacá tu carpeta, lápiz y usá todas tus estrategias para conquistar cada cálculo.' }
   };
 
   const idJuego = dataCompleta.juego;
@@ -1570,10 +1568,57 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
 
     function renderizarEjercicio() {
       const ej = ejercicios[ejActual];
-      const txt = ej.modo === 'A' ? 
-        `Saldo Inicial: $${ej.saldo_inicial}. Movimientos: ${ej.movimientos.join(', ')}` :
-        `Saldo Final: $${ej.saldo_final}. Movimientos: ${ej.movimientos.join(', ')}`;
-      
+      const ticketEstilo = `
+        <style>
+          .saldo-ticket {
+            background: #fff; border-radius: 12px; padding: 20px; margin: 20px auto 30px;
+            max-width: 320px; color: #2c3e50;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 0 0 10px rgba(255,255,255,0.4);
+            position: relative;
+          }
+          .saldo-ticket::before {
+            content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px;
+            background: radial-gradient(circle, #fff 5px, transparent 6px) repeat-x;
+            background-size: 20px 20px;
+          }
+          .ticket-header {
+            text-align: center; font-weight: 900; font-size: 1.3rem; margin-bottom: 15px; 
+            border-bottom: 2px dashed #bdc3c7; padding-bottom: 10px; color: #d35400;
+          }
+          .ticket-row {
+            display: flex; justify-content: space-between; font-size: 1.1rem; 
+            margin-bottom: 10px; font-weight: 600; align-items: center;
+          }
+          .ticket-total {
+            border-top: 2px dashed #bdc3c7; padding-top: 15px; margin-top: 15px; 
+            font-weight: 900; font-size: 1.3rem;
+          }
+          .monto-pos { color: #27ae60; background: rgba(39, 174, 96, 0.1); padding: 2px 8px; border-radius: 6px; }
+          .monto-neg { color: #e74c3c; background: rgba(231, 76, 60, 0.1); padding: 2px 8px; border-radius: 6px; }
+          .saldo-monto { font-family: 'Outfit', monospace; font-size: 1.25rem; font-weight: 800; }
+        </style>`;
+
+      let txtHtml = `<div class="saldo-ticket">`;
+      txtHtml += `<div class="ticket-header">🌴 BANCO ISLA 🌴</div>`;
+      if (ej.modo === 'A') {
+        txtHtml += `<div class="ticket-row"><span>Saldo Inicial:</span> <span class="saldo-monto">$${ej.saldo_inicial}</span></div>`;
+        ej.movimientos.forEach((m, i) => {
+          const colorClass = m > 0 ? 'monto-pos' : 'monto-neg';
+          const signo = m > 0 ? '+' : '';
+          txtHtml += `<div class="ticket-row"><span>Movimiento ${i+1}:</span> <span class="saldo-monto ${colorClass}">${signo}$${m}</span></div>`;
+        });
+        txtHtml += `<div class="ticket-row ticket-total"><span>Saldo Final:</span> <span class="saldo-monto">???</span></div>`;
+      } else {
+        txtHtml += `<div class="ticket-row ticket-total" style="border-top:none; border-bottom:2px dashed #bdc3c7; padding-top:0; padding-bottom:15px; margin-top:0;"><span>Saldo Inicial:</span> <span class="saldo-monto">???</span></div>`;
+        ej.movimientos.forEach((m, i) => {
+          const colorClass = m > 0 ? 'monto-pos' : 'monto-neg';
+          const signo = m > 0 ? '+' : '';
+          txtHtml += `<div class="ticket-row"><span>Movimiento ${i+1}:</span> <span class="saldo-monto ${colorClass}">${signo}$${m}</span></div>`;
+        });
+        txtHtml += `<div class="ticket-row ticket-total"><span>Saldo Final:</span> <span class="saldo-monto">$${ej.saldo_final}</span></div>`;
+      }
+      txtHtml += `</div>`;
+
       const calcEstilo = `
         <style>
           .calc-wrap { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2000; width: 220px; background: #2c3e50; padding: 12px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: move; touch-action: none; user-select: none; opacity: 0.6; transition: opacity 0.3s ease; }
@@ -1590,17 +1635,17 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
           .btn-close-calc:hover { color: #e74c3c; }
         </style>`;
 
-      contenedor.innerHTML = getProgresoHTML() + calcEstilo +
+      contenedor.innerHTML = getProgresoHTML() + ticketEstilo + calcEstilo +
         '<div class="header-juego">' + crearHTMLCronometro(TIEMPO_DEFECTO) + '<div class="puntaje">⭐ ' + puntaje + '</div></div>' +
-        '<div class="zona-pedido">' + (ej.modo === 'A' ? '¿Cuál es el saldo final?' : '¿Cuál era el saldo inicial?') + '</div>' +
-        '<p style="text-align:center; font-size: 1.1rem; margin: 15px 0;">' + txt + '</p>' +
+        '<div class="zona-pedido">' + (ej.modo === 'A' ? '¿Cuál es el saldo final de tu cuenta?' : '¿Cuál era tu saldo inicial?') + '</div>' +
+        txtHtml +
         '<div style="text-align:center; margin-bottom: 20px;">' +
           '<div style="display:flex; justify-content:center; gap:5px; margin-bottom:10px;">' +
             '<button onclick="window.cambiarSigno(\'input-saldo\', \'-\')" style="padding:10px; width:45px; background:#e67e22; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">-</button>' +
-            '<input type="number" id="input-saldo" placeholder="Saldo" style="width:100px; text-align:center; font-size:1.5rem; margin:0;">' +
+            '<input type="number" id="input-saldo" placeholder="Respuesta" style="width:130px; text-align:center; font-size:1.5rem; margin:0; border: 4px solid #3498db; border-radius:12px;">' +
             '<button onclick="window.cambiarSigno(\'input-saldo\', \'+\')" style="padding:10px; width:45px; background:#27ae60; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">+</button>' +
           '</div>' +
-          '<button onclick="window.comprobarSaldo()" style="width:100%; max-width:200px;">Verificar</button>' +
+          '<button onclick="window.comprobarSaldo()" style="width:100%; max-width:230px;">Verificar</button>' +
         '</div>' +
         '<div style="text-align:center;">' +
           '<button class="secundario" style="background:#f1c40f; color:#2c3e50; border:none;" onclick="const c=document.getElementById(\'calc-app\'); c.style.display=(c.style.display===\'block\'?\'none\':\'block\')">🧮 Calculadora de apoyo</button>' +
@@ -1774,6 +1819,255 @@ function mostrarJuego(dataCompleta, ejercicios, curso) {
       });
     }
     renderizarEjercicio();
+
+  // ── CÁLCULOS COMBINADOS (Fracciones y Enteros) ─────────────
+  } else if (dataCompleta.juego === 'calculos_combinados') {
+    const esModuloFracciones = idJuego === 'combinados_fracciones';
+    let ejActual = 0, puntaje = 0, aciertos = 0;
+
+    function renderizarEjercicio() {
+      const ej = ejercicios[ejActual];
+
+      const estilosCalc = `<style>
+        .combinado-card {
+          background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+          border-radius: 20px; padding: 28px 24px; text-align: center;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          border: 2px solid rgba(255,255,255,0.9); margin-bottom: 20px;
+        }
+        .combinado-num { 
+          font-size: 0.8rem; font-weight: 700; color: #95a5a6; 
+          text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+        }
+        .combinado-expr {
+          font-size: 2rem; font-weight: 800; color: #2c3e50;
+          line-height: 1.4; margin: 12px 0;
+          font-family: 'Courier New', monospace;
+          word-break: break-word;
+        }
+        .combinado-nivel {
+          display: inline-block;
+          background: ${ej.dificultad === 1 ? 'linear-gradient(135deg,#2ecc71,#1abc9c)' : ej.dificultad === 2 ? 'linear-gradient(135deg,#f39c12,#e67e22)' : 'linear-gradient(135deg,#e74c3c,#c0392b)'};
+          color: white; font-size: 0.75rem; font-weight: 900;
+          padding: 3px 12px; border-radius: 20px; letter-spacing: 1px;
+        }
+        .combinado-instruccion {
+          background: rgba(255, 243, 205, 0.9); border: 2px dashed #ffca28;
+          border-radius: 14px; padding: 14px; margin-bottom: 20px;
+          font-size: 0.95rem; color: #7f5200; font-weight: 600; text-align: center;
+        }
+        .combinado-input-wrap {
+          display: flex; gap: 8px; justify-content: center; align-items: center; flex-wrap: wrap;
+        }
+        .combinado-input {
+          width: 160px; text-align: center; font-size: 1.6rem; font-weight: 800;
+          border: 4px solid #3498db; border-radius: 14px; padding: 12px;
+          font-family: 'Outfit', sans-serif; margin: 0;
+          transition: border-color 0.3s ease;
+        }
+        .combinado-input:focus { border-color: #ff9800; outline: none; }
+
+        /* Recordatorio Jerarquía */
+        .recordatorio-wrap {
+          margin-top: 20px;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 2px solid rgba(52, 152, 219, 0.3);
+        }
+        .recordatorio-toggle {
+          width: 100%; background: rgba(52, 152, 219, 0.12);
+          border: none; padding: 12px 16px; cursor: pointer;
+          font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.95rem;
+          color: #2980b9; text-align: left; display: flex; 
+          justify-content: space-between; align-items: center;
+          transition: background 0.2s ease;
+        }
+        .recordatorio-toggle:hover { background: rgba(52, 152, 219, 0.2); }
+        .recordatorio-toggle .arr { transition: transform 0.3s ease; font-size: 1rem; }
+        .recordatorio-toggle.abierto .arr { transform: rotate(180deg); }
+        .recordatorio-body {
+          display: none; padding: 16px;
+          background: rgba(255,255,255,0.7);
+          backdrop-filter: blur(6px);
+          animation: fadeDown 0.25s ease;
+        }
+        .recordatorio-body.visible { display: block; }
+        @keyframes fadeDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+        .jerarquia-lista { list-style: none; padding: 0; margin: 0 0 12px; }
+        .jerarquia-lista li {
+          display: flex; align-items: flex-start; gap: 10px;
+          padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+          font-size: 0.9rem; color: #2c3e50;
+        }
+        .jerarquia-lista li:last-child { border-bottom: none; }
+        .jer-num {
+          background: linear-gradient(135deg, #ff9800, #ff5722);
+          color: white; font-weight: 900; font-size: 0.75rem;
+          min-width: 24px; height: 24px; border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          flex-shrink: 0; margin-top: 1px;
+        }
+        .signos-grid {
+          display: grid; grid-template-columns: 1fr 1fr;
+          gap: 8px; margin-top: 4px;
+        }
+        .signo-pill {
+          background: rgba(255,255,255,0.8); border-radius: 10px;
+          padding: 8px 10px; text-align: center;
+          font-weight: 700; font-size: 0.9rem; border: 2px solid;
+        }
+        .signo-pos { border-color: #2ecc71; color: #1a8a50; }
+        .signo-neg { border-color: #e74c3c; color: #c0392b; }
+        .recordatorio-title { font-weight: 800; font-size: 0.85rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; margin-top: 8px; }
+      </style>`;
+
+      const nivelLabel = ej.dificultad === 1 ? '⭐ Nivel Básico' : ej.dificultad === 2 ? '⭐⭐ Nivel Medio' : '⭐⭐⭐ Nivel Avanzado';
+      const instruccion = esModuloFracciones
+        ? '📓 Resolvé en tu carpeta, paso a paso.<br>Escribí el resultado como <strong>fracción</strong> (ej: <code>3/4</code>) o entero.'
+        : '📓 Resolvé en tu carpeta, paso a paso.<br>Escribí el resultado final (puede ser negativo, ej: <code>-12</code>).';
+
+      const cheatSheetHTML = esModuloFracciones ? `
+        <div class="recordatorio-wrap">
+          <button class="recordatorio-toggle" onclick="window.toggleRecordatorio(this)">
+            📋 Recordatorio: Jerarquía y Reglas &nbsp;<span class="arr">▼</span>
+          </button>
+          <div class="recordatorio-body" id="recordatorio-body">
+            <p class="recordatorio-title">📌 Orden de Operaciones (de 1° a 4°)</p>
+            <ol class="jerarquia-lista">
+              <li><span class="jer-num">1</span><span><strong>( ) Paréntesis</strong> — Resolvé primero lo que está adentro</span></li>
+              <li><span class="jer-num">2</span><span><strong>Potencias y Raíces</strong> — (ej: (1/2)² = 1/4 &nbsp;|&nbsp; √(1/4) = 1/2)</span></li>
+              <li><span class="jer-num">3</span><span><strong>× Multiplicación y ÷ División</strong> — de izquierda a derecha</span></li>
+              <li><span class="jer-num">4</span><span><strong>+ Suma y − Resta</strong> — de izquierda a derecha</span></li>
+            </ol>
+            <p class="recordatorio-title">🔢 Potencias de Fracciones</p>
+            <ol class="jerarquia-lista">
+              <li><span class="jer-num">★</span><span><strong>(a/b)²</strong> = a² / b² &nbsp;→ &nbsp;(2/3)² = 4/9</span></li>
+              <li><span class="jer-num">★</span><span><strong>√(a/b)</strong> = √a / √b &nbsp;→ &nbsp;√(4/9) = 2/3</span></li>
+              <li><span class="jer-num">★</span><span><strong>(a/b)⁻¹</strong> = b/a (invertís) &nbsp;→ &nbsp;(1/3)⁻¹ = 3</span></li>
+            </ol>
+          </div>
+        </div>` : `
+        <div class="recordatorio-wrap">
+          <button class="recordatorio-toggle" onclick="window.toggleRecordatorio(this)">
+            📋 Recordatorio: Jerarquía y Regla de Signos &nbsp;<span class="arr">▼</span>
+          </button>
+          <div class="recordatorio-body" id="recordatorio-body">
+            <p class="recordatorio-title">📌 Orden de Operaciones (de 1° a 4°)</p>
+            <ol class="jerarquia-lista">
+              <li><span class="jer-num">1</span><span><strong>( ) Paréntesis</strong> — Resolvé primero lo que está adentro</span></li>
+              <li><span class="jer-num">2</span><span><strong>Potencias y Raíces</strong> — (ej: (-3)² = 9 &nbsp;|&nbsp; ∛(-8) = -2)</span></li>
+              <li><span class="jer-num">3</span><span><strong>× Multiplicación y ÷ División</strong> — de izquierda a derecha</span></li>
+              <li><span class="jer-num">4</span><span><strong>+ Suma y − Resta</strong> — de izquierda a derecha</span></li>
+            </ol>
+            <p class="recordatorio-title">⚡ Regla de Signos (× y ÷)</p>
+            <div class="signos-grid">
+              <div class="signo-pill signo-pos">(+) × (+) = <strong>+</strong></div>
+              <div class="signo-pill signo-neg">(+) × (−) = <strong>−</strong></div>
+              <div class="signo-pill signo-neg">(−) × (+) = <strong>−</strong></div>
+              <div class="signo-pill signo-pos">(−) × (−) = <strong>+</strong></div>
+            </div>
+            <p class="recordatorio-title" style="margin-top:12px;">🔢 Potencias con base negativa</p>
+            <ol class="jerarquia-lista">
+              <li><span class="jer-num">★</span><span><strong>Exponente PAR</strong> → resultado <strong style="color:#27ae60">positivo</strong> &nbsp;|&nbsp; (-3)² = +9</span></li>
+              <li><span class="jer-num">★</span><span><strong>Exponente IMPAR</strong> → resultado <strong style="color:#e74c3c">negativo</strong> &nbsp;|&nbsp; (-2)³ = -8</span></li>
+              <li><span class="jer-num">★</span><span><strong>Raíz de negativo</strong> solo existe si es ∛ (raíz cúbica) &nbsp;|&nbsp; ∛(-27) = -3</span></li>
+            </ol>
+          </div>
+        </div>`;
+
+      contenedor.innerHTML = getProgresoHTML() + estilosCalc +
+        `<div style="text-align:right; color:#95a5a6; font-size:0.85rem; margin-bottom:10px;">
+          Ejercicio ${ejActual + 1} / ${ejercicios.length} &nbsp;|&nbsp; ⭐ ${puntaje} pts
+        </div>
+        <div class="combinado-card">
+          <div class="combinado-num">Cálculo Combinado</div>
+          <div class="combinado-expr">${ej.expresion}</div>
+          <span class="combinado-nivel">${nivelLabel}</span>
+        </div>
+        <div class="combinado-instruccion">${instruccion}</div>
+        <div class="combinado-input-wrap">
+          <input type="text" id="input-combinado" class="combinado-input" 
+            placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false">
+          <button onclick="window.verificarCombinado()" style="width:auto; padding:16px 28px; font-size:1.1rem;">
+            ✅ Verificar
+          </button>
+        </div>
+        <div style="text-align:center; margin-top:16px;">
+          <button class="secundario" onclick="window.saltarCombinado()" 
+            style="width:auto; padding:10px 20px; font-size:0.9rem; opacity:0.8;">
+            ⏭️ No sé / Saltar
+          </button>
+        </div>
+        ${cheatSheetHTML}`;
+
+      window.toggleRecordatorio = function(btn) {
+        btn.classList.toggle('abierto');
+        const body = document.getElementById('recordatorio-body');
+        if (body) body.classList.toggle('visible');
+      };
+
+      setTimeout(() => { const inp = document.getElementById('input-combinado'); if (inp) inp.focus(); }, 100);
+
+      document.getElementById('input-combinado').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') window.verificarCombinado();
+      });
+
+      window.verificarCombinado = function() {
+        const inp = document.getElementById('input-combinado');
+        if (!inp) return;
+        const respAlumno = inp.value.trim().replace(/\s+/g, '');
+        if (!respAlumno) { mostrarMensaje('Escribí una respuesta primero ✏️', 'error'); return; }
+
+        let esCorrecta = false;
+        try {
+          if (esModuloFracciones) {
+            esCorrecta = sonEquivalentes(respAlumno, ej.respuesta);
+          } else {
+            esCorrecta = parseInt(respAlumno) === parseInt(ej.respuesta);
+          }
+        } catch(err) {
+          esCorrecta = respAlumno === String(ej.respuesta);
+        }
+
+        const tema = esModuloFracciones ? 'Fracciones Combinadas' : 'Enteros Combinados';
+        if (esCorrecta) {
+          aciertos++; comboActual++;
+          puntaje += 20;
+          reproducirSonido('encaje');
+          const rect = inp.getBoundingClientRect();
+          crearParticulas(rect.left + rect.width / 2, rect.top + rect.height / 2, '#2ecc71');
+          mostrarMensaje('¡Cálculo correcto! 🎯', 'exito');
+          actProgreso(true);
+        } else {
+          comboActual = 0;
+          puntaje = Math.max(0, puntaje - 5);
+          reproducirSonido('error');
+          mostrarMensaje('Incorrecto. La respuesta era: ' + ej.respuesta, 'error');
+          erroresPorTema[tema] = (erroresPorTema[tema] || 0) + 1;
+          actProgreso(false);
+        }
+
+        setTimeout(() => {
+          ejActual++;
+          if (ejActual < ejercicios.length) renderizarEjercicio();
+          else mostrarPantallaFinal(contenedor, idJuego, curso, puntaje, aciertos, ejActual, erroresPorTema);
+        }, 2000);
+      };
+
+      window.saltarCombinado = function() {
+        comboActual = 0;
+        const tema = esModuloFracciones ? 'Fracciones Combinadas' : 'Enteros Combinados';
+        erroresPorTema[tema] = (erroresPorTema[tema] || 0) + 1;
+        actProgreso(false);
+        mostrarMensaje('Saltado. La respuesta era: ' + ej.respuesta, 'error');
+        setTimeout(() => {
+          ejActual++;
+          if (ejActual < ejercicios.length) renderizarEjercicio();
+          else mostrarPantallaFinal(contenedor, idJuego, curso, puntaje, aciertos, ejActual, erroresPorTema);
+        }, 2000);
+      };
+    }
+    renderizarEjercicio();
   }
 }
 
@@ -1825,6 +2119,44 @@ function lanzarBilletes() {
         10% { opacity: 1; }
         90% { opacity: 1; }
         100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(s);
+  }
+}
+
+function lanzarConfeti() {
+  reproducirSonido('fanfarria');
+  const colores = ['#ff9800', '#ff4757', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f'];
+  for (let i = 0; i < 150; i++) {
+    const c = document.createElement('div');
+    c.style.cssText = `
+      position: fixed;
+      top: -20px;
+      left: ${Math.random() * 100}vw;
+      width: ${Math.random() * 10 + 6}px;
+      height: ${Math.random() * 18 + 8}px;
+      background-color: ${colores[Math.floor(Math.random() * colores.length)]};
+      z-index: 10000;
+      pointer-events: none;
+      opacity: 1;
+      transform: rotate(${Math.random() * 360}deg);
+      border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+      animation: caer-confeti ${Math.random() * 2 + 2.5}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation-delay: ${Math.random() * 1.5}s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    `;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 6000);
+  }
+  
+  if (!document.getElementById('style-confeti')) {
+    const s = document.createElement('style');
+    s.id = 'style-confeti';
+    s.textContent = `
+      @keyframes caer-confeti {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(120vh) rotate(1080deg); opacity: 0; }
       }
     `;
     document.head.appendChild(s);

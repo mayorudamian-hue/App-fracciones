@@ -1,0 +1,20 @@
+{
+  "juego": "calculos_combinados",
+  "metadata": {
+    "descripcion": "Cálculos Combinados - Desafío Carpeta",
+    "mecanica": "Resolvé el cálculo combinado en tu carpeta, sin límite de tiempo, y escribí el resultado final para verificar (en formato fracción o entero)."
+  },
+  "ejercicios": [
+    { "id": 1, "curso_minimo": "1ro", "expresion": "(1/2 + 1/4) - 1/4", "respuesta": "1/2", "dificultad": 1 },
+    { "id": 2, "curso_minimo": "1ro", "expresion": "1/3 + (1/2 * 2/3)", "respuesta": "2/3", "dificultad": 1 },
+    { "id": 3, "curso_minimo": "1ro", "expresion": "(3/4 - 1/2) * 4/1", "respuesta": "1", "dificultad": 1 },
+    { "id": 4, "curso_minimo": "2do", "expresion": "(1/2)² + 3/4", "respuesta": "1", "dificultad": 2 },
+    { "id": 5, "curso_minimo": "2do", "expresion": "√(1/4) + 1/2", "respuesta": "1", "dificultad": 2 },
+    { "id": 6, "curso_minimo": "2do", "expresion": "(2/3)² * (9/4)", "respuesta": "1", "dificultad": 2 },
+    { "id": 7, "curso_minimo": "2do", "expresion": "√(4/9) + (1/3)³ * 27", "respuesta": "5/3", "dificultad": 2 },
+    { "id": 8, "curso_minimo": "3ro", "expresion": "√(16/25) * (1/2)⁻²", "respuesta": "16/5", "dificultad": 3 },
+    { "id": 9, "curso_minimo": "3ro", "expresion": "((1/3)⁻¹ + 2) / (5/2)", "respuesta": "2", "dificultad": 3 },
+    { "id": 10, "curso_minimo": "3ro", "expresion": "∛(8/27) + (3/2)⁻¹", "respuesta": "4/3", "dificultad": 3 },
+    { "id": 11, "curso_minimo": "3ro", "expresion": "((2/5)² * 25/4) + √(1/16)", "respuesta": "5/4", "dificultad": 3 }
+  ]
+}

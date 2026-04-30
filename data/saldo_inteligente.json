@@ -5,28 +5,693 @@
     "mecanica": "Gestioná el saldo de tu tarjeta. ¡Cuidado con quedar en negativo!"
   },
   "ejercicios": [
-    { "id": 1, "modo": "A", "curso_minimo": "1ro", "saldo_inicial": 200, "movimientos": [-50, -60, 100], "respuesta": 190, "dificultad": 1 },
-    { "id": 2, "modo": "B", "curso_minimo": "2do", "saldo_final": 40, "movimientos": [-30, -20, 10], "respuesta": 80, "dificultad": 2 },
-    { "id": 3, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 50, "movimientos": [-100, 200, -80], "respuesta": 70, "dificultad": 3 },
-    { "id": 4, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 100, "movimientos": [-150, -40, 30], "respuesta": -60, "dificultad": 3 },
-    { "id": 5, "modo": "B", "curso_minimo": "3ro", "saldo_final": -20, "movimientos": [-50, 10, -40], "respuesta": 60, "dificultad": 3 },
-    { "id": 6, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 50, "movimientos": [-100, -100, 50], "respuesta": -100, "dificultad": 3 },
-    { "id": 7, "modo": "B", "curso_minimo": "3ro", "saldo_final": -100, "movimientos": [200, -400, 50], "respuesta": 50, "dificultad": 3 },
-    { "id": 8, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 0, "movimientos": [-250, 100, -80], "respuesta": -230, "dificultad": 3 },
-    { "id": 9, "modo": "B", "curso_minimo": "3ro", "saldo_final": -50, "movimientos": [150, -300, 100], "respuesta": 0, "dificultad": 3 },
-    { "id": 10, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": -20, "movimientos": [-80, -50, 30], "respuesta": -120, "dificultad": 3 },
-    { "id": 11, "modo": "B", "curso_minimo": "3ro", "saldo_final": -200, "movimientos": [-100, -100, -50], "respuesta": 50, "dificultad": 3 },
-    { "id": 12, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 300, "movimientos": [-500, 50, -20], "respuesta": -170, "dificultad": 3 },
-    { "id": 13, "modo": "B", "curso_minimo": "3ro", "saldo_final": -10, "movimientos": [100, -200, 50], "respuesta": 40, "dificultad": 3 },
-    { "id": 14, "modo": "A", "curso_minimo": "1ro", "saldo_inicial": 500, "movimientos": [-150, 300, -100], "respuesta": 550, "dificultad": 1 },
-    { "id": 15, "modo": "A", "curso_minimo": "1ro", "saldo_inicial": 1000, "movimientos": [-450, -250, 700], "respuesta": 1000, "dificultad": 1 },
-    { "id": 16, "modo": "B", "curso_minimo": "2do", "saldo_final": 1200, "movimientos": [-800, 500, -300], "respuesta": 1800, "dificultad": 2 },
-    { "id": 17, "modo": "B", "curso_minimo": "2do", "saldo_final": -500, "movimientos": [1000, -2500, 500], "respuesta": 500, "dificultad": 2 },
-    { "id": 18, "modo": "A", "curso_minimo": "2do", "saldo_inicial": 2500, "movimientos": [-3000, 1500, -800], "respuesta": 200, "dificultad": 2 },
-    { "id": 19, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 10000, "movimientos": [-15000, 8500, -3500], "respuesta": 0, "dificultad": 3 },
-    { "id": 20, "modo": "B", "curso_minimo": "3ro", "saldo_final": -2500, "movimientos": [5000, -12000, 3000], "respuesta": 1500, "dificultad": 3 },
-    { "id": 21, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": 50000, "movimientos": [-75000, 35000, -10000], "respuesta": 0, "dificultad": 3 },
-    { "id": 22, "modo": "B", "curso_minimo": "3ro", "saldo_final": 0, "movimientos": [25000, -45000, 15000], "respuesta": 5000, "dificultad": 3 },
-    { "id": 23, "modo": "A", "curso_minimo": "3ro", "saldo_inicial": -15000, "movimientos": [45000, -30000, 12000], "respuesta": 12000, "dificultad": 3 }
+    {
+      "id": 1,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 200,
+      "movimientos": [
+        -50,
+        -60,
+        100
+      ],
+      "respuesta": 190,
+      "dificultad": 1
+    },
+    {
+      "id": 2,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": 40,
+      "movimientos": [
+        -30,
+        -20,
+        10
+      ],
+      "respuesta": 80,
+      "dificultad": 2
+    },
+    {
+      "id": 3,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 50,
+      "movimientos": [
+        -100,
+        200,
+        -80
+      ],
+      "respuesta": 70,
+      "dificultad": 3
+    },
+    {
+      "id": 4,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 100,
+      "movimientos": [
+        -150,
+        -40,
+        30
+      ],
+      "respuesta": -60,
+      "dificultad": 3
+    },
+    {
+      "id": 5,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": -20,
+      "movimientos": [
+        -50,
+        10,
+        -40
+      ],
+      "respuesta": 60,
+      "dificultad": 3
+    },
+    {
+      "id": 6,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 50,
+      "movimientos": [
+        -100,
+        -100,
+        50
+      ],
+      "respuesta": -100,
+      "dificultad": 3
+    },
+    {
+      "id": 7,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": -100,
+      "movimientos": [
+        200,
+        -400,
+        50
+      ],
+      "respuesta": 50,
+      "dificultad": 3
+    },
+    {
+      "id": 8,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 0,
+      "movimientos": [
+        -250,
+        100,
+        -80
+      ],
+      "respuesta": -230,
+      "dificultad": 3
+    },
+    {
+      "id": 9,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": -50,
+      "movimientos": [
+        150,
+        -300,
+        100
+      ],
+      "respuesta": 0,
+      "dificultad": 3
+    },
+    {
+      "id": 10,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": -20,
+      "movimientos": [
+        -80,
+        -50,
+        30
+      ],
+      "respuesta": -120,
+      "dificultad": 3
+    },
+    {
+      "id": 11,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": -200,
+      "movimientos": [
+        -100,
+        -100,
+        -50
+      ],
+      "respuesta": 50,
+      "dificultad": 3
+    },
+    {
+      "id": 12,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 300,
+      "movimientos": [
+        -500,
+        50,
+        -20
+      ],
+      "respuesta": -170,
+      "dificultad": 3
+    },
+    {
+      "id": 13,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": -10,
+      "movimientos": [
+        100,
+        -200,
+        50
+      ],
+      "respuesta": 40,
+      "dificultad": 3
+    },
+    {
+      "id": 14,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 500,
+      "movimientos": [
+        -150,
+        300,
+        -100
+      ],
+      "respuesta": 550,
+      "dificultad": 1
+    },
+    {
+      "id": 15,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 1000,
+      "movimientos": [
+        -450,
+        -250,
+        700
+      ],
+      "respuesta": 1000,
+      "dificultad": 1
+    },
+    {
+      "id": 16,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": 1200,
+      "movimientos": [
+        -800,
+        500,
+        -300
+      ],
+      "respuesta": 1800,
+      "dificultad": 2
+    },
+    {
+      "id": 17,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": -500,
+      "movimientos": [
+        1000,
+        -2500,
+        500
+      ],
+      "respuesta": 500,
+      "dificultad": 2
+    },
+    {
+      "id": 18,
+      "modo": "A",
+      "curso_minimo": "2do",
+      "saldo_inicial": 2500,
+      "movimientos": [
+        -3000,
+        1500,
+        -800
+      ],
+      "respuesta": 200,
+      "dificultad": 2
+    },
+    {
+      "id": 19,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 10000,
+      "movimientos": [
+        -15000,
+        8500,
+        -3500
+      ],
+      "respuesta": 0,
+      "dificultad": 3
+    },
+    {
+      "id": 20,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": -2500,
+      "movimientos": [
+        5000,
+        -12000,
+        3000
+      ],
+      "respuesta": 1500,
+      "dificultad": 3
+    },
+    {
+      "id": 21,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 50000,
+      "movimientos": [
+        -75000,
+        35000,
+        -10000
+      ],
+      "respuesta": 0,
+      "dificultad": 3
+    },
+    {
+      "id": 22,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": 0,
+      "movimientos": [
+        25000,
+        -45000,
+        15000
+      ],
+      "respuesta": 5000,
+      "dificultad": 3
+    },
+    {
+      "id": 23,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": -15000,
+      "movimientos": [
+        45000,
+        -30000,
+        12000
+      ],
+      "respuesta": 12000,
+      "dificultad": 3
+    },
+    {
+      "id": 24,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": -400,
+      "movimientos": [
+        600,
+        4100
+      ],
+      "respuesta": 4300,
+      "dificultad": 1
+    },
+    {
+      "id": 25,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": -1900,
+      "movimientos": [
+        -300,
+        4100,
+        -2400,
+        -2100
+      ],
+      "respuesta": -1200,
+      "dificultad": 2
+    },
+    {
+      "id": 26,
+      "modo": "B",
+      "curso_minimo": "1ro",
+      "saldo_final": 400,
+      "movimientos": [
+        -1800,
+        -2500,
+        1500,
+        -2800
+      ],
+      "respuesta": 6000,
+      "dificultad": 1
+    },
+    {
+      "id": 27,
+      "modo": "B",
+      "curso_minimo": "1ro",
+      "saldo_final": 4500,
+      "movimientos": [
+        -4600,
+        -3000
+      ],
+      "respuesta": 12100,
+      "dificultad": 1
+    },
+    {
+      "id": 28,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": -500,
+      "movimientos": [
+        -2900,
+        -3700,
+        5000,
+        4400
+      ],
+      "respuesta": 2300,
+      "dificultad": 3
+    },
+    {
+      "id": 29,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": 400,
+      "movimientos": [
+        1300,
+        2100,
+        -1900
+      ],
+      "respuesta": -1100,
+      "dificultad": 2
+    },
+    {
+      "id": 30,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 1400,
+      "movimientos": [
+        3200,
+        -1200
+      ],
+      "respuesta": 3400,
+      "dificultad": 3
+    },
+    {
+      "id": 31,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 2600,
+      "movimientos": [
+        -800,
+        4600
+      ],
+      "respuesta": 6400,
+      "dificultad": 1
+    },
+    {
+      "id": 32,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 5000,
+      "movimientos": [
+        -3400,
+        -300
+      ],
+      "respuesta": 1300,
+      "dificultad": 1
+    },
+    {
+      "id": 33,
+      "modo": "A",
+      "curso_minimo": "2do",
+      "saldo_inicial": -900,
+      "movimientos": [
+        3300,
+        -400,
+        1100,
+        3900
+      ],
+      "respuesta": 7000,
+      "dificultad": 2
+    },
+    {
+      "id": 34,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": 800,
+      "movimientos": [
+        3500,
+        -1000,
+        -2000
+      ],
+      "respuesta": 300,
+      "dificultad": 2
+    },
+    {
+      "id": 35,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": 2400,
+      "movimientos": [
+        700,
+        -1700,
+        -4400,
+        2800
+      ],
+      "respuesta": 5000,
+      "dificultad": 2
+    },
+    {
+      "id": 36,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": -1600,
+      "movimientos": [
+        -4700,
+        -4900
+      ],
+      "respuesta": -11200,
+      "dificultad": 1
+    },
+    {
+      "id": 37,
+      "modo": "B",
+      "curso_minimo": "1ro",
+      "saldo_final": 1900,
+      "movimientos": [
+        -2300,
+        4600,
+        -1800,
+        -4400
+      ],
+      "respuesta": 5800,
+      "dificultad": 1
+    },
+    {
+      "id": 38,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 700,
+      "movimientos": [
+        -4300,
+        600,
+        800,
+        300
+      ],
+      "respuesta": -1900,
+      "dificultad": 1
+    },
+    {
+      "id": 39,
+      "modo": "B",
+      "curso_minimo": "1ro",
+      "saldo_final": 400,
+      "movimientos": [
+        4100,
+        -4600
+      ],
+      "respuesta": 900,
+      "dificultad": 1
+    },
+    {
+      "id": 40,
+      "modo": "B",
+      "curso_minimo": "1ro",
+      "saldo_final": -900,
+      "movimientos": [
+        4900,
+        -3100,
+        4000
+      ],
+      "respuesta": -6700,
+      "dificultad": 1
+    },
+    {
+      "id": 41,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 1400,
+      "movimientos": [
+        3200,
+        4900,
+        4600
+      ],
+      "respuesta": 14100,
+      "dificultad": 3
+    },
+    {
+      "id": 42,
+      "modo": "B",
+      "curso_minimo": "2do",
+      "saldo_final": 4200,
+      "movimientos": [
+        -3200,
+        3300,
+        3600
+      ],
+      "respuesta": 500,
+      "dificultad": 2
+    },
+    {
+      "id": 43,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": 4600,
+      "movimientos": [
+        -700,
+        300,
+        -3900
+      ],
+      "respuesta": 8900,
+      "dificultad": 3
+    },
+    {
+      "id": 44,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 3300,
+      "movimientos": [
+        -4400,
+        3900,
+        -2800
+      ],
+      "respuesta": 0,
+      "dificultad": 1
+    },
+    {
+      "id": 45,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": -1700,
+      "movimientos": [
+        900,
+        600
+      ],
+      "respuesta": -200,
+      "dificultad": 1
+    },
+    {
+      "id": 46,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 600,
+      "movimientos": [
+        4300,
+        4200,
+        4900
+      ],
+      "respuesta": 14000,
+      "dificultad": 1
+    },
+    {
+      "id": 47,
+      "modo": "A",
+      "curso_minimo": "2do",
+      "saldo_inicial": -200,
+      "movimientos": [
+        3200,
+        -4700,
+        -900
+      ],
+      "respuesta": -2600,
+      "dificultad": 2
+    },
+    {
+      "id": 48,
+      "modo": "B",
+      "curso_minimo": "3ro",
+      "saldo_final": 100,
+      "movimientos": [
+        -4600,
+        -4300,
+        1700,
+        3000
+      ],
+      "respuesta": 4300,
+      "dificultad": 3
+    },
+    {
+      "id": 49,
+      "modo": "B",
+      "curso_minimo": "1ro",
+      "saldo_final": 2200,
+      "movimientos": [
+        3600,
+        -1900,
+        4900,
+        -3900
+      ],
+      "respuesta": -500,
+      "dificultad": 1
+    },
+    {
+      "id": 50,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 300,
+      "movimientos": [
+        4600,
+        2300,
+        -4100
+      ],
+      "respuesta": 3100,
+      "dificultad": 3
+    },
+    {
+      "id": 51,
+      "modo": "A",
+      "curso_minimo": "1ro",
+      "saldo_inicial": 900,
+      "movimientos": [
+        1300,
+        4300
+      ],
+      "respuesta": 6500,
+      "dificultad": 1
+    },
+    {
+      "id": 52,
+      "modo": "A",
+      "curso_minimo": "2do",
+      "saldo_inicial": 2600,
+      "movimientos": [
+        -2200,
+        4400
+      ],
+      "respuesta": 4800,
+      "dificultad": 2
+    },
+    {
+      "id": 53,
+      "modo": "A",
+      "curso_minimo": "3ro",
+      "saldo_inicial": 700,
+      "movimientos": [
+        2100,
+        600,
+        -3100
+      ],
+      "respuesta": 300,
+      "dificultad": 3
+    }
   ]
 }
