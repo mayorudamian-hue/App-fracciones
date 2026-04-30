@@ -827,18 +827,29 @@ function iniciarArrastre(e) {
   if (elementoArrastrado.classList.contains('usada')) return;
   reproducirSonido('grab');
   const touch = e.touches ? e.touches[0] : e;
-  const rect = elementoArrastrado.getBoundingClientRect();
-  offsetX = touch.clientX - rect.left; offsetY = touch.clientY - rect.top;
-  // Guardar estilos originales para restaurar al soltar
+
+  // Guardamos estilos de posición para restaurar al soltar
   elementoArrastrado._estilosOriginales = {
-    position: elementoArrastrado.style.position || '',
-    left:     elementoArrastrado.style.left     || '',
-    top:      elementoArrastrado.style.top      || '',
-    zIndex:   elementoArrastrado.style.zIndex   || '',
-    pointerEvents: elementoArrastrado.style.pointerEvents || ''
+    position:     elementoArrastrado.style.position     || '',
+    left:         elementoArrastrado.style.left         || '',
+    top:          elementoArrastrado.style.top          || '',
+    zIndex:       elementoArrastrado.style.zIndex       || '',
+    pointerEvents:elementoArrastrado.style.pointerEvents|| '',
+    width:        elementoArrastrado.style.width        || ''
   };
+
+  // Fijamos el tamaño ANTES de pasar a fixed para que no colapsen
+  const naturalW = elementoArrastrado.offsetWidth;
+  const naturalH = elementoArrastrado.offsetHeight;
+
+  // Usamos el centro del elemento como punto de agarre para evitar
+  // que el transform de :active distorsione el cálculo del offset
+  offsetX = naturalW / 2;
+  offsetY = naturalH / 2;
+
   elementoArrastrado.classList.add('arrastrando');
   elementoArrastrado.style.position = 'fixed';
+  elementoArrastrado.style.width = naturalW + 'px';
   elementoArrastrado.style.zIndex = '1000';
   elementoArrastrado.style.pointerEvents = 'none';
   moverElemento(touch.clientX, touch.clientY);
@@ -875,6 +886,7 @@ function soltar(e) {
   elementoArrastrado.style.top          = orig.top          || '';
   elementoArrastrado.style.zIndex       = orig.zIndex       || '';
   elementoArrastrado.style.pointerEvents = orig.pointerEvents || '';
+  elementoArrastrado.style.width         = orig.width        || '';
   elementoArrastrado.classList.remove('arrastrando');
   document.querySelectorAll('.caja-pizza,.bowl').forEach(function(z) { z.style.outline = 'none'; });
   if (zonaDestino) {
